@@ -71,6 +71,19 @@ describe('ripio_estimate_trade', () => {
     expect(text(result)).toContain('buy 100 USDT ≈ 161091.83 ARS');
   });
 
+  it('tells the user when Ripio Trade has no price for a pair (Ripio answers price 0)', async () => {
+    harness = await connectTools(
+      fakeClient({ tradeEstimatePrice: async () => ({ price: 0 }), tradeFees: async () => tradeFees }),
+    );
+    const result = await harness.mcp.callTool({
+      name: 'ripio_estimate_trade',
+      arguments: { pair: 'btc_ars', side: 'buy', amount: '1' },
+    });
+    expect(result.isError).toBe(true);
+    expect(text(result)).toContain('Ripio Trade has no price for BTC_ARS');
+    expect(text(result)).not.toContain('changed its API');
+  });
+
   it('surfaces Ripio’s "Invalid pair" instead of an outage', async () => {
     harness = await connectTools(
       fakeClient({

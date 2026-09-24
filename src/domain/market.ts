@@ -120,10 +120,17 @@ export interface TradeEstimateInput {
 
 export function buildTradeEstimate(input: TradeEstimateInput): TradeEstimateOutput {
   const unitPrice = toDecimal(input.price);
-  if (unitPrice === undefined || isZero(unitPrice)) {
+  if (unitPrice === undefined) {
     throw new RipioApiError('schema', `Ripio returned no usable price estimate for ${input.pair}`, {
       endpoint: `/trade/orders/estimate-price/${input.pair}`,
     });
+  }
+  // Ripio answers price 0 for pairs it knows but doesn't trade on Ripio Trade (e.g. BTC_ARS).
+  if (isZero(unitPrice)) {
+    throw new RipioApiError(
+      'bad_request',
+      `Ripio Trade has no price for ${input.pair} right now: the pair may not trade on Ripio Trade, or its order book is empty. ripio_get_prices shows which pairs have a Trade price.`,
+    );
   }
   const gross = round(mul(input.amount, unitPrice), 8);
   const takerPct = toDecimal(input.fees?.find((fee) => fee.side.toLowerCase() === input.side)?.taker);

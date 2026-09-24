@@ -70,4 +70,17 @@ describe('buildTradeEstimate', () => {
   it('rejects a missing price', () => {
     expect(() => buildTradeEstimate({ pair: 'USDT_ARS', side: 'buy', amount: '1', price: 'n/a' })).toThrow(RipioApiError);
   });
+
+  it('explains a zero price as a pair Ripio Trade does not quote, not as an API change', () => {
+    // Ripio answers 200 {"price": 0} for pairs such as BTC_ARS that exist as tickers elsewhere but don't trade here.
+    let error: unknown;
+    try {
+      buildTradeEstimate({ pair: 'BTC_ARS', side: 'buy', amount: '1', price: 0 });
+    } catch (caught) {
+      error = caught;
+    }
+    expect(error).toBeInstanceOf(RipioApiError);
+    expect(error).toMatchObject({ kind: 'bad_request', status: undefined });
+    expect((error as RipioApiError).message).toContain('Ripio Trade has no price for BTC_ARS');
+  });
 });
