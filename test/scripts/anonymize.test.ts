@@ -1,40 +1,63 @@
 import { describe, expect, it } from 'vitest';
 import { anonymize } from '../../scripts/anonymize.js';
 
+const half = () => 0.5;
+
 describe('anonymize', () => {
-  it('redacts identifiers and personal fields, scales account amounts and keeps public data', () => {
-    const input = {
-      results: [
-        {
-          id: 1234567,
-          external_id: 'EXAMPLE-WALLET_TXN_0000001',
-          transaction_type: 'withdrawal',
-          amount_from: '12345.60',
-          destination: '0000003100012345678901',
-          created_at: '2025-06-18T14:20:10.123456+00:00',
-          extra_data: { bank_name: 'Banco X', bank_account: '123', provider_reference: 'abc' },
+  it('keeps only the magnitude of an amount: different amounts of the same size look identical', () => {
+    expect(anonymize({ amount: '12345.60' }, half)).toEqual({ amount: '55000.00' });
+    expect(anonymize({ amount: '98765.43' }, half)).toEqual({ amount: '55000.00' });
+  });
+
+  it('keeps sign, decimals and zero, for strings and numbers', () => {
+    const out = anonymize(
+      { available_amount: 3e-7, after_balance: -0.5, locked_amount: '0.00', fee: 1, total: '7' },
+      half,
+    ) as Record<string, unknown>;
+    expect(out).toEqual({ available_amount: 6e-7, after_balance: -0.6, locked_amount: '0.00', fee: 6, total: '6' });
+  });
+
+  it('redacts every field it does not know to be safe, keeping ids numeric', () => {
+    const out = anonymize(
+      {
+        id: 1234567,
+        external_id: 'EXAMPLE-WALLET_TXN_0000001',
+        nc: 'opaque-cursor',
+        destination: '0000003100012345678901',
+        extra_data: {
+          bank_name: 'Banco X',
+          username: 'someone',
+          description: 'rent',
+          phone: '+54 11 5555 5555',
+          document_number: 12345678,
         },
-      ],
-      nc: 'opaque-cursor',
+      },
+      half,
+    ) as { id: number; external_id: string; nc: string; destination: string; extra_data: Record<string, unknown> };
+    expect(typeof out.id).toBe('number');
+    expect(out.id).not.toBe(1234567);
+    const { document_number, ...texts } = out.extra_data;
+    for (const value of [out.external_id, out.nc, out.destination, ...Object.values(texts)]) {
+      expect(value).toMatch(/^redacted-\d+$/);
+    }
+    expect(document_number).not.toBe(12345678);
+  });
+
+  it('keeps public market data, enums, flags and dates', () => {
+    const input = {
       ticker: 'BTC_ARS',
       buy_rate: '98000000',
-      available_amount: 3e-7,
+      sell_rate: '97000000',
+      pair: 'USDT_ARS',
+      bid: 1599.5,
+      transaction_type: 'withdrawal',
+      status: 'COM',
+      currency: 'ARS',
+      rail: 'bank',
+      enabled: true,
+      created_at: '2025-06-18T14:20:10.123456+00:00',
+      taker: 0.3,
     };
-    const out = anonymize(input) as typeof input;
-    const [tx] = out.results;
-    expect(typeof tx?.id).toBe('number');
-    expect(tx?.id).not.toBe(1234567);
-    expect(tx?.external_id).toMatch(/^redacted-\d+$/);
-    expect(tx?.destination).toMatch(/^redacted-\d+$/);
-    expect(tx?.extra_data.bank_name).toMatch(/^redacted-\d+$/);
-    expect(tx?.extra_data.bank_account).toMatch(/^redacted-\d+$/);
-    expect(tx?.extra_data.provider_reference).toMatch(/^redacted-\d+$/);
-    expect(tx?.amount_from).toBe('4567.87200000');
-    expect(tx?.transaction_type).toBe('withdrawal');
-    expect(tx?.created_at).toBe('2025-06-18T14:20:10.123456+00:00');
-    expect(out.nc).toMatch(/^redacted-\d+$/);
-    expect(out.ticker).toBe('BTC_ARS');
-    expect(out.buy_rate).toBe('98000000');
-    expect(out.available_amount).toBe(1.1e-7);
+    expect(anonymize(input, half)).toEqual(input);
   });
 });
