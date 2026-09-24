@@ -5,6 +5,8 @@ import { RipioApiError } from './ripio/errors.js';
 import { RipioHttp } from './ripio/http.js';
 import type { ToolContext } from './tools/context.js';
 import { registerGetPortfolio } from './tools/get-portfolio.js';
+import { registerGetTransaction } from './tools/get-transaction.js';
+import { registerListActivity } from './tools/list-activity.js';
 import { stderrLogger, type Logger } from './tools/result.js';
 
 export const SERVER_NAME = 'ripio-community-mcp';
@@ -36,5 +38,7 @@ export function createServer(config: Config | RipioApiError, deps: ServerDeps = 
   const ctx: ToolContext = { client, now: deps.now ?? (() => new Date()), log };
   const server = new McpServer({ name: SERVER_NAME, version: SERVER_VERSION }, { instructions: INSTRUCTIONS });
   registerGetPortfolio(server, ctx);
+  registerListActivity(server, ctx);
+  registerGetTransaction(server, ctx);
   return server;
 }
