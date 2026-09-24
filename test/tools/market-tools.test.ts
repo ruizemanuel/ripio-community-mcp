@@ -48,13 +48,17 @@ describe('ripio_get_prices', () => {
 describe('ripio_estimate_trade', () => {
   it('uppercases the pair and returns the fee-inclusive total', async () => {
     const calls: unknown[][] = [];
+    const feeCalls: unknown[][] = [];
     harness = await connectTools(
       fakeClient({
         tradeEstimatePrice: async (...args) => {
           calls.push(args);
           return { price: 1606.1 };
         },
-        tradeFees: async () => tradeFees,
+        tradeFees: async (...args) => {
+          feeCalls.push(args);
+          return tradeFees;
+        },
       }),
     );
     const result = await harness.mcp.callTool({
@@ -62,6 +66,7 @@ describe('ripio_estimate_trade', () => {
       arguments: { pair: 'usdt_ars', side: 'buy', amount: '100' },
     });
     expect(calls).toEqual([['USDT_ARS', '100', 'buy']]);
+    expect(feeCalls).toEqual([['USDT_ARS']]);
     expect(result.structuredContent).toMatchObject({ estimated_total: '161091.83', estimated_fee: '481.83' });
     expect(text(result)).toContain('buy 100 USDT ≈ 161091.83 ARS');
   });

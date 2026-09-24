@@ -21,7 +21,7 @@ const targets: Array<[name: string, path: string, options?: GetOptions]> = [
   ['trade-balances', '/trade/user/balances'],
   ['trade-tickers', '/trade/public/tickers', { signed: false }],
   ['trade-statement', '/trade/user/statement', { query: { page_size: 20 } }],
-  ['trade-fees', '/trade/user/trading-fees'],
+  ['trade-fees', '/trade/user/trading-fees', { query: { pair: 'USDT_ARS' } }],
   ['trade-open-orders', '/trade/orders/open'],
   ['trade-estimate-usdt-ars', '/trade/orders/estimate-price/USDT_ARS', { query: { amount: 1, side: 'buy' } }],
 ];

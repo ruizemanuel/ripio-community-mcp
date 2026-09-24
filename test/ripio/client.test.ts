@@ -76,6 +76,17 @@ describe('Ripio client', () => {
     expect((error as RipioApiError).details).toContain('wallet');
   });
 
+  it('asks for the trading fees of a pair (Ripio answers 400 "Invalid pair" without one) and caches them per pair', async () => {
+    const { client, calls } = setup({
+      '/trade/user/trading-fees': () => tradeOk([{ side: 'buy', maker: 0.25, taker: 0.5 }]),
+    });
+    await client.tradeFees('USDT_ARS');
+    await client.tradeFees('USDT_ARS');
+    await client.tradeFees('BTC_USDT');
+    const feeCalls = calls.filter((c) => c.url.pathname === '/trade/user/trading-fees');
+    expect(feeCalls.map((c) => c.url.search)).toEqual(['?pair=USDT_ARS', '?pair=BTC_USDT']);
+  });
+
   it('caches rates for 10 seconds', async () => {
     const { client, calls, clock } = setup({ '/wallet/rates/': () => walletOk([{ ticker: 'BTC_ARS', buy_rate: '1', sell_rate: '1' }]) });
     await client.walletRates();

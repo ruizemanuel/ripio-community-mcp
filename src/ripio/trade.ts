@@ -36,8 +36,9 @@ export async function getTradeStatement(http: RipioHttp, query: TradeStatementQu
   return parseResponse(TradeStatementSchema, await http.get(STATEMENT, { query }), STATEMENT);
 }
 
-export async function getTradeFees(http: RipioHttp): Promise<TradeFee[]> {
-  return parseResponse(TradeFeesSchema, await http.get(FEES), FEES);
+/** Ripio requires `pair` here (it answers 400 "Invalid pair" without it), although its docs list no parameters. */
+export async function getTradeFees(http: RipioHttp, pair: string): Promise<TradeFee[]> {
+  return parseResponse(TradeFeesSchema, await http.get(FEES, { query: { pair } }), FEES);
 }
 
 export async function estimateTradePrice(

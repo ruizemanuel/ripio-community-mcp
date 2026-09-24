@@ -45,7 +45,7 @@ export interface RipioClient {
   tradeBalances(): Promise<TradeBalance[]>;
   tradeTickers(): Promise<TradeTicker[]>;
   tradeStatement(query: TradeStatementQuery): Promise<TradeStatement>;
-  tradeFees(): Promise<TradeFee[]>;
+  tradeFees(pair: string): Promise<TradeFee[]>;
   tradeEstimatePrice(pair: string, amount: string, side: 'buy' | 'sell'): Promise<TradePriceEstimate>;
   tradeOpenOrders(query: OpenOrdersQuery): Promise<TradeOpenOrders>;
 }
@@ -64,7 +64,7 @@ export function createRipioClient(http: RipioHttp, now: () => number = Date.now)
     tradeBalances: () => getTradeBalances(http),
     tradeTickers: () => cache.getOrLoad('trade-tickers', CACHE_TTL_MS.tickers, () => getTradeTickers(http)),
     tradeStatement: (query) => getTradeStatement(http, query),
-    tradeFees: () => cache.getOrLoad('trade-fees', CACHE_TTL_MS.fees, () => getTradeFees(http)),
+    tradeFees: (pair) => cache.getOrLoad(`trade-fees:${pair}`, CACHE_TTL_MS.fees, () => getTradeFees(http, pair)),
     tradeEstimatePrice: (pair, amount, side) => estimateTradePrice(http, pair, amount, side),
     tradeOpenOrders: (query) => listTradeOpenOrders(http, query),
   };

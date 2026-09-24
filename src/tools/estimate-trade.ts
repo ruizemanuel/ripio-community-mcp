@@ -28,7 +28,7 @@ export function registerEstimateTrade(server: McpServer, ctx: ToolContext): void
         const normalizedAmount = toDecimal(amount) ?? amount;
         const [estimate, fees] = await Promise.allSettled([
           client.tradeEstimatePrice(normalizedPair, normalizedAmount, side),
-          client.tradeFees(),
+          client.tradeFees(normalizedPair),
         ]);
         if (estimate.status === 'rejected') throw estimate.reason;
         const warnings =
