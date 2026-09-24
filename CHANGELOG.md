@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.1 — unreleased
+## 0.1.1 — 2026-09-24
 
 - `ripio_get_transaction` accepts the id as the string `ripio_list_activity` returns.
 - `ripio_list_activity` explains Ripio Trade's 182-day statement limit instead of passing on Ripio's 400.
