@@ -38,7 +38,7 @@ Neither can show card transactions, in-app buys/sells or bill payments: Ripio's 
 ### 1. Create a read-only API key in Ripio
 
 1. Open [app.ripio.com](https://app.ripio.com), click your avatar (top right) → **Perfil** → **API** tab → **Nueva clave**.
-2. **IP restriction:** choose **IPs específicas** and add your public IP (recommended), or **Sin restricción**.
+2. **IP restriction:** choose **IPs específicas** and add your public IP (recommended), or **Sin restricción**. Home connections often get a new public IP now and then; when that happens the server reports a 403 until you add the new IP to the key.
 3. Name the key and keep the **Solo lectura** preset (Consultar 9/9, Operar 0/3, Retiros 0/2).
 4. Confirm with your 2FA method and copy the **API Key** and **Secret Key**. The secret is shown only once.
 
@@ -130,6 +130,7 @@ Found a vulnerability? See [SECURITY.md](SECURITY.md).
 - Values are estimates at Ripio app sell rates, not firm quotes.
 - Tested with Argentinian accounts. Other countries may work for reading, but haven't been tested.
 - Ripio Trade allows 1 request per second without verified documents; the server paces requests for you.
+- Ripio Trade statements can be read up to 182 days at a time; ask for older periods in chunks of about 6 months.
 
 ## Development
 

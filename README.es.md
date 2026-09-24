@@ -9,7 +9,7 @@ English version: [README.md](README.md)
 ## 1. Creá una clave de API de solo lectura
 
 1. Entrá a [app.ripio.com](https://app.ripio.com), hacé clic en tu avatar (arriba a la derecha) → **Perfil** → pestaña **API** → **Nueva clave**.
-2. **Restricción de IP:** elegí **IPs específicas** y agregá tu IP pública (recomendado), o **Sin restricción**.
+2. **Restricción de IP:** elegí **IPs específicas** y agregá tu IP pública (recomendado), o **Sin restricción**. Las conexiones hogareñas suelen cambiar de IP pública cada tanto; cuando pasa, el servidor responde con un error 403 hasta que agregues la IP nueva a la clave.
 
    <img src="docs/images/ripio-api-key-ip.png" alt="Restricción de IP" width="300">
 
@@ -69,6 +69,7 @@ Para VS Code, Zed y otros clientes, mirá la sección "Add it to your client" de
 - La API de Ripio no expone los movimientos de tarjeta, las compras/ventas hechas en la app ni los pagos de servicios.
 - Los valores son estimados al precio de venta de la app; no son una cotización firme.
 - Probado con cuentas de Argentina.
+- El extracto de Ripio Trade se puede leer de a 182 días como máximo; para períodos más viejos, pedilo en tramos de unos 6 meses.
 
 ## Aviso legal
 
