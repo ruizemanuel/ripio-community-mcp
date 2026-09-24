@@ -10,7 +10,13 @@ English version: [README.md](README.md)
 
 1. Entrá a [app.ripio.com](https://app.ripio.com), hacé clic en tu avatar (arriba a la derecha) → **Perfil** → pestaña **API** → **Nueva clave**.
 2. **Restricción de IP:** elegí **IPs específicas** y agregá tu IP pública (recomendado), o **Sin restricción**.
+
+   <img src="docs/images/ripio-api-key-ip.png" alt="Restricción de IP" width="300">
+
 3. Poné un nombre y dejá el preset **Solo lectura** (Consultar 9/9, Operar 0/3, Retiros 0/2).
+
+   <img src="docs/images/ripio-api-key-permissions.png" alt="Permisos Solo lectura" width="300">
+
 4. Confirmá con tu método de verificación en dos pasos y copiá la **API Key** y la **Secret Key**. La secret se muestra una sola vez.
 
 > Aviso: el preset "Solo lectura" de Ripio igual permite registrar cuentas bancarias a tu nombre por API. Este servidor nunca llama a ese endpoint.
