@@ -4,6 +4,13 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    ignore:
+      # typescript-eslint 8 supports TypeScript < 6.1.
+      - dependency-name: typescript
+        versions: ['>=6.1']
+      # Types must match the oldest supported runtime (Node 22).
+      - dependency-name: '@types/node'
+        update-types: ['version-update:semver-major']
   - package-ecosystem: github-actions
     directory: /
     schedule:
