@@ -23,10 +23,11 @@ jobs:
       - run: npm run build
       - name: Check the tag matches package.json
         run: test "v$(node -p "require('./package.json').version")" = "${GITHUB_REF_NAME}"
+      # Build the bundle before publishing, so a bundle failure can't leave an npm version without a release.
+      - run: npm run build:mcpb
       - run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - run: npm run build:mcpb
       - run: gh release create "${GITHUB_REF_NAME}" ripio-community-mcp.mcpb --title "${GITHUB_REF_NAME}" --generate-notes
         env:
           GH_TOKEN: ${{ github.token }}

@@ -1,4 +1,4 @@
-// Builds ripio-community-mcp.mcpb: dist + production dependencies + manifest, packed with the official mcpb CLI.
+// Builds ripio-community-mcp.mcpb: dist + production dependencies pinned by the lockfile + manifest, packed with the official mcpb CLI.
 // Runs npm and mcpb through Node directly (no shell), so it behaves the same on Windows, macOS and Linux.
 import { execFileSync } from 'node:child_process';
 import { cpSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
@@ -14,12 +14,11 @@ const stage = 'build/mcpb';
 rmSync('build', { recursive: true, force: true });
 mkdirSync(stage, { recursive: true });
 cpSync('dist', `${stage}/dist`, { recursive: true });
-for (const file of ['manifest.json', 'LICENSE', 'README.md']) cpSync(file, `${stage}/${file}`);
-writeFileSync(
-  `${stage}/package.json`,
-  JSON.stringify({ name: pkg.name, version: pkg.version, type: 'module', dependencies: pkg.dependencies }, null, 2),
-);
-execFileSync(process.execPath, [npmCli, 'install', '--omit=dev', '--ignore-scripts', '--no-audit', '--no-fund'], {
+for (const file of ['manifest.json', 'LICENSE', 'README.md', 'package-lock.json']) cpSync(file, `${stage}/${file}`);
+// devDependencies stay listed so `npm ci` accepts the lockfile; --omit=dev keeps them out of the bundle.
+const { name, version, type, dependencies, devDependencies } = pkg;
+writeFileSync(`${stage}/package.json`, JSON.stringify({ name, version, type, dependencies, devDependencies }, null, 2));
+execFileSync(process.execPath, [npmCli, 'ci', '--omit=dev', '--ignore-scripts', '--no-audit', '--no-fund'], {
   cwd: stage,
   stdio: 'inherit',
 });
