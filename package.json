@@ -1,0 +1,65 @@
+{
+  "name": "ripio-community-mcp",
+  "version": "0.1.0",
+  "description": "Unofficial, community-built, read-only MCP server for Ripio. Not affiliated with Ripio.",
+  "license": "MIT",
+  "author": "Emanuel Ruiz (https://github.com/ruizemanuel)",
+  "type": "module",
+  "bin": {
+    "ripio-community-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "README.es.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ruizemanuel/ripio-community-mcp.git"
+  },
+  "homepage": "https://github.com/ruizemanuel/ripio-community-mcp#readme",
+  "bugs": {
+    "url": "https://github.com/ruizemanuel/ripio-community-mcp/issues"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "ripio",
+    "crypto",
+    "argentina",
+    "claude"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "test": "vitest run",
+    "test:live": "vitest run --config vitest.live.config.ts",
+    "record-fixtures": "node --env-file=.env.live --import tsx scripts/record-fixtures.ts",
+    "build:mcpb": "node scripts/build-mcpb.mjs",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/server": "^2.1.0",
+    "big.js": "^7.0.1",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@anthropic-ai/mcpb": "^2.1.2",
+    "@eslint/js": "^10.0.1",
+    "@modelcontextprotocol/client": "^2.1.0",
+    "@types/big.js": "^7.0.0",
+    "@types/node": "^22.20.4",
+    "eslint": "^10.11.0",
+    "prettier": "^3.9.9",
+    "tsx": "^4.23.15",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.70.1",
+    "vitest": "^5.0.1"
+  }
+}
