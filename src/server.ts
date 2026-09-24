@@ -4,7 +4,9 @@ import { createRipioClient, type RipioClient } from './ripio/client.js';
 import { RipioApiError } from './ripio/errors.js';
 import { RipioHttp } from './ripio/http.js';
 import type { ToolContext } from './tools/context.js';
+import { registerEstimateTrade } from './tools/estimate-trade.js';
 import { registerGetPortfolio } from './tools/get-portfolio.js';
+import { registerGetPrices } from './tools/get-prices.js';
 import { registerGetTransaction } from './tools/get-transaction.js';
 import { registerListActivity } from './tools/list-activity.js';
 import { stderrLogger, type Logger } from './tools/result.js';
@@ -40,5 +42,7 @@ export function createServer(config: Config | RipioApiError, deps: ServerDeps = 
   registerGetPortfolio(server, ctx);
   registerListActivity(server, ctx);
   registerGetTransaction(server, ctx);
+  registerGetPrices(server, ctx);
+  registerEstimateTrade(server, ctx);
   return server;
 }
