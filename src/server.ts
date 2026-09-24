@@ -5,10 +5,12 @@ import { RipioApiError } from './ripio/errors.js';
 import { RipioHttp } from './ripio/http.js';
 import type { ToolContext } from './tools/context.js';
 import { registerEstimateTrade } from './tools/estimate-trade.js';
+import { registerGetLimits } from './tools/get-limits.js';
 import { registerGetPortfolio } from './tools/get-portfolio.js';
 import { registerGetPrices } from './tools/get-prices.js';
 import { registerGetTransaction } from './tools/get-transaction.js';
 import { registerListActivity } from './tools/list-activity.js';
+import { registerListOpenOrders } from './tools/list-open-orders.js';
 import { stderrLogger, type Logger } from './tools/result.js';
 
 export const SERVER_NAME = 'ripio-community-mcp';
@@ -44,5 +46,7 @@ export function createServer(config: Config | RipioApiError, deps: ServerDeps = 
   registerGetTransaction(server, ctx);
   registerGetPrices(server, ctx);
   registerEstimateTrade(server, ctx);
+  registerGetLimits(server, ctx);
+  registerListOpenOrders(server, ctx);
   return server;
 }
