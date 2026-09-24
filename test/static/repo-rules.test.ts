@@ -29,9 +29,11 @@ describe('repository rules', () => {
     expect([...hosts].sort()).toEqual(['api.ripio.com', 'github.com']);
   });
 
-  it('keeps the server version in sync with package.json', () => {
+  it('keeps the version in sync across package.json, manifest.json and the server', () => {
     const pkg = JSON.parse(readFileSync('package.json', 'utf8')) as { version: string };
+    const manifest = JSON.parse(readFileSync('manifest.json', 'utf8')) as { version: string };
     expect(SERVER_VERSION).toBe(pkg.version);
+    expect(manifest.version).toBe(pkg.version);
   });
 
   it('commits no secrets or personal data in fixtures', () => {

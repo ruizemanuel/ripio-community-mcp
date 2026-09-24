@@ -1,0 +1,63 @@
+{
+  "manifest_version": "0.4",
+  "name": "ripio-community-mcp",
+  "display_name": "Ripio (community, read-only)",
+  "version": "0.1.0",
+  "description": "Read your Ripio account from Claude: balances, activity, prices, limits and open orders. Unofficial and read-only.",
+  "long_description": "Unofficial, community-built MCP server for Ripio. Not affiliated with Ripio. It uses your own Ripio API key (create a read-only key in Ripio > Perfil > API), runs on your computer and can only send read (GET) requests to api.ripio.com.",
+  "author": { "name": "Emanuel Ruiz", "url": "https://github.com/ruizemanuel" },
+  "repository": { "type": "git", "url": "https://github.com/ruizemanuel/ripio-community-mcp" },
+  "homepage": "https://github.com/ruizemanuel/ripio-community-mcp",
+  "documentation": "https://github.com/ruizemanuel/ripio-community-mcp#readme",
+  "support": "https://github.com/ruizemanuel/ripio-community-mcp/issues",
+  "license": "MIT",
+  "keywords": ["ripio", "crypto", "argentina", "finance", "read-only"],
+  "server": {
+    "type": "node",
+    "entry_point": "dist/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/dist/index.js"],
+      "env": {
+        "RIPIO_API_KEY": "${user_config.api_key}",
+        "RIPIO_API_SECRET": "${user_config.api_secret}",
+        "RIPIO_TRADE_RPS": "${user_config.trade_rps}"
+      }
+    }
+  },
+  "tools": [
+    { "name": "ripio_get_portfolio", "description": "Balances across Wallet, memecoins and Ripio Trade with estimated ARS/USD value." },
+    { "name": "ripio_list_activity", "description": "Wallet movements or Ripio Trade statement, normalized and paginated." },
+    { "name": "ripio_get_transaction", "description": "Detail of one Wallet movement by id." },
+    { "name": "ripio_get_prices", "description": "App buy/sell rates and Ripio Trade prices for the requested assets." },
+    { "name": "ripio_estimate_trade", "description": "Estimated cost or proceeds of a market order, fees included. Nothing is executed." },
+    { "name": "ripio_get_limits", "description": "Remaining deposit, withdrawal and swap limits per rail." },
+    { "name": "ripio_list_open_orders", "description": "Open orders on Ripio Trade." }
+  ],
+  "user_config": {
+    "api_key": {
+      "type": "string",
+      "title": "Ripio API key",
+      "description": "Create a read-only key in Ripio > Perfil > API.",
+      "required": true,
+      "sensitive": true
+    },
+    "api_secret": {
+      "type": "string",
+      "title": "Ripio secret key",
+      "description": "Shown once when you create the key.",
+      "required": true,
+      "sensitive": true
+    },
+    "trade_rps": {
+      "type": "number",
+      "title": "Ripio Trade requests per second",
+      "description": "1 by default; up to 3.5 if your Ripio account has verified documents.",
+      "required": false,
+      "default": 1,
+      "min": 0.2,
+      "max": 3.5
+    }
+  },
+  "compatibility": { "platforms": ["darwin", "win32", "linux"], "runtimes": { "node": ">=22.0.0" } }
+}
