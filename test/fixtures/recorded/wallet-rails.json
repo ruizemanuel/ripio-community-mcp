@@ -1,0 +1,100 @@
+[
+  {
+    "rail": "bank",
+    "name": "redacted-1",
+    "transaction_types": [
+      {
+        "enabled": true,
+        "account_enabled": true,
+        "fee": "0.00",
+        "fixed_fee": "0.00",
+        "custom_fee_currencies": {},
+        "taxes": [],
+        "deliver_time": null,
+        "transaction_type": "withdrawal",
+        "blocked": false
+      },
+      {
+        "enabled": true,
+        "account_enabled": true,
+        "fee": "0.00",
+        "fixed_fee": "0.00",
+        "custom_fee_currencies": {},
+        "taxes": [],
+        "deliver_time": null,
+        "transaction_type": "deposit",
+        "blocked": false
+      }
+    ],
+    "order": 100002
+  },
+  {
+    "rail": "ripio",
+    "name": "redacted-3",
+    "transaction_types": [
+      {
+        "enabled": true,
+        "account_enabled": true,
+        "fee": "0.00",
+        "fixed_fee": "0.00",
+        "custom_fee_currencies": {},
+        "taxes": [],
+        "deliver_time": null,
+        "transaction_type": "withdrawal",
+        "blocked": false
+      },
+      {
+        "enabled": true,
+        "account_enabled": true,
+        "fee": "0.00",
+        "fixed_fee": "0.00",
+        "custom_fee_currencies": {},
+        "taxes": [],
+        "deliver_time": null,
+        "transaction_type": "swap",
+        "blocked": false
+      },
+      {
+        "enabled": true,
+        "account_enabled": true,
+        "fee": "0.46",
+        "fixed_fee": "0.00",
+        "custom_fee_currencies": {},
+        "taxes": [],
+        "deliver_time": null,
+        "transaction_type": "deposit",
+        "blocked": false
+      }
+    ],
+    "order": 100004
+  },
+  {
+    "rail": "crypto",
+    "name": "redacted-5",
+    "transaction_types": [
+      {
+        "enabled": true,
+        "account_enabled": true,
+        "fee": "0.00",
+        "fixed_fee": "0.00",
+        "custom_fee_currencies": {},
+        "taxes": [],
+        "deliver_time": null,
+        "transaction_type": "deposit",
+        "blocked": false
+      },
+      {
+        "enabled": true,
+        "account_enabled": true,
+        "fee": "0.00",
+        "fixed_fee": "0.00",
+        "custom_fee_currencies": {},
+        "taxes": [],
+        "deliver_time": null,
+        "transaction_type": "withdrawal",
+        "blocked": false
+      }
+    ],
+    "order": 100006
+  }
+]

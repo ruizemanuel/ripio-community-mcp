@@ -1,0 +1,11 @@
+{
+  "orders": [],
+  "pagination": {
+    "current_page": -1,
+    "page_size": 100001,
+    "registers_count": 100002,
+    "total_pages": -1
+  },
+  "nc": null,
+  "pc": null
+}

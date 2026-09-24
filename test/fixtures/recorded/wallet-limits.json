@@ -1,0 +1,275 @@
+[
+  {
+    "rail": null,
+    "transaction_types": [
+      {
+        "currency": "ARS",
+        "currency_balance_id": 2,
+        "limits": {
+          "min_amount": null,
+          "max_amount": null,
+          "daily_amount": 686700000,
+          "daily_qty": null,
+          "monthly_amount": 945000000,
+          "monthly_qty": null,
+          "annual_amount": 407100000,
+          "annual_qty": null
+        },
+        "remaining": {
+          "daily_amount": 360700000,
+          "daily_qty": null,
+          "monthly_amount": 357800000,
+          "monthly_qty": null,
+          "annual_amount": 646200000,
+          "annual_qty": null
+        },
+        "transaction_type": "withdrawal"
+      },
+      {
+        "currency": "ARS",
+        "currency_balance_id": 4,
+        "limits": {
+          "min_amount": null,
+          "max_amount": null,
+          "daily_amount": 824300000,
+          "daily_qty": null,
+          "monthly_amount": 505400000,
+          "monthly_qty": null,
+          "annual_amount": 416200000,
+          "annual_qty": null
+        },
+        "remaining": {
+          "daily_amount": 437200000,
+          "daily_qty": null,
+          "monthly_amount": 784900000,
+          "monthly_qty": null,
+          "annual_amount": 442200000,
+          "annual_qty": null
+        },
+        "transaction_type": "deposit"
+      },
+      {
+        "currency": "USD",
+        "currency_balance_id": 79,
+        "limits": {
+          "min_amount": null,
+          "max_amount": null,
+          "daily_amount": 594900,
+          "daily_qty": null,
+          "monthly_amount": 918200,
+          "monthly_qty": null,
+          "annual_amount": 922000,
+          "annual_qty": null
+        },
+        "remaining": {
+          "daily_amount": 207400,
+          "daily_qty": null,
+          "monthly_amount": 193700,
+          "monthly_qty": null,
+          "annual_amount": 485900,
+          "annual_qty": null
+        },
+        "transaction_type": "withdrawal"
+      },
+      {
+        "currency": "USD",
+        "currency_balance_id": 14,
+        "limits": {
+          "min_amount": null,
+          "max_amount": null,
+          "daily_amount": 243900,
+          "daily_qty": null,
+          "monthly_amount": 351500,
+          "monthly_qty": null,
+          "annual_amount": 166500,
+          "annual_qty": null
+        },
+        "remaining": {
+          "daily_amount": 719700,
+          "daily_qty": null,
+          "monthly_amount": 610300,
+          "monthly_qty": null,
+          "annual_amount": 684400,
+          "annual_qty": null
+        },
+        "transaction_type": "deposit"
+      }
+    ]
+  },
+  {
+    "rail": "ripio",
+    "transaction_types": [
+      {
+        "currency": "ARS",
+        "currency_balance_id": 4,
+        "limits": {
+          "min_amount": 5,
+          "max_amount": null,
+          "daily_amount": null,
+          "daily_qty": 97,
+          "monthly_amount": null,
+          "monthly_qty": null,
+          "annual_amount": null,
+          "annual_qty": null
+        },
+        "remaining": {
+          "daily_amount": null,
+          "daily_qty": 73,
+          "monthly_amount": null,
+          "monthly_qty": null,
+          "annual_amount": null,
+          "annual_qty": null
+        },
+        "transaction_type": "withdrawal"
+      },
+      {
+        "currency": "ARS",
+        "currency_balance_id": 7,
+        "limits": {
+          "min_amount": null,
+          "max_amount": null,
+          "daily_amount": null,
+          "daily_qty": null,
+          "monthly_amount": null,
+          "monthly_qty": null,
+          "annual_amount": null,
+          "annual_qty": null
+        },
+        "remaining": {
+          "daily_amount": null,
+          "daily_qty": null,
+          "monthly_amount": null,
+          "monthly_qty": null,
+          "annual_amount": null,
+          "annual_qty": null
+        },
+        "transaction_type": "deposit"
+      },
+      {
+        "currency": "USDT",
+        "currency_balance_id": 19,
+        "limits": {
+          "min_amount": 6,
+          "max_amount": null,
+          "daily_amount": 35070,
+          "daily_qty": 32,
+          "monthly_amount": 632400,
+          "monthly_qty": null,
+          "annual_amount": 404800,
+          "annual_qty": null
+        },
+        "remaining": {
+          "daily_amount": 86650,
+          "daily_qty": 66,
+          "monthly_amount": 630600,
+          "monthly_qty": null,
+          "annual_amount": 355600,
+          "annual_qty": null
+        },
+        "transaction_type": "swap"
+      }
+    ]
+  },
+  {
+    "rail": "crypto",
+    "transaction_types": [
+      {
+        "currency": "ARS",
+        "currency_balance_id": 4,
+        "limits": {
+          "min_amount": null,
+          "max_amount": null,
+          "daily_amount": null,
+          "daily_qty": null,
+          "monthly_amount": null,
+          "monthly_qty": null,
+          "annual_amount": null,
+          "annual_qty": null
+        },
+        "remaining": {
+          "daily_amount": null,
+          "daily_qty": null,
+          "monthly_amount": null,
+          "monthly_qty": null,
+          "annual_amount": null,
+          "annual_qty": null
+        },
+        "transaction_type": "withdrawal"
+      },
+      {
+        "currency": "ARS",
+        "currency_balance_id": 2,
+        "limits": {
+          "min_amount": null,
+          "max_amount": null,
+          "daily_amount": null,
+          "daily_qty": null,
+          "monthly_amount": null,
+          "monthly_qty": null,
+          "annual_amount": null,
+          "annual_qty": null
+        },
+        "remaining": {
+          "daily_amount": null,
+          "daily_qty": null,
+          "monthly_amount": null,
+          "monthly_qty": null,
+          "annual_amount": null,
+          "annual_qty": null
+        },
+        "transaction_type": "deposit"
+      }
+    ]
+  },
+  {
+    "rail": "bank",
+    "transaction_types": [
+      {
+        "currency": "ARS",
+        "currency_balance_id": 9,
+        "limits": {
+          "min_amount": 58,
+          "max_amount": null,
+          "daily_amount": 495400000,
+          "daily_qty": 670,
+          "monthly_amount": 947100000,
+          "monthly_qty": null,
+          "annual_amount": 223600000,
+          "annual_qty": null
+        },
+        "remaining": {
+          "daily_amount": 710900000,
+          "daily_qty": 843,
+          "monthly_amount": 812900000,
+          "monthly_qty": null,
+          "annual_amount": 101300000,
+          "annual_qty": null
+        },
+        "transaction_type": "withdrawal"
+      },
+      {
+        "currency": "ARS",
+        "currency_balance_id": 6,
+        "limits": {
+          "min_amount": 0.02,
+          "max_amount": null,
+          "daily_amount": 701700000,
+          "daily_qty": 608,
+          "monthly_amount": 148200000,
+          "monthly_qty": null,
+          "annual_amount": 937300000,
+          "annual_qty": null
+        },
+        "remaining": {
+          "daily_amount": 517500000,
+          "daily_qty": 438,
+          "monthly_amount": 667600000,
+          "monthly_qty": null,
+          "annual_amount": 299400000,
+          "annual_qty": null
+        },
+        "transaction_type": "deposit"
+      }
+    ]
+  }
+]

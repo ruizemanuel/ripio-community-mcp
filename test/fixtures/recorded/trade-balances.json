@@ -1,0 +1,14 @@
+[
+  {
+    "available_amount": 3e-7,
+    "currency_code": "BTC",
+    "last_update": "2022-10-07 02:36:25.325",
+    "locked_amount": 0
+  },
+  {
+    "available_amount": 0.08587,
+    "currency_code": "USDT",
+    "last_update": "2022-07-07 17:37:28",
+    "locked_amount": 0
+  }
+]

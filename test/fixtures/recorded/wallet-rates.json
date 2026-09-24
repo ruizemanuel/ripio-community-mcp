@@ -1,0 +1,1242 @@
+[
+  {
+    "ticker": "WARS_ARS",
+    "base_currency_balance_id": 9074,
+    "quote_currency_balance_id": 8,
+    "buy_rate": "1.00",
+    "sell_rate": "1.00",
+    "variation": "-0.00"
+  },
+  {
+    "ticker": "WARS_USD",
+    "base_currency_balance_id": 6130,
+    "quote_currency_balance_id": 14,
+    "buy_rate": "0.000621",
+    "sell_rate": "0.00062",
+    "variation": "-0.64"
+  },
+  {
+    "ticker": "BTC_ARS",
+    "base_currency_balance_id": 41,
+    "quote_currency_balance_id": 7,
+    "buy_rate": "136964762.88",
+    "sell_rate": "132062633.30",
+    "variation": "0.43"
+  },
+  {
+    "ticker": "BTC_USD",
+    "base_currency_balance_id": 44,
+    "quote_currency_balance_id": 39,
+    "buy_rate": "84521.79",
+    "sell_rate": "84092.01",
+    "variation": "-0.09"
+  },
+  {
+    "ticker": "USDT_ARS",
+    "base_currency_balance_id": 29,
+    "quote_currency_balance_id": 7,
+    "buy_rate": "1625.99",
+    "sell_rate": "1588.78",
+    "variation": "0.27"
+  },
+  {
+    "ticker": "USDT_USD",
+    "base_currency_balance_id": 70,
+    "quote_currency_balance_id": 51,
+    "buy_rate": "0.99972",
+    "sell_rate": "0.99961",
+    "variation": "-0.01"
+  },
+  {
+    "ticker": "ETH_ARS",
+    "base_currency_balance_id": 16,
+    "quote_currency_balance_id": 5,
+    "buy_rate": "4365971.87",
+    "sell_rate": "4252724.25",
+    "variation": "0.73"
+  },
+  {
+    "ticker": "ETH_USD",
+    "base_currency_balance_id": 41,
+    "quote_currency_balance_id": 62,
+    "buy_rate": "2693.98",
+    "sell_rate": "2680.47",
+    "variation": "0.22"
+  },
+  {
+    "ticker": "LTC_ARS",
+    "base_currency_balance_id": 11,
+    "quote_currency_balance_id": 5,
+    "buy_rate": "116383.22",
+    "sell_rate": "111699.76",
+    "variation": "15.95"
+  },
+  {
+    "ticker": "LTC_USD",
+    "base_currency_balance_id": 17,
+    "quote_currency_balance_id": 52,
+    "buy_rate": "71.4928",
+    "sell_rate": "71.1258",
+    "variation": "15.40"
+  },
+  {
+    "ticker": "USDAR_ARS",
+    "base_currency_balance_id": 7182,
+    "quote_currency_balance_id": 7,
+    "buy_rate": "1595.63",
+    "sell_rate": "1526.61",
+    "variation": "0.47"
+  },
+  {
+    "ticker": "USDAR_USD",
+    "base_currency_balance_id": 5650,
+    "quote_currency_balance_id": 18,
+    "buy_rate": "0.994422",
+    "sell_rate": "0.951408",
+    "variation": "0.39"
+  },
+  {
+    "ticker": "USDC_ARS",
+    "base_currency_balance_id": 34,
+    "quote_currency_balance_id": 8,
+    "buy_rate": "1629.66",
+    "sell_rate": "1594.30",
+    "variation": "0.50"
+  },
+  {
+    "ticker": "USDC_USD",
+    "base_currency_balance_id": 54,
+    "quote_currency_balance_id": 29,
+    "buy_rate": "0.9999",
+    "sell_rate": "0.9998",
+    "variation": "-0.00"
+  },
+  {
+    "ticker": "LAC_ARS",
+    "base_currency_balance_id": 79,
+    "quote_currency_balance_id": 5,
+    "buy_rate": "16.3512",
+    "sell_rate": "15.8552",
+    "variation": "0.49"
+  },
+  {
+    "ticker": "LAC_USD",
+    "base_currency_balance_id": 91,
+    "quote_currency_balance_id": 39,
+    "buy_rate": "0.010044",
+    "sell_rate": "0.009943",
+    "variation": "0.01"
+  },
+  {
+    "ticker": "AAPLx_ARS",
+    "base_currency_balance_id": 3230,
+    "quote_currency_balance_id": 4,
+    "buy_rate": "546781.05",
+    "sell_rate": "535469.42",
+    "variation": "0.14"
+  },
+  {
+    "ticker": "AAPLx_USD",
+    "base_currency_balance_id": 6102,
+    "quote_currency_balance_id": 83,
+    "buy_rate": "335.862",
+    "sell_rate": "335.832",
+    "variation": "-0.33"
+  },
+  {
+    "ticker": "AAVE_ARS",
+    "base_currency_balance_id": 6,
+    "quote_currency_balance_id": 4,
+    "buy_rate": "235767.69",
+    "sell_rate": "230593.25",
+    "variation": "4.81"
+  },
+  {
+    "ticker": "AAVE_USD",
+    "base_currency_balance_id": 5,
+    "quote_currency_balance_id": 63,
+    "buy_rate": "146.934",
+    "sell_rate": "143.709",
+    "variation": "4.72"
+  },
+  {
+    "ticker": "ACX_ARS",
+    "base_currency_balance_id": 3,
+    "quote_currency_balance_id": 9,
+    "buy_rate": "66.2978",
+    "sell_rate": "66.0771",
+    "variation": "0.30"
+  },
+  {
+    "ticker": "ACX_USD",
+    "base_currency_balance_id": 7,
+    "quote_currency_balance_id": 39,
+    "buy_rate": "0.0413179",
+    "sell_rate": "0.0411803",
+    "variation": "0.22"
+  },
+  {
+    "ticker": "ADA_ARS",
+    "base_currency_balance_id": 9,
+    "quote_currency_balance_id": 10,
+    "buy_rate": "402.756",
+    "sell_rate": "392.212",
+    "variation": "4.13"
+  },
+  {
+    "ticker": "ADA_USD",
+    "base_currency_balance_id": 2,
+    "quote_currency_balance_id": 49,
+    "buy_rate": "0.251004",
+    "sell_rate": "0.244433",
+    "variation": "4.05"
+  },
+  {
+    "ticker": "ALGO_ARS",
+    "base_currency_balance_id": 3,
+    "quote_currency_balance_id": 5,
+    "buy_rate": "182.222",
+    "sell_rate": "178.076",
+    "variation": "7.90"
+  },
+  {
+    "ticker": "ALGO_USD",
+    "base_currency_balance_id": 7,
+    "quote_currency_balance_id": 70,
+    "buy_rate": "0.113564",
+    "sell_rate": "0.11098",
+    "variation": "7.81"
+  },
+  {
+    "ticker": "ARB_ARS",
+    "base_currency_balance_id": 2,
+    "quote_currency_balance_id": 5,
+    "buy_rate": "355.564",
+    "sell_rate": "346.238",
+    "variation": "1.56"
+  },
+  {
+    "ticker": "ARB_USD",
+    "base_currency_balance_id": 5,
+    "quote_currency_balance_id": 50,
+    "buy_rate": "0.221593",
+    "sell_rate": "0.215781",
+    "variation": "1.47"
+  },
+  {
+    "ticker": "ATOM_ARS",
+    "base_currency_balance_id": 9,
+    "quote_currency_balance_id": 3,
+    "buy_rate": "2914.49",
+    "sell_rate": "2836.16",
+    "variation": "5.86"
+  },
+  {
+    "ticker": "ATOM_USD",
+    "base_currency_balance_id": 8,
+    "quote_currency_balance_id": 88,
+    "buy_rate": "1.81636",
+    "sell_rate": "1.76754",
+    "variation": "5.77"
+  },
+  {
+    "ticker": "AVAX_ARS",
+    "base_currency_balance_id": 3,
+    "quote_currency_balance_id": 2,
+    "buy_rate": "16917.37",
+    "sell_rate": "16479.57",
+    "variation": "1.54"
+  },
+  {
+    "ticker": "AVAX_USD",
+    "base_currency_balance_id": 3,
+    "quote_currency_balance_id": 83,
+    "buy_rate": "10.5432",
+    "sell_rate": "10.2703",
+    "variation": "1.46"
+  },
+  {
+    "ticker": "AXS_ARS",
+    "base_currency_balance_id": 6,
+    "quote_currency_balance_id": 10,
+    "buy_rate": "1767.55",
+    "sell_rate": "1726.75",
+    "variation": "5.57"
+  },
+  {
+    "ticker": "AXS_USD",
+    "base_currency_balance_id": 3,
+    "quote_currency_balance_id": 41,
+    "buy_rate": "1.10157",
+    "sell_rate": "1.07614",
+    "variation": "5.49"
+  },
+  {
+    "ticker": "BAT_ARS",
+    "base_currency_balance_id": 75,
+    "quote_currency_balance_id": 4,
+    "buy_rate": "147.675",
+    "sell_rate": "144.24",
+    "variation": "4.35"
+  },
+  {
+    "ticker": "BAT_USD",
+    "base_currency_balance_id": 93,
+    "quote_currency_balance_id": 93,
+    "buy_rate": "0.0920334",
+    "sell_rate": "0.0898927",
+    "variation": "4.27"
+  },
+  {
+    "ticker": "BCH_ARS",
+    "base_currency_balance_id": 78,
+    "quote_currency_balance_id": 6,
+    "buy_rate": "549597.11",
+    "sell_rate": "537246.04",
+    "variation": "0.54"
+  },
+  {
+    "ticker": "BCH_USD",
+    "base_currency_balance_id": 67,
+    "quote_currency_balance_id": 68,
+    "buy_rate": "342.518",
+    "sell_rate": "334.82",
+    "variation": "0.46"
+  },
+  {
+    "ticker": "BNB_ARS",
+    "base_currency_balance_id": 68,
+    "quote_currency_balance_id": 7,
+    "buy_rate": "1268855.38",
+    "sell_rate": "1235737.86",
+    "variation": "1.91"
+  },
+  {
+    "ticker": "BNB_USD",
+    "base_currency_balance_id": 46,
+    "quote_currency_balance_id": 76,
+    "buy_rate": "790.771",
+    "sell_rate": "770.132",
+    "variation": "1.83"
+  },
+  {
+    "ticker": "CELO_ARS",
+    "base_currency_balance_id": 74,
+    "quote_currency_balance_id": 2,
+    "buy_rate": "150.392",
+    "sell_rate": "146.327",
+    "variation": "3.91"
+  },
+  {
+    "ticker": "CELO_USD",
+    "base_currency_balance_id": 82,
+    "quote_currency_balance_id": 65,
+    "buy_rate": "0.0937267",
+    "sell_rate": "0.0911933",
+    "variation": "3.82"
+  },
+  {
+    "ticker": "CHZ_ARS",
+    "base_currency_balance_id": 45,
+    "quote_currency_balance_id": 8,
+    "buy_rate": "26.6269",
+    "sell_rate": "26.0204",
+    "variation": "3.82"
+  },
+  {
+    "ticker": "CHZ_USD",
+    "base_currency_balance_id": 57,
+    "quote_currency_balance_id": 98,
+    "buy_rate": "0.0165943",
+    "sell_rate": "0.0162163",
+    "variation": "3.73"
+  },
+  {
+    "ticker": "CRCLx_ARS",
+    "base_currency_balance_id": 7749,
+    "quote_currency_balance_id": 10,
+    "buy_rate": "150537.17",
+    "sell_rate": "147487.13",
+    "variation": "-0.71"
+  },
+  {
+    "ticker": "CRCLx_USD",
+    "base_currency_balance_id": 6974,
+    "quote_currency_balance_id": 77,
+    "buy_rate": "92.52",
+    "sell_rate": "92.50",
+    "variation": "-1.12"
+  },
+  {
+    "ticker": "DAI_ARS",
+    "base_currency_balance_id": 80,
+    "quote_currency_balance_id": 4,
+    "buy_rate": "1617.04",
+    "sell_rate": "1594.14",
+    "variation": "0.50"
+  },
+  {
+    "ticker": "DAI_USD",
+    "base_currency_balance_id": 56,
+    "quote_currency_balance_id": 24,
+    "buy_rate": "0.999967",
+    "sell_rate": "0.9998",
+    "variation": "-0.00"
+  },
+  {
+    "ticker": "DOGE_ARS",
+    "base_currency_balance_id": 34,
+    "quote_currency_balance_id": 5,
+    "buy_rate": "155.667",
+    "sell_rate": "152.199",
+    "variation": "3.72"
+  },
+  {
+    "ticker": "DOGE_USD",
+    "base_currency_balance_id": 94,
+    "quote_currency_balance_id": 71,
+    "buy_rate": "0.0970142",
+    "sell_rate": "0.0948529",
+    "variation": "3.64"
+  },
+  {
+    "ticker": "DOT_ARS",
+    "base_currency_balance_id": 30,
+    "quote_currency_balance_id": 8,
+    "buy_rate": "1896.39",
+    "sell_rate": "1845.33",
+    "variation": "6.16"
+  },
+  {
+    "ticker": "DOT_USD",
+    "base_currency_balance_id": 77,
+    "quote_currency_balance_id": 37,
+    "buy_rate": "1.18186",
+    "sell_rate": "1.15004",
+    "variation": "6.08"
+  },
+  {
+    "ticker": "ENA_ARS",
+    "base_currency_balance_id": 82,
+    "quote_currency_balance_id": 6,
+    "buy_rate": "359.195",
+    "sell_rate": "351.069",
+    "variation": "7.48"
+  },
+  {
+    "ticker": "ENA_USD",
+    "base_currency_balance_id": 17,
+    "quote_currency_balance_id": 11,
+    "buy_rate": "0.223856",
+    "sell_rate": "0.218792",
+    "variation": "7.39"
+  },
+  {
+    "ticker": "ENS_ARS",
+    "base_currency_balance_id": 17,
+    "quote_currency_balance_id": 5,
+    "buy_rate": "11567.05",
+    "sell_rate": "11294.55",
+    "variation": "5.83"
+  },
+  {
+    "ticker": "ENS_USD",
+    "base_currency_balance_id": 81,
+    "quote_currency_balance_id": 47,
+    "buy_rate": "7.20877",
+    "sell_rate": "7.03894",
+    "variation": "5.75"
+  },
+  {
+    "ticker": "ETHFI_ARS",
+    "base_currency_balance_id": 79,
+    "quote_currency_balance_id": 6,
+    "buy_rate": "1107.97",
+    "sell_rate": "1083.07",
+    "variation": "5.50"
+  },
+  {
+    "ticker": "ETHFI_USD",
+    "base_currency_balance_id": 34,
+    "quote_currency_balance_id": 65,
+    "buy_rate": "0.690505",
+    "sell_rate": "0.674987",
+    "variation": "5.41"
+  },
+  {
+    "ticker": "GLDx_ARS",
+    "base_currency_balance_id": 5471,
+    "quote_currency_balance_id": 6,
+    "buy_rate": "637912.51",
+    "sell_rate": "624165.53",
+    "variation": "0.08"
+  },
+  {
+    "ticker": "GLDx_USD",
+    "base_currency_balance_id": 7452,
+    "quote_currency_balance_id": 35,
+    "buy_rate": "391.80",
+    "sell_rate": "391.46",
+    "variation": "-0.40"
+  },
+  {
+    "ticker": "GNO_ARS",
+    "base_currency_balance_id": 95,
+    "quote_currency_balance_id": 6,
+    "buy_rate": "186924.75",
+    "sell_rate": "182762.15",
+    "variation": "1.72"
+  },
+  {
+    "ticker": "GNO_USD",
+    "base_currency_balance_id": 22,
+    "quote_currency_balance_id": 70,
+    "buy_rate": "116.495",
+    "sell_rate": "113.90",
+    "variation": "1.64"
+  },
+  {
+    "ticker": "GOOGLx_ARS",
+    "base_currency_balance_id": 7368,
+    "quote_currency_balance_id": 5,
+    "buy_rate": "557117.08",
+    "sell_rate": "545569.37",
+    "variation": "1.38"
+  },
+  {
+    "ticker": "GOOGLx_USD",
+    "base_currency_balance_id": 8837,
+    "quote_currency_balance_id": 41,
+    "buy_rate": "342.206",
+    "sell_rate": "342.167",
+    "variation": "0.89"
+  },
+  {
+    "ticker": "GRAM_ARS",
+    "base_currency_balance_id": 6115,
+    "quote_currency_balance_id": 6,
+    "buy_rate": "2306.91",
+    "sell_rate": "2254.16",
+    "variation": "0.76"
+  },
+  {
+    "ticker": "GRAM_USD",
+    "base_currency_balance_id": 5682,
+    "quote_currency_balance_id": 55,
+    "buy_rate": "1.4196",
+    "sell_rate": "1.41845",
+    "variation": "0.42"
+  },
+  {
+    "ticker": "HOODx_ARS",
+    "base_currency_balance_id": 7846,
+    "quote_currency_balance_id": 9,
+    "buy_rate": "196617.55",
+    "sell_rate": "192530.50",
+    "variation": "-1.10"
+  },
+  {
+    "ticker": "HOODx_USD",
+    "base_currency_balance_id": 9365,
+    "quote_currency_balance_id": 88,
+    "buy_rate": "120.84",
+    "sell_rate": "120.75",
+    "variation": "-1.52"
+  },
+  {
+    "ticker": "HYPE_ARS",
+    "base_currency_balance_id": 1029,
+    "quote_currency_balance_id": 6,
+    "buy_rate": "152803.79",
+    "sell_rate": "148448.08",
+    "variation": "0.54"
+  },
+  {
+    "ticker": "HYPE_USD",
+    "base_currency_balance_id": 1270,
+    "quote_currency_balance_id": 89,
+    "buy_rate": "95.2298",
+    "sell_rate": "92.5152",
+    "variation": "0.46"
+  },
+  {
+    "ticker": "LAND1RD_ARS",
+    "base_currency_balance_id": 4274,
+    "quote_currency_balance_id": 3,
+    "buy_rate": "1600.52",
+    "sell_rate": "1462.72",
+    "variation": "-0.00"
+  },
+  {
+    "ticker": "LAND1RD_USD",
+    "base_currency_balance_id": 7157,
+    "quote_currency_balance_id": 85,
+    "buy_rate": "0.983923",
+    "sell_rate": "0.917146",
+    "variation": "-0.73"
+  },
+  {
+    "ticker": "LINK_ARS",
+    "base_currency_balance_id": 33,
+    "quote_currency_balance_id": 3,
+    "buy_rate": "21407.15",
+    "sell_rate": "20930.67",
+    "variation": "6.90"
+  },
+  {
+    "ticker": "LINK_USD",
+    "base_currency_balance_id": 13,
+    "quote_currency_balance_id": 84,
+    "buy_rate": "13.3413",
+    "sell_rate": "13.0443",
+    "variation": "6.81"
+  },
+  {
+    "ticker": "MANA_ARS",
+    "base_currency_balance_id": 16,
+    "quote_currency_balance_id": 7,
+    "buy_rate": "143.289",
+    "sell_rate": "139.95",
+    "variation": "7.04"
+  },
+  {
+    "ticker": "MANA_USD",
+    "base_currency_balance_id": 61,
+    "quote_currency_balance_id": 26,
+    "buy_rate": "0.0893",
+    "sell_rate": "0.0872191",
+    "variation": "6.96"
+  },
+  {
+    "ticker": "MSTRx_ARS",
+    "base_currency_balance_id": 9484,
+    "quote_currency_balance_id": 2,
+    "buy_rate": "262125.91",
+    "sell_rate": "256834.88",
+    "variation": "-0.44"
+  },
+  {
+    "ticker": "MSTRx_USD",
+    "base_currency_balance_id": 4663,
+    "quote_currency_balance_id": 73,
+    "buy_rate": "161.10",
+    "sell_rate": "161.08",
+    "variation": "-0.86"
+  },
+  {
+    "ticker": "NMR_ARS",
+    "base_currency_balance_id": 64,
+    "quote_currency_balance_id": 4,
+    "buy_rate": "15579.78",
+    "sell_rate": "15218.26",
+    "variation": "3.59"
+  },
+  {
+    "ticker": "NMR_USD",
+    "base_currency_balance_id": 12,
+    "quote_currency_balance_id": 82,
+    "buy_rate": "9.70957",
+    "sell_rate": "9.48426",
+    "variation": "3.51"
+  },
+  {
+    "ticker": "NVDAx_ARS",
+    "base_currency_balance_id": 6711,
+    "quote_currency_balance_id": 4,
+    "buy_rate": "364490.12",
+    "sell_rate": "357060.81",
+    "variation": "-0.09"
+  },
+  {
+    "ticker": "NVDAx_USD",
+    "base_currency_balance_id": 3947,
+    "quote_currency_balance_id": 77,
+    "buy_rate": "223.969",
+    "sell_rate": "223.939",
+    "variation": "-0.53"
+  },
+  {
+    "ticker": "ONDO_ARS",
+    "base_currency_balance_id": 88,
+    "quote_currency_balance_id": 10,
+    "buy_rate": "830.163",
+    "sell_rate": "811.588",
+    "variation": "24.15"
+  },
+  {
+    "ticker": "ONDO_USD",
+    "base_currency_balance_id": 90,
+    "quote_currency_balance_id": 40,
+    "buy_rate": "0.517371",
+    "sell_rate": "0.505795",
+    "variation": "24.05"
+  },
+  {
+    "ticker": "OP_ARS",
+    "base_currency_balance_id": 41,
+    "quote_currency_balance_id": 7,
+    "buy_rate": "215.521",
+    "sell_rate": "209.745",
+    "variation": "7.91"
+  },
+  {
+    "ticker": "OP_USD",
+    "base_currency_balance_id": 39,
+    "quote_currency_balance_id": 28,
+    "buy_rate": "0.134316",
+    "sell_rate": "0.130716",
+    "variation": "7.82"
+  },
+  {
+    "ticker": "PAXG_ARS",
+    "base_currency_balance_id": 43,
+    "quote_currency_balance_id": 9,
+    "buy_rate": "6934553.37",
+    "sell_rate": "6781032.90",
+    "variation": "-0.23"
+  },
+  {
+    "ticker": "PAXG_USD",
+    "base_currency_balance_id": 11,
+    "quote_currency_balance_id": 35,
+    "buy_rate": "4321.72",
+    "sell_rate": "4226.05",
+    "variation": "-0.32"
+  },
+  {
+    "ticker": "PIXEL_ARS",
+    "base_currency_balance_id": 22,
+    "quote_currency_balance_id": 5,
+    "buy_rate": "9.25993",
+    "sell_rate": "9.03907",
+    "variation": "8.42"
+  },
+  {
+    "ticker": "PIXEL_USD",
+    "base_currency_balance_id": 91,
+    "quote_currency_balance_id": 78,
+    "buy_rate": "0.00577094",
+    "sell_rate": "0.00563329",
+    "variation": "8.33"
+  },
+  {
+    "ticker": "POL_ARS",
+    "base_currency_balance_id": 48,
+    "quote_currency_balance_id": 1,
+    "buy_rate": "174.201",
+    "sell_rate": "170.281",
+    "variation": "6.25"
+  },
+  {
+    "ticker": "POL_USD",
+    "base_currency_balance_id": 88,
+    "quote_currency_balance_id": 13,
+    "buy_rate": "0.108565",
+    "sell_rate": "0.106122",
+    "variation": "6.16"
+  },
+  {
+    "ticker": "PYUSD_ARS",
+    "base_currency_balance_id": 90,
+    "quote_currency_balance_id": 3,
+    "buy_rate": "1611.93",
+    "sell_rate": "1608.79",
+    "variation": "0.50"
+  },
+  {
+    "ticker": "PYUSD_USD",
+    "base_currency_balance_id": 59,
+    "quote_currency_balance_id": 25,
+    "buy_rate": "1.00458",
+    "sell_rate": "1.00262",
+    "variation": "0.42"
+  },
+  {
+    "ticker": "QQQx_ARS",
+    "base_currency_balance_id": 9089,
+    "quote_currency_balance_id": 6,
+    "buy_rate": "1205966.88",
+    "sell_rate": "1180600.14",
+    "variation": "0.46"
+  },
+  {
+    "ticker": "QQQx_USD",
+    "base_currency_balance_id": 9239,
+    "quote_currency_balance_id": 83,
+    "buy_rate": "740.481",
+    "sell_rate": "740.441",
+    "variation": "-0.06"
+  },
+  {
+    "ticker": "RIF_ARS",
+    "base_currency_balance_id": 4344,
+    "quote_currency_balance_id": 6,
+    "buy_rate": "152.214",
+    "sell_rate": "148.698",
+    "variation": "2.55"
+  },
+  {
+    "ticker": "RIF_USD",
+    "base_currency_balance_id": 2657,
+    "quote_currency_balance_id": 16,
+    "buy_rate": "0.0948622",
+    "sell_rate": "0.092671",
+    "variation": "2.46"
+  },
+  {
+    "ticker": "RLUSD_ARS",
+    "base_currency_balance_id": 6108,
+    "quote_currency_balance_id": 6,
+    "buy_rate": "1625.10",
+    "sell_rate": "1588.99",
+    "variation": "0.26"
+  },
+  {
+    "ticker": "RLUSD_USD",
+    "base_currency_balance_id": 2770,
+    "quote_currency_balance_id": 90,
+    "buy_rate": "1.00006",
+    "sell_rate": "0.99986",
+    "variation": "0.00"
+  },
+  {
+    "ticker": "RPC_ARS",
+    "base_currency_balance_id": 42,
+    "quote_currency_balance_id": 5,
+    "buy_rate": "15.886",
+    "sell_rate": "14.8171",
+    "variation": "2.22"
+  },
+  {
+    "ticker": "RPC_USD",
+    "base_currency_balance_id": 25,
+    "quote_currency_balance_id": 91,
+    "buy_rate": "0.00990041",
+    "sell_rate": "0.00923425",
+    "variation": "2.13"
+  },
+  {
+    "ticker": "RSR_ARS",
+    "base_currency_balance_id": 22,
+    "quote_currency_balance_id": 10,
+    "buy_rate": "2.85921",
+    "sell_rate": "2.79274",
+    "variation": "8.25"
+  },
+  {
+    "ticker": "RSR_USD",
+    "base_currency_balance_id": 11,
+    "quote_currency_balance_id": 26,
+    "buy_rate": "0.00178191",
+    "sell_rate": "0.00174048",
+    "variation": "8.16"
+  },
+  {
+    "ticker": "SHIB_ARS",
+    "base_currency_balance_id": 28,
+    "quote_currency_balance_id": 3,
+    "buy_rate": "0.00947333",
+    "sell_rate": "0.00921211",
+    "variation": "3.45"
+  },
+  {
+    "ticker": "SHIB_USD",
+    "base_currency_balance_id": 66,
+    "quote_currency_balance_id": 73,
+    "buy_rate": "0.00000590393",
+    "sell_rate": "0.00000574113",
+    "variation": "3.36"
+  },
+  {
+    "ticker": "SLP_ARS",
+    "base_currency_balance_id": 80,
+    "quote_currency_balance_id": 7,
+    "buy_rate": "1.11282",
+    "sell_rate": "1.08511",
+    "variation": "4.06"
+  },
+  {
+    "ticker": "SLP_USD",
+    "base_currency_balance_id": 80,
+    "quote_currency_balance_id": 45,
+    "buy_rate": "0.000693527",
+    "sell_rate": "0.000676258",
+    "variation": "3.98"
+  },
+  {
+    "ticker": "SOL_ARS",
+    "base_currency_balance_id": 82,
+    "quote_currency_balance_id": 3,
+    "buy_rate": "190171.99",
+    "sell_rate": "185222.06",
+    "variation": "1.85"
+  },
+  {
+    "ticker": "SOL_USD",
+    "base_currency_balance_id": 51,
+    "quote_currency_balance_id": 17,
+    "buy_rate": "118.518",
+    "sell_rate": "115.433",
+    "variation": "1.77"
+  },
+  {
+    "ticker": "SPYx_ARS",
+    "base_currency_balance_id": 9552,
+    "quote_currency_balance_id": 5,
+    "buy_rate": "1248618.08",
+    "sell_rate": "1221943.64",
+    "variation": "0.34"
+  },
+  {
+    "ticker": "SPYx_USD",
+    "base_currency_balance_id": 5145,
+    "quote_currency_balance_id": 94,
+    "buy_rate": "766.661",
+    "sell_rate": "766.371",
+    "variation": "-0.17"
+  },
+  {
+    "ticker": "SUI_ARS",
+    "base_currency_balance_id": 97,
+    "quote_currency_balance_id": 3,
+    "buy_rate": "1658.02",
+    "sell_rate": "1621.31",
+    "variation": "6.64"
+  },
+  {
+    "ticker": "SUI_USD",
+    "base_currency_balance_id": 20,
+    "quote_currency_balance_id": 98,
+    "buy_rate": "1.0333",
+    "sell_rate": "1.01043",
+    "variation": "6.55"
+  },
+  {
+    "ticker": "S_ARS",
+    "base_currency_balance_id": 23,
+    "quote_currency_balance_id": 7,
+    "buy_rate": "66.704",
+    "sell_rate": "65.2179",
+    "variation": "2.55"
+  },
+  {
+    "ticker": "S_USD",
+    "base_currency_balance_id": 87,
+    "quote_currency_balance_id": 23,
+    "buy_rate": "0.041571",
+    "sell_rate": "0.0406448",
+    "variation": "2.47"
+  },
+  {
+    "ticker": "TAO_ARS",
+    "base_currency_balance_id": 29,
+    "quote_currency_balance_id": 8,
+    "buy_rate": "486990.02",
+    "sell_rate": "476159.18",
+    "variation": "4.69"
+  },
+  {
+    "ticker": "TAO_USD",
+    "base_currency_balance_id": 75,
+    "quote_currency_balance_id": 65,
+    "buy_rate": "303.50",
+    "sell_rate": "296.75",
+    "variation": "4.61"
+  },
+  {
+    "ticker": "TRUMP_ARS",
+    "base_currency_balance_id": 70,
+    "quote_currency_balance_id": 6,
+    "buy_rate": "3417.70",
+    "sell_rate": "3341.22",
+    "variation": "7.29"
+  },
+  {
+    "ticker": "TRUMP_USD",
+    "base_currency_balance_id": 67,
+    "quote_currency_balance_id": 49,
+    "buy_rate": "2.12997",
+    "sell_rate": "2.0823",
+    "variation": "7.21"
+  },
+  {
+    "ticker": "TRX_ARS",
+    "base_currency_balance_id": 94,
+    "quote_currency_balance_id": 2,
+    "buy_rate": "553.872",
+    "sell_rate": "539.413",
+    "variation": "-0.30"
+  },
+  {
+    "ticker": "TRX_USD",
+    "base_currency_balance_id": 44,
+    "quote_currency_balance_id": 60,
+    "buy_rate": "0.345182",
+    "sell_rate": "0.336171",
+    "variation": "-0.38"
+  },
+  {
+    "ticker": "TSLAx_ARS",
+    "base_currency_balance_id": 3787,
+    "quote_currency_balance_id": 8,
+    "buy_rate": "615309.74",
+    "sell_rate": "602512.82",
+    "variation": "-0.16"
+  },
+  {
+    "ticker": "TSLAx_USD",
+    "base_currency_balance_id": 4403,
+    "quote_currency_balance_id": 83,
+    "buy_rate": "377.926",
+    "sell_rate": "377.88",
+    "variation": "-0.64"
+  },
+  {
+    "ticker": "UMA_ARS",
+    "base_currency_balance_id": 39,
+    "quote_currency_balance_id": 9,
+    "buy_rate": "667.621",
+    "sell_rate": "649.813",
+    "variation": "5.94"
+  },
+  {
+    "ticker": "UMA_USD",
+    "base_currency_balance_id": 85,
+    "quote_currency_balance_id": 17,
+    "buy_rate": "0.416072",
+    "sell_rate": "0.404974",
+    "variation": "5.85"
+  },
+  {
+    "ticker": "UNI_ARS",
+    "base_currency_balance_id": 71,
+    "quote_currency_balance_id": 8,
+    "buy_rate": "15023.92",
+    "sell_rate": "14693.09",
+    "variation": "0.34"
+  },
+  {
+    "ticker": "UNI_USD",
+    "base_currency_balance_id": 73,
+    "quote_currency_balance_id": 41,
+    "buy_rate": "9.36315",
+    "sell_rate": "9.15697",
+    "variation": "0.26"
+  },
+  {
+    "ticker": "USD_ARS",
+    "base_currency_balance_id": 13,
+    "quote_currency_balance_id": 6,
+    "buy_rate": "1604.58",
+    "sell_rate": "1604.58",
+    "variation": "0.08"
+  },
+  {
+    "ticker": "VIRTUAL_ARS",
+    "base_currency_balance_id": 12,
+    "quote_currency_balance_id": 1,
+    "buy_rate": "1210.50",
+    "sell_rate": "1183.80",
+    "variation": "7.02"
+  },
+  {
+    "ticker": "VIRTUAL_USD",
+    "base_currency_balance_id": 13,
+    "quote_currency_balance_id": 24,
+    "buy_rate": "0.754403",
+    "sell_rate": "0.737763",
+    "variation": "6.93"
+  },
+  {
+    "ticker": "WAL30RD_ARS",
+    "base_currency_balance_id": 4000,
+    "quote_currency_balance_id": 3,
+    "buy_rate": "874.359",
+    "sell_rate": "851.53",
+    "variation": "0.50"
+  },
+  {
+    "ticker": "WAL30RD_USD",
+    "base_currency_balance_id": 1699,
+    "quote_currency_balance_id": 19,
+    "buy_rate": "0.544915",
+    "sell_rate": "0.530687",
+    "variation": "0.42"
+  },
+  {
+    "ticker": "WBRL_ARS",
+    "base_currency_balance_id": 1014,
+    "quote_currency_balance_id": 5,
+    "buy_rate": "313.235",
+    "sell_rate": "306.048",
+    "variation": "0.04"
+  },
+  {
+    "ticker": "WBRL_USD",
+    "base_currency_balance_id": 1471,
+    "quote_currency_balance_id": 36,
+    "buy_rate": "0.192533",
+    "sell_rate": "0.191926",
+    "variation": "-0.38"
+  },
+  {
+    "ticker": "WCLP_ARS",
+    "base_currency_balance_id": 8152,
+    "quote_currency_balance_id": 5,
+    "buy_rate": "1.6964",
+    "sell_rate": "1.64908",
+    "variation": "0.66"
+  },
+  {
+    "ticker": "WCLP_USD",
+    "base_currency_balance_id": 5290,
+    "quote_currency_balance_id": 19,
+    "buy_rate": "0.00105722",
+    "sell_rate": "0.00102773",
+    "variation": "0.58"
+  },
+  {
+    "ticker": "WCOP_ARS",
+    "base_currency_balance_id": 6530,
+    "quote_currency_balance_id": 7,
+    "buy_rate": "0.49462",
+    "sell_rate": "0.471308",
+    "variation": "-1.05"
+  },
+  {
+    "ticker": "WCOP_USD",
+    "base_currency_balance_id": 1421,
+    "quote_currency_balance_id": 48,
+    "buy_rate": "0.000304",
+    "sell_rate": "0.000296",
+    "variation": "-1.62"
+  },
+  {
+    "ticker": "WLD_ARS",
+    "base_currency_balance_id": 65,
+    "quote_currency_balance_id": 7,
+    "buy_rate": "721.763",
+    "sell_rate": "667.339",
+    "variation": "8.97"
+  },
+  {
+    "ticker": "WLD_USD",
+    "base_currency_balance_id": 55,
+    "quote_currency_balance_id": 81,
+    "buy_rate": "0.449814",
+    "sell_rate": "0.415896",
+    "variation": "8.88"
+  },
+  {
+    "ticker": "WMXN_ARS",
+    "base_currency_balance_id": 4344,
+    "quote_currency_balance_id": 5,
+    "buy_rate": "92.0371",
+    "sell_rate": "89.9208",
+    "variation": "-0.51"
+  },
+  {
+    "ticker": "WMXN_USD",
+    "base_currency_balance_id": 7329,
+    "quote_currency_balance_id": 66,
+    "buy_rate": "0.056571",
+    "sell_rate": "0.05639",
+    "variation": "-0.93"
+  },
+  {
+    "ticker": "WPEN_ARS",
+    "base_currency_balance_id": 5964,
+    "quote_currency_balance_id": 9,
+    "buy_rate": "481.336",
+    "sell_rate": "468.91",
+    "variation": "-0.32"
+  },
+  {
+    "ticker": "WPEN_USD",
+    "base_currency_balance_id": 3709,
+    "quote_currency_balance_id": 33,
+    "buy_rate": "0.299976",
+    "sell_rate": "0.292232",
+    "variation": "-0.40"
+  },
+  {
+    "ticker": "XAUT_ARS",
+    "base_currency_balance_id": 2383,
+    "quote_currency_balance_id": 8,
+    "buy_rate": "6948969.78",
+    "sell_rate": "6803762.38",
+    "variation": "-0.04"
+  },
+  {
+    "ticker": "XAUT_USD",
+    "base_currency_balance_id": 2084,
+    "quote_currency_balance_id": 25,
+    "buy_rate": "4330.71",
+    "sell_rate": "4240.21",
+    "variation": "-0.12"
+  },
+  {
+    "ticker": "XLM_ARS",
+    "base_currency_balance_id": 39,
+    "quote_currency_balance_id": 7,
+    "buy_rate": "345.857",
+    "sell_rate": "336.809",
+    "variation": "5.43"
+  },
+  {
+    "ticker": "XLM_USD",
+    "base_currency_balance_id": 50,
+    "quote_currency_balance_id": 63,
+    "buy_rate": "0.215544",
+    "sell_rate": "0.209905",
+    "variation": "5.34"
+  },
+  {
+    "ticker": "XPL_ARS",
+    "base_currency_balance_id": 5436,
+    "quote_currency_balance_id": 5,
+    "buy_rate": "176.193",
+    "sell_rate": "172.336",
+    "variation": "20.86"
+  },
+  {
+    "ticker": "XPL_USD",
+    "base_currency_balance_id": 3593,
+    "quote_currency_balance_id": 54,
+    "buy_rate": "0.10844",
+    "sell_rate": "0.108418",
+    "variation": "20.53"
+  },
+  {
+    "ticker": "XRP_ARS",
+    "base_currency_balance_id": 96,
+    "quote_currency_balance_id": 9,
+    "buy_rate": "2492.30",
+    "sell_rate": "2428.45",
+    "variation": "2.31"
+  },
+  {
+    "ticker": "XRP_USD",
+    "base_currency_balance_id": 54,
+    "quote_currency_balance_id": 83,
+    "buy_rate": "1.55324",
+    "sell_rate": "1.51345",
+    "variation": "2.22"
+  },
+  {
+    "ticker": "ZK_ARS",
+    "base_currency_balance_id": 97,
+    "quote_currency_balance_id": 9,
+    "buy_rate": "19.5222",
+    "sell_rate": "19.0836",
+    "variation": "7.59"
+  },
+  {
+    "ticker": "ZK_USD",
+    "base_currency_balance_id": 14,
+    "quote_currency_balance_id": 60,
+    "buy_rate": "0.0121665",
+    "sell_rate": "0.0118932",
+    "variation": "7.51"
+  }
+]

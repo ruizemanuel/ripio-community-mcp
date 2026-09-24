@@ -1,0 +1,12 @@
+[
+  {
+    "side": "buy",
+    "maker": 0.25,
+    "taker": 0.5
+  },
+  {
+    "side": "sell",
+    "maker": 0.25,
+    "taker": 0.5
+  }
+]

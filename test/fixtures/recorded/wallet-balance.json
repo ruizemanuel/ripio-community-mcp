@@ -1,0 +1,473 @@
+{
+  "wallet": [
+    {
+      "currency": "ARS",
+      "currency_internal_id": 100001,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "WARS",
+      "currency_internal_id": 100002,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "WBRL",
+      "currency_internal_id": 100003,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "BTC",
+      "currency_internal_id": 100004,
+      "amount": "0.00000009",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "ETH",
+      "currency_internal_id": 100005,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "USDT",
+      "currency_internal_id": 100006,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "USDC",
+      "currency_internal_id": 100007,
+      "amount": "0.000046",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "RPC",
+      "currency_internal_id": 100008,
+      "amount": "628.5000",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "DAI",
+      "currency_internal_id": 100009,
+      "amount": "0.0003",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "AAPLx",
+      "currency_internal_id": 100010,
+      "amount": "0",
+      "locked_amount": "0"
+    },
+    {
+      "currency": "AAVE",
+      "currency_internal_id": 100011,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "ACX",
+      "currency_internal_id": 100012,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "ADA",
+      "currency_internal_id": 100013,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "ALGO",
+      "currency_internal_id": 100014,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "ARB",
+      "currency_internal_id": 100015,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "ATOM",
+      "currency_internal_id": 100016,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "AVAX",
+      "currency_internal_id": 100017,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "AXS",
+      "currency_internal_id": 100018,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "BAT",
+      "currency_internal_id": 100019,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "BCH",
+      "currency_internal_id": 100020,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "BNB",
+      "currency_internal_id": 100021,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "CELO",
+      "currency_internal_id": 100022,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "CHZ",
+      "currency_internal_id": 100023,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "CRCLx",
+      "currency_internal_id": 100024,
+      "amount": "0",
+      "locked_amount": "0"
+    },
+    {
+      "currency": "DOGE",
+      "currency_internal_id": 100025,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "DOT",
+      "currency_internal_id": 100026,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "ENA",
+      "currency_internal_id": 100027,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "ENS",
+      "currency_internal_id": 100028,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "ETHFI",
+      "currency_internal_id": 100029,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "GLDx",
+      "currency_internal_id": 100030,
+      "amount": "0",
+      "locked_amount": "0"
+    },
+    {
+      "currency": "GNO",
+      "currency_internal_id": 100031,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "GOOGLx",
+      "currency_internal_id": 100032,
+      "amount": "0",
+      "locked_amount": "0"
+    },
+    {
+      "currency": "GRAM",
+      "currency_internal_id": 100033,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "HOODx",
+      "currency_internal_id": 100034,
+      "amount": "0",
+      "locked_amount": "0"
+    },
+    {
+      "currency": "HYPE",
+      "currency_internal_id": 100035,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "LAC",
+      "currency_internal_id": 100036,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "LAND1RD",
+      "currency_internal_id": 100037,
+      "amount": "0",
+      "locked_amount": "0"
+    },
+    {
+      "currency": "LINK",
+      "currency_internal_id": 100038,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "LTC",
+      "currency_internal_id": 100039,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "MANA",
+      "currency_internal_id": 100040,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "MSTRx",
+      "currency_internal_id": 100041,
+      "amount": "0",
+      "locked_amount": "0"
+    },
+    {
+      "currency": "NMR",
+      "currency_internal_id": 100042,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "NVDAx",
+      "currency_internal_id": 100043,
+      "amount": "0",
+      "locked_amount": "0"
+    },
+    {
+      "currency": "ONDO",
+      "currency_internal_id": 100044,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "OP",
+      "currency_internal_id": 100045,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "PAXG",
+      "currency_internal_id": 100046,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "PIXEL",
+      "currency_internal_id": 100047,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "POL",
+      "currency_internal_id": 100048,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "PYUSD",
+      "currency_internal_id": 100049,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "QQQx",
+      "currency_internal_id": 100050,
+      "amount": "0",
+      "locked_amount": "0"
+    },
+    {
+      "currency": "RIF",
+      "currency_internal_id": 100051,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "RLUSD",
+      "currency_internal_id": 100052,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "RSR",
+      "currency_internal_id": 100053,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "S",
+      "currency_internal_id": 100054,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "SHIB",
+      "currency_internal_id": 100055,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "SLP",
+      "currency_internal_id": 100056,
+      "amount": "0",
+      "locked_amount": "0"
+    },
+    {
+      "currency": "SOL",
+      "currency_internal_id": 100057,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "SPYx",
+      "currency_internal_id": 100058,
+      "amount": "0",
+      "locked_amount": "0"
+    },
+    {
+      "currency": "SUI",
+      "currency_internal_id": 100059,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "TAO",
+      "currency_internal_id": 100060,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "TRUMP",
+      "currency_internal_id": 100061,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "TRX",
+      "currency_internal_id": 100062,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "TSLAx",
+      "currency_internal_id": 100063,
+      "amount": "0",
+      "locked_amount": "0"
+    },
+    {
+      "currency": "UMA",
+      "currency_internal_id": 100064,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "UNI",
+      "currency_internal_id": 100065,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "USDAR",
+      "currency_internal_id": 100066,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "VIRTUAL",
+      "currency_internal_id": 100067,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "WAL30RD",
+      "currency_internal_id": 100068,
+      "amount": "0",
+      "locked_amount": "0"
+    },
+    {
+      "currency": "WCLP",
+      "currency_internal_id": 100069,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "WCOP",
+      "currency_internal_id": 100070,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "WLD",
+      "currency_internal_id": 100071,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "WMXN",
+      "currency_internal_id": 100072,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "WPEN",
+      "currency_internal_id": 100073,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "XAUT",
+      "currency_internal_id": 100074,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "XLM",
+      "currency_internal_id": 100075,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "XPL",
+      "currency_internal_id": 100076,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "XRP",
+      "currency_internal_id": 100077,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    },
+    {
+      "currency": "ZK",
+      "currency_internal_id": 100078,
+      "amount": "0.00",
+      "locked_amount": "0.00"
+    }
+  ],
+  "virals": []
+}
