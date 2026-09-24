@@ -8,7 +8,7 @@ English version: [README.md](README.md)
 
 ## 1. Creá una clave de API de solo lectura
 
-1. Entrá a [app.ripio.com](https://app.ripio.com) → **Configuración** → **API** → **Nueva clave**.
+1. Entrá a [app.ripio.com](https://app.ripio.com), hacé clic en tu avatar (arriba a la derecha) → **Perfil** → pestaña **API** → **Nueva clave**.
 2. **Restricción de IP:** elegí **IPs específicas** y agregá tu IP pública (recomendado), o **Sin restricción**.
 3. Poné un nombre y dejá el preset **Solo lectura** (Consultar 9/9, Operar 0/3, Retiros 0/2).
 4. Confirmá con tu método de verificación en dos pasos y copiá la **API Key** y la **Secret Key**. La secret se muestra una sola vez.
@@ -56,7 +56,7 @@ Para VS Code, Zed y otros clientes, mirá la sección "Add it to your client" de
 - Solo lectura por construcción: el servidor solo puede hacer pedidos GET, y un test lo verifica.
 - Solo habla con `https://api.ripio.com`. No tiene telemetría.
 - Tus claves no se loguean ni se le pasan al modelo.
-- Usá una clave "Solo lectura" con restricción de IP. La podés revocar cuando quieras en Configuración → API.
+- Usá una clave "Solo lectura" con restricción de IP. La podés revocar cuando quieras en Perfil → API.
 
 ## Limitaciones
 

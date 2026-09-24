@@ -37,7 +37,7 @@ Neither can show card transactions, in-app buys/sells or bill payments: Ripio's 
 
 ### 1. Create a read-only API key in Ripio
 
-1. Open [app.ripio.com](https://app.ripio.com) → **Configuración** → **API** → **Nueva clave**.
+1. Open [app.ripio.com](https://app.ripio.com), click your avatar (top right) → **Perfil** → **API** tab → **Nueva clave**.
 2. **IP restriction:** choose **IPs específicas** and add your public IP (recommended), or **Sin restricción**.
 3. Name the key and keep the **Solo lectura** preset (Consultar 9/9, Operar 0/3, Retiros 0/2).
 4. Confirm with your 2FA method and copy the **API Key** and **Secret Key**. The secret is shown only once.
@@ -118,7 +118,7 @@ claude mcp add --env RIPIO_API_KEY=your-key --env RIPIO_API_SECRET=your-secret -
 - **Read-only by construction.** The HTTP client can only send GET requests, and a test fails the build if anything else appears in the code. Even a key with write permissions can't be used to move funds through this server.
 - **One host.** It only talks to `https://api.ripio.com`. No telemetry.
 - **Your keys stay yours.** They are read from environment variables (or your keychain, in Claude Desktop) and never logged or sent to the model.
-- **Least privilege.** Use a "Solo lectura" key with an IP allowlist. Revoke it any time in Ripio → Configuración → API.
+- **Least privilege.** Use a "Solo lectura" key with an IP allowlist. Revoke it any time in Ripio → Perfil → API.
 - **Verifiable builds.** npm releases are published from GitHub Actions with [provenance](https://docs.npmjs.com/generating-provenance-statements).
 
 Found a vulnerability? See [SECURITY.md](SECURITY.md).
