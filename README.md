@@ -51,7 +51,7 @@ Neither can show card transactions, in-app buys/sells or bill payments: Ripio's 
 **Claude Code**
 
 ```bash
-claude mcp add --transport stdio ripio --env RIPIO_API_KEY=your-key --env RIPIO_API_SECRET=your-secret -- npx -y ripio-community-mcp
+claude mcp add --env RIPIO_API_KEY=your-key --env RIPIO_API_SECRET=your-secret --transport stdio ripio -- npx -y ripio-community-mcp
 ```
 
 **Cursor** (`~/.cursor/mcp.json`)
@@ -68,7 +68,42 @@ claude mcp add --transport stdio ripio --env RIPIO_API_KEY=your-key --env RIPIO_
 }
 ```
 
-**Any other MCP client** (VS Code, Zed, Cline…): add a stdio server with command `npx`, arguments `-y ripio-community-mcp`, and the environment variables below. See your client's MCP documentation for where that goes.
+**VS Code** (`.vscode/mcp.json`, or **MCP: Open User Configuration** for all workspaces). VS Code asks for the key and secret once and stores them securely:
+
+```json
+{
+  "inputs": [
+    { "type": "promptString", "id": "ripio-key", "description": "Ripio API key", "password": true },
+    { "type": "promptString", "id": "ripio-secret", "description": "Ripio secret key", "password": true }
+  ],
+  "servers": {
+    "ripio": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "ripio-community-mcp"],
+      "env": { "RIPIO_API_KEY": "${input:ripio-key}", "RIPIO_API_SECRET": "${input:ripio-secret}" }
+    }
+  }
+}
+```
+
+**Zed** (`settings.json`)
+
+```json
+{
+  "context_servers": {
+    "ripio": {
+      "command": "npx",
+      "args": ["-y", "ripio-community-mcp"],
+      "env": { "RIPIO_API_KEY": "your-key", "RIPIO_API_SECRET": "your-secret" }
+    }
+  }
+}
+```
+
+**Any other MCP client** (Cline, Continue…): add a stdio server with command `npx`, arguments `-y ripio-community-mcp`, and the environment variables below. See your client's MCP documentation for where that goes.
+
+> **Windows:** if the server doesn't start (for example, "Connection closed"), launch `npx` through `cmd`. In Claude Code, end the command with `-- cmd /c npx -y ripio-community-mcp`; in JSON configs, use `"command": "cmd"` and `"args": ["/c", "npx", "-y", "ripio-community-mcp"]`.
 
 ### Configuration
 

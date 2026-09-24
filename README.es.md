@@ -22,7 +22,7 @@ English version: [README.md](README.md)
 **Claude Code**
 
 ```bash
-claude mcp add --transport stdio ripio --env RIPIO_API_KEY=tu-clave --env RIPIO_API_SECRET=tu-secret -- npx -y ripio-community-mcp
+claude mcp add --env RIPIO_API_KEY=tu-clave --env RIPIO_API_SECRET=tu-secret --transport stdio ripio -- npx -y ripio-community-mcp
 ```
 
 **Cursor** (`~/.cursor/mcp.json`)
@@ -38,6 +38,10 @@ claude mcp add --transport stdio ripio --env RIPIO_API_KEY=tu-clave --env RIPIO_
   }
 }
 ```
+
+Para VS Code, Zed y otros clientes, mirá la sección "Add it to your client" del [README en inglés](README.md#2-add-it-to-your-client).
+
+> **Windows:** si el servidor no arranca (por ejemplo, "Connection closed"), ejecutá `npx` a través de `cmd`. En Claude Code, terminá el comando con `-- cmd /c npx -y ripio-community-mcp`; en las configuraciones JSON, usá `"command": "cmd"` y `"args": ["/c", "npx", "-y", "ripio-community-mcp"]`.
 
 ## 3. Preguntale
 
