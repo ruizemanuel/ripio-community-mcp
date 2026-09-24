@@ -56,10 +56,12 @@ export function userMessage(error: unknown): string {
     case 'auth_clock':
       return "Ripio rejected the request time even after re-syncing the clock. Check your computer's date and time.";
     case 'forbidden': {
+      // Keys made with the README's "Solo lectura" preset have every read permission, so a changed IP is likelier.
       const scope = scopeFor(error.endpoint);
+      const ip = `Ripio denied access to ${error.endpoint ?? 'this endpoint'}. If your key only allows specific IPs, your public IP may have changed: add the new one to the key in Ripio → Perfil → API.`;
       return scope
-        ? `Your Ripio API key lacks the "${scope}" permission (or your IP is not in the key's allowlist). Edit the key in Ripio → Perfil → API.`
-        : `Ripio denied access to ${error.endpoint ?? 'this endpoint'}. Use a key with the full "Solo lectura" preset and check its IP allowlist in Ripio → Perfil → API.`;
+        ? `${ip} Otherwise the key lacks the "${scope}" permission.`
+        : `${ip} Otherwise use a key with the full "Solo lectura" preset.`;
     }
     case 'not_found':
       return `Not found: ${error.endpoint ?? 'the requested resource'}.`;

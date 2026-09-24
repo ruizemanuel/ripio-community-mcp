@@ -28,6 +28,15 @@ describe('userMessage', () => {
   });
 });
 
+describe('userMessage for 403', () => {
+  it('leads with a changed public IP, the likeliest cause for a "Solo lectura" key with an allowlist', () => {
+    const message = userMessage(error('forbidden', 'Forbidden', { status: 403, endpoint: '/wallet/balance/' }));
+    expect(message.startsWith('Ripio denied access to /wallet/balance/.')).toBe(true);
+    expect(message.indexOf('public IP may have changed')).toBeGreaterThan(-1);
+    expect(message.indexOf('public IP may have changed')).toBeLessThan(message.indexOf('permission'));
+  });
+});
+
 describe('fail', () => {
   it('logs schema details for the maintainer but keeps them out of the answer', () => {
     const logs: string[] = [];
