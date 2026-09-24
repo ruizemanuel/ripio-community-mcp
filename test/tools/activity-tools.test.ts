@@ -121,9 +121,24 @@ describe('ripio_get_transaction', () => {
     expect(text(result)).toContain('No Wallet transaction with id 999');
   });
 
-  it('rejects non-integer ids before calling Ripio', async () => {
+  it('accepts the id as the string ripio_list_activity returns', async () => {
+    const ids: number[] = [];
+    harness = await connectTools(
+      fakeClient({
+        walletTransaction: async (id) => {
+          ids.push(id);
+          return walletWithdrawal;
+        },
+      }),
+    );
+    const result = await harness.mcp.callTool({ name: 'ripio_get_transaction', arguments: { id: '1002' } });
+    expect(result.isError).toBeFalsy();
+    expect(ids).toEqual([1002]);
+  });
+
+  it.each([['12.5'], ['abc'], [-3], [0]])('rejects the id %j before calling Ripio', async (id) => {
     harness = await connectTools(fakeClient({}));
-    const result = await harness.mcp.callTool({ name: 'ripio_get_transaction', arguments: { id: '12' } });
+    const result = await harness.mcp.callTool({ name: 'ripio_get_transaction', arguments: { id } });
     expect(result.isError).toBe(true);
   });
 });

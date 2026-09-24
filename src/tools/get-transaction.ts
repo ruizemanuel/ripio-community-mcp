@@ -13,14 +13,18 @@ export function registerGetTransaction(server: McpServer, ctx: ToolContext): voi
       description:
         'Full detail of one Wallet movement by its id (from ripio_list_activity with source "wallet"): amounts, fee, ' +
         'rail, counterparty, status and the on-chain hash when there is one.',
-      inputSchema: z.object({ id: z.number().int().positive().describe('Wallet transaction id.') }),
+      inputSchema: z.object({
+        id: z
+          .union([z.number().int().positive(), z.string().regex(/^[1-9]\d*$/)])
+          .describe('Wallet transaction id, as a number or as the string ripio_list_activity returns.'),
+      }),
       outputSchema: TransactionDetailSchema,
       annotations: READ_ONLY_ANNOTATIONS,
     },
     async ({ id }) =>
       run(ctx, async (client) => {
         try {
-          const detail = walletTransactionDetail(await client.walletTransaction(id));
+          const detail = walletTransactionDetail(await client.walletTransaction(Number(id)));
           return ok(detail, `${detail.type} of ${detail.amount} ${detail.asset} on ${detail.date} (${detail.status}).`);
         } catch (error) {
           if (error instanceof RipioApiError && error.kind === 'not_found') {
