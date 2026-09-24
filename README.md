@@ -46,7 +46,7 @@ Neither can show card transactions, in-app buys/sells or bill payments: Ripio's 
 
 ### 2. Add it to your client
 
-**Claude Desktop (easiest).** Download `ripio-community-mcp.mcpb` from the [latest release](https://github.com/ruizemanuel/ripio-community-mcp/releases/latest), open it, and paste your API key and secret when asked. Claude Desktop keeps them in your system keychain.
+**Claude Desktop (easiest).** Download `ripio-community-mcp.mcpb` from the [latest release](https://github.com/ruizemanuel/ripio-community-mcp/releases/latest). In Claude Desktop, go to **Settings** → **Extensions** → **Advanced settings** → **Install Extension…**, pick the file, and paste your API key and secret when asked. Claude Desktop keeps them in your system keychain. Then ask in a regular chat, for example "How much do I have on Ripio and in what?"
 
 **Claude Code**
 

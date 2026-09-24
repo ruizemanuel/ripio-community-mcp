@@ -23,7 +23,7 @@ English version: [README.md](README.md)
 
 ## 2. Instalalo
 
-**Claude Desktop (lo más fácil).** Bajá `ripio-community-mcp.mcpb` del [último release](https://github.com/ruizemanuel/ripio-community-mcp/releases/latest), abrilo y pegá la API key y la secret cuando te las pida. Claude Desktop las guarda en el llavero del sistema.
+**Claude Desktop (lo más fácil).** Bajá `ripio-community-mcp.mcpb` del [último release](https://github.com/ruizemanuel/ripio-community-mcp/releases/latest). En Claude Desktop, andá a **Configuración** → **Extensiones** → **Configuración avanzada** → **Instalar extensión…**, elegí el archivo y pegá la API key y la secret cuando te las pida. Claude Desktop las guarda en el llavero del sistema. Después preguntale en un chat común, por ejemplo "¿Cuánto tengo en Ripio y en qué?".
 
 **Claude Code**
 
