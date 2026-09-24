@@ -43,7 +43,26 @@ describe('anonymize', () => {
     expect(document_number).not.toBe(12345678);
   });
 
-  it('keeps public market data, enums, flags and dates', () => {
+  it('moves dates to a random moment of the same year, keeping their exact format', () => {
+    const out = anonymize(
+      {
+        created_at: '2025-06-18T14:20:10.123456+00:00',
+        date: '2022-03-14 09:21:37.418',
+        last_update: '2022-05-02 18:04:11',
+        create_date: '2026-09-20',
+      },
+      half,
+    ) as Record<string, string>;
+    expect(out.created_at).toMatch(/^2025-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{6}\+00:00$/);
+    expect(out.date).toMatch(/^2022-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3}$/);
+    expect(out.last_update).toMatch(/^2022-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/);
+    expect(out.create_date).toMatch(/^2026-\d{2}-\d{2}$/);
+    expect(out.created_at).not.toBe('2025-06-18T14:20:10.123456+00:00');
+    expect(out.date).not.toBe('2022-03-14 09:21:37.418');
+    for (const value of Object.values(out)) expect(Number.isNaN(Date.parse(value.replace(' ', 'T')))).toBe(false);
+  });
+
+  it('keeps public market data, enums and flags', () => {
     const input = {
       ticker: 'BTC_ARS',
       buy_rate: '98000000',
@@ -55,7 +74,6 @@ describe('anonymize', () => {
       currency: 'ARS',
       rail: 'bank',
       enabled: true,
-      created_at: '2025-06-18T14:20:10.123456+00:00',
       taker: 0.3,
     };
     expect(anonymize(input, half)).toEqual(input);
