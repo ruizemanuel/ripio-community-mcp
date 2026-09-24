@@ -28,7 +28,11 @@ jobs:
         run: test "v$(node -p "require('./package.json').version")" = "${GITHUB_REF_NAME}"
       # Build the bundle before publishing, so a bundle failure can't leave an npm version without a release.
       - run: npm run build:mcpb
+      - run: npm --version
+      # Verbose output shows why an OIDC token exchange fails (npm redacts tokens in logs).
       - run: npm publish --provenance --access public
+        env:
+          NPM_CONFIG_LOGLEVEL: verbose
       - run: gh release create "${GITHUB_REF_NAME}" ripio-community-mcp.mcpb --title "${GITHUB_REF_NAME}" --generate-notes
         env:
           GH_TOKEN: ${{ github.token }}
