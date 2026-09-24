@@ -54,7 +54,7 @@
     "@eslint/js": "^10.0.1",
     "@modelcontextprotocol/client": "^2.1.0",
     "@types/big.js": "^7.0.0",
-    "@types/node": "^22.20.4",
+    "@types/node": "^26.6.2",
     "eslint": "^10.11.0",
     "prettier": "^3.9.9",
     "tsx": "^4.23.15",
