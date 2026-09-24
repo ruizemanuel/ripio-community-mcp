@@ -13,11 +13,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      # npm trusted publishing (OIDC, no token) needs npm >= 11.5.1, which ships with Node 24.
       - uses: actions/setup-node@v7
         with:
-          node-version: 22
-          cache: npm
+          node-version: 24
           registry-url: https://registry.npmjs.org
+          package-manager-cache: false
       - run: npm ci
       - run: npm test
       - run: npm run build
@@ -26,8 +29,6 @@ jobs:
       # Build the bundle before publishing, so a bundle failure can't leave an npm version without a release.
       - run: npm run build:mcpb
       - run: npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - run: gh release create "${GITHUB_REF_NAME}" ripio-community-mcp.mcpb --title "${GITHUB_REF_NAME}" --generate-notes
         env:
           GH_TOKEN: ${{ github.token }}
