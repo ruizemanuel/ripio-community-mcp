@@ -35,7 +35,10 @@ describe('ripio_get_portfolio', () => {
       totals: { value_ars: '2611.44', value_usd: '1.63', unvalued_assets: ['RPC'] },
       warnings: [],
     });
-    expect(result.content).toEqual([{ type: 'text', text: '6 holdings, estimated total 2611.44 ARS (≈ 1.63 USD).' }]);
+    expect(result.content).toEqual([
+      { type: 'text', text: '6 holdings, estimated total 2611.44 ARS (≈ 1.63 USD).' },
+      { type: 'text', text: JSON.stringify(result.structuredContent) },
+    ]);
   });
 
   it('still answers when Ripio Trade fails, with a warning naming the permission', async () => {

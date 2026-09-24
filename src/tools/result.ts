@@ -14,8 +14,15 @@ export const READ_ONLY_ANNOTATIONS = {
   openWorldHint: true,
 } as const;
 
+/** The summary, then the full result as JSON text for clients that ignore structuredContent (MCP 2025-06-18). */
 export function ok(structured: Record<string, unknown>, summary: string): CallToolResult {
-  return { content: [{ type: 'text', text: summary }], structuredContent: structured };
+  return {
+    content: [
+      { type: 'text', text: summary },
+      { type: 'text', text: JSON.stringify(structured) },
+    ],
+    structuredContent: structured,
+  };
 }
 
 export function failText(text: string): CallToolResult {

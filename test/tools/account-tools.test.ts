@@ -60,6 +60,9 @@ describe('ripio_list_open_orders', () => {
   it('says so when there are no open orders', async () => {
     harness = await connectTools(fakeClient({ tradeOpenOrders: async () => ({ orders: [], nc: null }) }));
     const result = await harness.mcp.callTool({ name: 'ripio_list_open_orders', arguments: {} });
-    expect(result.content).toEqual([{ type: 'text', text: 'No open orders.' }]);
+    expect(result.content).toEqual([
+      { type: 'text', text: 'No open orders.' },
+      { type: 'text', text: JSON.stringify({ orders: [] }) },
+    ]);
   });
 });
