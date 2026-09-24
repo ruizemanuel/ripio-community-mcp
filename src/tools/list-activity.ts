@@ -17,6 +17,8 @@ import { AssetInput, DateInput, RailInput } from './inputs.js';
 import { ok, READ_ONLY_ANNOTATIONS } from './result.js';
 
 const TRADE_PAGE_SIZE = 50;
+/** Ripio Trade answers 400 "Invalid date interval" for longer statement ranges (182 days measured as accepted). */
+const MAX_TRADE_RANGE_MS = 182 * 86_400_000;
 
 function summarize(page: ActivityPage): string {
   const venue = page.source === 'wallet' ? 'Wallet' : 'Ripio Trade';
@@ -32,7 +34,7 @@ export function registerListActivity(server: McpServer, ctx: ToolContext): void 
       description:
         'Deposits, withdrawals and swaps (source "wallet", default) or Ripio Trade statement entries (source "trade"), ' +
         'newest first, in one normalized shape. Card transactions, in-app buys/sells and bill payments are not available ' +
-        "from Ripio's API. Pass next_cursor back as cursor for older items. Dates are UTC; on Wallet, from/to filter the returned page only.",
+        "from Ripio's API. Pass next_cursor back as cursor for older items. Dates are UTC; on Wallet, from/to filter the returned page only; on Ripio Trade a from/to range can span up to 182 days.",
       inputSchema: z.object({
         source: z.enum(['wallet', 'trade']).optional().describe('Default "wallet".'),
         currency: AssetInput.optional().describe('Only this asset, e.g. "USDT".'),
@@ -82,9 +84,20 @@ export function registerListActivity(server: McpServer, ctx: ToolContext): void 
             'Invalid cursor for trade. Use next_cursor exactly as returned by the previous call.',
           );
         }
+        const startTime = args.from === undefined ? undefined : rangeStart(args.from);
+        const endTime = args.to === undefined ? undefined : rangeEnd(args.to);
+        if (startTime !== undefined) {
+          const end = endTime === undefined ? ctx.now().getTime() : Date.parse(endTime);
+          if (end - Date.parse(startTime) > MAX_TRADE_RANGE_MS) {
+            throw new RipioApiError(
+              'bad_request',
+              'Ripio Trade only returns statement ranges of up to 182 days (about 6 months). Set both from and to within that span, e.g. from 2024-01-01 to 2024-06-30, and ask again for the next range.',
+            );
+          }
+        }
         const statement = await client.tradeStatement({
-          start_time: args.from === undefined ? undefined : rangeStart(args.from),
-          end_time: args.to === undefined ? undefined : rangeEnd(args.to),
+          start_time: startTime,
+          end_time: endTime,
           current_page: currentPage,
           page_size: TRADE_PAGE_SIZE,
         });

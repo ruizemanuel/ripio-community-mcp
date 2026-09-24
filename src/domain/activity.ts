@@ -36,7 +36,8 @@ export type ActivityPage = z.infer<typeof ActivityPageSchema>;
 
 export const WALLET_COVERAGE_NOTE =
   "Since 2026-07-21 Ripio's API excludes card transactions, in-app buys/sells and bill payments from this feed.";
-export const TRADE_COVERAGE_NOTE = 'Ripio Trade returns the last 6 months unless `from` is set.';
+export const TRADE_COVERAGE_NOTE =
+  'Ripio Trade returns the last 6 months by default and only accepts ranges of up to 182 days: set both from and to for older activity.';
 export const PAGE_DATE_FILTER_NOTE =
   'Date filters are applied to this page only; follow next_cursor for older movements.';
 

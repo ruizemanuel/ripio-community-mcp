@@ -70,10 +70,15 @@ describe('ripio_list_activity', () => {
     );
     const result = await harness.mcp.callTool({
       name: 'ripio_list_activity',
-      arguments: { source: 'trade', from: '2022-07-01', currency: 'btc', type: 'trade' },
+      arguments: { source: 'trade', from: '2022-03-01', to: '2022-03-31', currency: 'btc', type: 'trade' },
     });
     const page = result.structuredContent as { items: Array<{ id: string }>; next_cursor: string; coverage_notes: string[] };
-    expect(queries[0]).toEqual({ start_time: '2022-07-01T00:00:00.000Z', end_time: undefined, current_page: 1, page_size: 50 });
+    expect(queries[0]).toEqual({
+      start_time: '2022-03-01T00:00:00.000Z',
+      end_time: '2022-03-31T23:59:59.999Z',
+      current_page: 1,
+      page_size: 50,
+    });
     expect(page.items.map((i) => i.id)).toEqual(['op-1']);
     expect(decodeCursor(page.next_cursor, 'trade')).toBe('2');
     expect(page.coverage_notes).toEqual([TRADE_COVERAGE_NOTE]);
@@ -84,6 +89,8 @@ describe('ripio_list_activity', () => {
     [{ source: 'trade', rail: 'bank' }, 'rail only applies to source "wallet"'],
     [{ source: 'trade', type: 'swap' }, 'only exists in source "wallet"'],
     [{ cursor: 'garbage' }, 'Invalid cursor'],
+    [{ source: 'trade', from: '2024-01-01', to: '2024-12-31' }, 'up to 182 days'],
+    [{ source: 'trade', from: '2024-01-01' }, 'up to 182 days'],
   ])('rejects %j with a clear message', async (args, message) => {
     harness = await connectTools(fakeClient({}));
     const result = await harness.mcp.callTool({ name: 'ripio_list_activity', arguments: args });
