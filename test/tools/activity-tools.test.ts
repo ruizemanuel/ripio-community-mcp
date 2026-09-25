@@ -105,6 +105,15 @@ describe('ripio_list_activity', () => {
     expect((result.structuredContent as { coverage_notes: string[] }).coverage_notes).toContain(UNREADABLE_NOTE);
     expect(text(result).split('\n')[0]).toBe('2 Wallet movements, 1 with missing or unreadable data (see "unreadable").');
   });
+
+  it('notes Ripio Trade entries that came with missing or unreadable data', async () => {
+    const [sell] = tradeStatement.statement;
+    if (sell === undefined) throw new Error('fixture');
+    harness = await connectTools(fakeClient({ tradeStatement: async () => ({ ...tradeStatement, statement: [{ ...sell, amount: 'N/A' }] }) }));
+    const result = await harness.mcp.callTool({ name: 'ripio_list_activity', arguments: { source: 'trade' } });
+    expect((result.structuredContent as { coverage_notes: string[] }).coverage_notes).toEqual([TRADE_COVERAGE_NOTE, UNREADABLE_NOTE]);
+    expect(text(result).split('\n')[0]).toMatch(/^1 Ripio Trade movements, 1 with missing or unreadable data \(see "unreadable"\)\./);
+  });
 });
 
 describe('ripio_get_transaction', () => {
@@ -161,5 +170,12 @@ describe('ripio_get_transaction', () => {
     harness = await connectTools(fakeClient({ walletTransaction: async () => ({ ...walletWithdrawal, amount_from: 'N/A', amount_to: null }) }));
     const result = await harness.mcp.callTool({ name: 'ripio_get_transaction', arguments: { id: 1002 } });
     expect(text(result).split('\n')[0]).toMatch(/ Ripio sent the amount missing or unreadable; it shows as 0\.$/);
+  });
+
+  it('says what each field shows as when Ripio sent both the amount and the asset unreadable', async () => {
+    const broken = { ...walletWithdrawal, amount_from: 'N/A', amount_to: null, from_currency: null, to_currency: ' ' };
+    harness = await connectTools(fakeClient({ walletTransaction: async () => broken }));
+    const result = await harness.mcp.callTool({ name: 'ripio_get_transaction', arguments: { id: 1002 } });
+    expect(text(result).split('\n')[0]).toMatch(/ Ripio sent the amount and asset missing or unreadable; they show as 0 and UNKNOWN\.$/);
   });
 });

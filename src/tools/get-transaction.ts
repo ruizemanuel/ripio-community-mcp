@@ -26,9 +26,10 @@ export function registerGetTransaction(server: McpServer, ctx: ToolContext): voi
         try {
           const detail = walletTransactionDetail(await client.walletTransaction(Number(id)));
           const unreadable = detail.unreadable ?? [];
-          const shown = unreadable.includes('amount') ? '0' : 'UNKNOWN';
+          const shown = unreadable.map((field) => (field === 'amount' ? '0' : 'UNKNOWN')).join(' and ');
+          const verb = unreadable.length === 1 ? 'it shows' : 'they show';
           const unread =
-            unreadable.length === 0 ? '' : ` Ripio sent the ${unreadable.join(' and ')} missing or unreadable; it shows as ${shown}.`;
+            unreadable.length === 0 ? '' : ` Ripio sent the ${unreadable.join(' and ')} missing or unreadable; ${verb} as ${shown}.`;
           return ok(detail, `${detail.type} of ${detail.amount} ${detail.asset} on ${detail.date} (${detail.status}).${unread}`);
         } catch (error) {
           if (error instanceof RipioApiError && error.kind === 'not_found') {
