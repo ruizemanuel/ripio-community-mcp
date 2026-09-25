@@ -7,6 +7,11 @@ const SERVER_TIME_PATH = '/trade/public/server-time';
 /** The longest Retry-After worth waiting out inside one tool call; beyond it the error goes back to the user. */
 export const MAX_RETRY_AFTER_MS = 10_000;
 
+/** Node's fetch rejects a redirect it was told not to follow with TypeError('fetch failed') caused by "unexpected redirect". */
+function isRefusedRedirect(error: unknown): boolean {
+  return error instanceof TypeError && error.cause instanceof Error && error.cause.message === 'unexpected redirect';
+}
+
 export interface FetchResponseLike {
   status: number;
   headers: { get(name: string): string | null };
@@ -124,6 +129,12 @@ export class RipioHttp {
       retryAfter = response.headers.get('retry-after');
       text = await response.text();
     } catch (cause) {
+      if (isRefusedRedirect(cause)) {
+        throw new RipioApiError('upstream', 'Ripio answered with a redirect, which this server does not follow', {
+          endpoint: url.pathname,
+          cause,
+        });
+      }
       const reason = controller.signal.aborted ? 'timed out' : 'network error';
       throw new RipioApiError('upstream', `Ripio API unreachable (${reason})`, {
         endpoint: url.pathname,

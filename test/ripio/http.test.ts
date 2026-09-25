@@ -1,6 +1,8 @@
+import { createServer } from 'node:http';
+import type { AddressInfo } from 'node:net';
 import { describe, expect, it } from 'vitest';
 import { RipioApiError } from '../../src/ripio/errors.js';
-import { RipioHttp, type RipioHttpOptions } from '../../src/ripio/http.js';
+import { RIPIO_BASE_URL, RipioHttp, type RipioHttpOptions } from '../../src/ripio/http.js';
 import { signRequest } from '../../src/ripio/signing.js';
 import {
   fakeFetch,
@@ -228,5 +230,38 @@ describe('RipioHttp', () => {
     const error = await rejection(http.get('/wallet/balance/'));
     expect(error).toMatchObject({ kind: 'rate_limited', retryAfterMs: 11_000 });
     expect(sleeps).toEqual([]);
+  });
+
+  it('reports a refused redirect as such, without retrying it', async () => {
+    const refused = new TypeError('fetch failed', { cause: new Error('unexpected redirect') });
+    const { http, callsTo, sleeps } = setup((url) => (isServerTime(url) ? serverTimeReply : refused));
+    const error = await rejection(http.get('/wallet/balance/'));
+    expect(error).toMatchObject({ kind: 'upstream', retryable: false });
+    expect(error.message).toBe('Ripio answered with a redirect, which this server does not follow');
+    expect(callsTo('/wallet/balance/')).toHaveLength(1);
+    expect(sleeps).toEqual([]);
+  });
+
+  it("recognizes Node's own fetch refusing a redirect", async () => {
+    const server = createServer((_request, response) => {
+      response.writeHead(302, { Location: 'https://example.com/' });
+      response.end();
+    });
+    await new Promise<void>((resolve) => server.listen(0, '127.0.0.1', resolve));
+    const { port } = server.address() as AddressInfo;
+    try {
+      const http = new RipioHttp({
+        apiKey: 'key-123',
+        apiSecret: SECRET,
+        maxRetries: 0,
+        fetch: (url, init) => fetch(url.replace(RIPIO_BASE_URL, `http://127.0.0.1:${port}`), init),
+      });
+      const error = await rejection(http.get('/trade/public/tickers', { signed: false }));
+      expect(error).toMatchObject({ kind: 'upstream', retryable: false });
+      expect(error.message).toContain('redirect');
+    } finally {
+      server.closeAllConnections();
+      server.close();
+    }
   });
 });
