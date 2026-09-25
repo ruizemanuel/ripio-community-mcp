@@ -9,7 +9,10 @@ describe('buildDepositAccounts', () => {
       accounts: [
         { type: 'cvu', currency: 'ARS', account_number: 'CVU-SYNTHETIC-0001', alias: 'synthetic.alias.ripio', same_holder_required: false },
       ],
-      warnings: ['Deposit only ARS by bank transfer to this CVU. For crypto use ripio_get_deposit_address.'],
+      warnings: [
+        'Deposit only ARS by bank transfer to this CVU. For crypto use ripio_get_deposit_address.',
+        'Depending on the deposit currency set in the Ripio app profile, pesos transferred to this CVU may be converted automatically to crypto.',
+      ],
     });
     expect(DepositAccountsSchema.safeParse(result).success).toBe(true);
   });
@@ -26,6 +29,7 @@ describe('buildDepositAccounts', () => {
     expect(result.accounts[0]?.same_holder_required).toBe(true);
     expect(result.warnings).toContain("Deposits must come from an account in the account holder's name; otherwise they can be lost or blocked.");
     expect(JSON.stringify(result)).not.toContain('000.000.000-00');
+    expect(result.warnings.some((w) => w.includes('converted automatically'))).toBe(false);
   });
 
   it('passes unknown account types through and skips a blank alias', () => {

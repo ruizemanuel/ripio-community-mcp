@@ -26,6 +26,12 @@ export function buildDepositAccounts(accounts: WalletDepositAccount[]): DepositA
     warnings.add(
       `Deposit only ${account.currency} by bank transfer to this ${account.type.toUpperCase()}. For crypto use ripio_get_deposit_address.`,
     );
+    if (account.currency.toUpperCase() === 'ARS') {
+      warnings.add(
+        `Depending on the deposit currency set in the Ripio app profile, pesos transferred to this ${account.type.toUpperCase()} ` +
+          'may be converted automatically to crypto.',
+      );
+    }
     if (sameHolder) warnings.add(SAME_HOLDER);
     return {
       type: account.type,
