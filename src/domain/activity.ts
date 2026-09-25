@@ -16,6 +16,8 @@ export const ActivityItemSchema = z.object({
   status: z.string(),
   counterparty: z.string().optional(),
   description: z.string().optional(),
+  /** Fields Ripio sent missing or unreadable; they show as "0" (amount) or "UNKNOWN" (asset). */
+  unreadable: z.array(z.enum(['amount', 'asset'])).optional(),
 });
 
 export const TransactionDetailSchema = ActivityItemSchema.extend({
@@ -51,17 +53,19 @@ export function normalizeWalletTransaction(tx: WalletTransaction): ActivityItem 
   const type = tx.transaction_type.toLowerCase();
   const incoming = type === 'deposit';
   const direction: ActivityItem['direction'] = incoming ? 'in' : type === 'withdrawal' ? 'out' : 'internal';
-  const currency = (incoming ? tx.to_currency : tx.from_currency) ?? tx.to_currency ?? tx.from_currency ?? 'UNKNOWN';
-  const amount = toDecimal(incoming ? tx.amount_to : tx.amount_from) ?? toDecimal(tx.amount_to) ?? '0';
+  const currency = [incoming ? tx.to_currency : tx.from_currency, tx.to_currency, tx.from_currency].find((c) => c?.trim());
+  const amount = toDecimal(incoming ? tx.amount_to : tx.amount_from) ?? toDecimal(tx.amount_to);
   const item: ActivityItem = {
     id: String(tx.id),
     date: toIsoDate(tx.created_at),
     type,
     direction,
-    asset: currency.toUpperCase(),
-    amount,
+    asset: currency?.toUpperCase() ?? 'UNKNOWN',
+    amount: amount ?? '0',
     status: statusName(tx.status),
   };
+  const unreadable = [...(amount === undefined ? ['amount' as const] : []), ...(currency === undefined ? ['asset' as const] : [])];
+  if (unreadable.length > 0) item.unreadable = unreadable;
   const fee = toDecimal(tx.fee);
   if (fee !== undefined && !isZero(fee)) {
     item.fee = fee;
@@ -85,7 +89,8 @@ export function walletTransactionDetail(tx: WalletTransaction): TransactionDetai
 }
 
 export function normalizeTradeStatementEntry(entry: TradeStatementEntry): ActivityItem {
-  const signed = toDecimal(entry.amount) ?? '0';
+  const readable = toDecimal(entry.amount);
+  const signed = readable ?? '0';
   const operation = entry.operation.toLowerCase();
   const type =
     operation.includes('tax') || operation.includes('fee')
@@ -97,7 +102,7 @@ export function normalizeTradeStatementEntry(entry: TradeStatementEntry): Activi
           : operation.includes('buy') || operation.includes('sell')
             ? 'trade'
             : 'other';
-  return {
+  const item: ActivityItem = {
     id: entry.operation_id,
     date: toIsoDate(entry.date),
     type,
@@ -107,4 +112,6 @@ export function normalizeTradeStatementEntry(entry: TradeStatementEntry): Activi
     status: 'completed',
     description: entry.operation,
   };
+  if (readable === undefined) item.unreadable = ['amount'];
+  return item;
 }

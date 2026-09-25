@@ -54,6 +54,14 @@ describe('normalizeWalletTransaction', () => {
     expect(walletTransactionDetail(walletWithdrawal)).toMatchObject({ raw_status: 'PEN', transaction_hash: '0xabc123' });
     expect(walletTransactionDetail(walletDeposit)).not.toHaveProperty('transaction_hash');
   });
+
+  it('flags a movement whose amount or currency Ripio sent missing or unreadable', () => {
+    const noAmount = normalizeWalletTransaction({ ...walletDeposit, amount_to: 'N/A', amount_from: null });
+    expect(noAmount).toMatchObject({ amount: '0', asset: 'ARS', unreadable: ['amount'] });
+    const noAsset = normalizeWalletTransaction({ ...walletDeposit, to_currency: null, from_currency: ' ' });
+    expect(noAsset).toMatchObject({ asset: 'UNKNOWN', unreadable: ['asset'] });
+    expect(normalizeWalletTransaction(walletDeposit)).not.toHaveProperty('unreadable');
+  });
 });
 
 describe('normalizeTradeStatementEntry', () => {
@@ -78,5 +86,12 @@ describe('normalizeTradeStatementEntry', () => {
     expect(normalizeTradeStatementEntry({ ...base, amount: 10, operation: 'Deposit' }).type).toBe('deposit');
     expect(normalizeTradeStatementEntry({ ...base, amount: -10, operation: 'Withdrawal' }).type).toBe('withdrawal');
     expect(normalizeTradeStatementEntry({ ...base, amount: 1, operation: 'Something new' }).type).toBe('other');
+  });
+
+  it('flags an entry whose amount Ripio sent unreadable', () => {
+    const [sell] = tradeStatement.statement;
+    if (sell === undefined) throw new Error('fixture');
+    expect(normalizeTradeStatementEntry({ ...sell, amount: 'N/A' })).toMatchObject({ amount: '0', unreadable: ['amount'] });
+    expect(normalizeTradeStatementEntry(sell)).not.toHaveProperty('unreadable');
   });
 });
