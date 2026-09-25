@@ -1,6 +1,6 @@
 import * as z from 'zod/v4';
 import type { TradeBalance, WalletBalance, WalletRate } from '../ripio/schemas.js';
-import { add, compare, divide, fixed, isZero, mul, sum, toDecimal, type Decimal } from './money.js';
+import { add, compare, divide, fixed, isUnreadable, isZero, mul, sum, toDecimal, type Decimal } from './money.js';
 
 export const HoldingSchema = z.object({
   asset: z.string(),
@@ -61,6 +61,11 @@ export function buildPortfolio(input: PortfolioInput): Portfolio {
 
   const holdings: Holding[] = [];
   const addHolding = (asset: string, venue: Holding['venue'], availableRaw: RawAmount, lockedRaw: RawAmount): void => {
+    for (const [part, raw] of [['available', availableRaw], ['locked', lockedRaw]] as const) {
+      if (isUnreadable(raw)) {
+        warnings.push(`Ripio sent an unreadable ${part} balance for ${asset} (${venue}); it is counted as 0, so the totals may be low.`);
+      }
+    }
     const available = toDecimal(availableRaw) ?? '0';
     const locked = toDecimal(lockedRaw) ?? '0';
     const total = add(available, locked);

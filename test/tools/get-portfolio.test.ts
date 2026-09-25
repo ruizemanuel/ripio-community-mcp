@@ -81,4 +81,16 @@ describe('ripio_get_portfolio', () => {
     expect(result.isError).toBe(true);
     expect(text(result)).toContain('RIPIO_API_KEY and RIPIO_API_SECRET not set');
   });
+
+  it('counts the warnings about unreadable balances in the summary', async () => {
+    harness = await connectTools(
+      fakeClient({
+        walletBalance: async () => ({ wallet: [{ currency: 'BTC', amount: 'N/A', locked_amount: null }] }),
+        tradeBalances: async () => [],
+        walletRates: async () => walletRates,
+      }),
+    );
+    const result = await harness.mcp.callTool({ name: 'ripio_get_portfolio', arguments: {} });
+    expect(text(result)).toContain('Warnings: 1.');
+  });
 });

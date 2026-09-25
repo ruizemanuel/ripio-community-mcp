@@ -45,7 +45,7 @@ export function registerGetPortfolio(server: McpServer, ctx: ToolContext): void 
           warnings,
         });
         const usd = portfolio.totals.value_usd === undefined ? '' : ` (≈ ${portfolio.totals.value_usd} USD)`;
-        const warned = warnings.length === 0 ? '' : ` Warnings: ${warnings.length}.`;
+        const warned = portfolio.warnings.length === 0 ? '' : ` Warnings: ${portfolio.warnings.length}.`;
         return ok(portfolio, `${portfolio.holdings.length} holdings, estimated total ${portfolio.totals.value_ars} ARS${usd}.${warned}`);
       }),
   );
