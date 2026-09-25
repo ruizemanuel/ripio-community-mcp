@@ -14,3 +14,13 @@ export const PositiveDecimalInput = z
   .string()
   .regex(/^(?=.*[1-9])\d+(\.\d+)?$/)
   .describe('Positive decimal as a string, e.g. "100" or "0.005".');
+
+export const TickerInput = z
+  .string()
+  .regex(/^[A-Za-z0-9]{1,15}$/, 'asset must be a Ripio ticker such as USDT.')
+  .describe('Ripio ticker, e.g. USDT, BTC or AAPLx.');
+export const NetworkInput = z
+  .string()
+  .min(1)
+  .max(60)
+  .describe('The network as the sender names it: code, name or token standard, e.g. tron, "BNB Chain", TRC20, BEP-20.');

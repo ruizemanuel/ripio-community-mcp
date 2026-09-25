@@ -1,13 +1,15 @@
 import { describe, expect, it } from 'vitest';
+import { INSTRUCTIONS } from '../../src/server.js';
 import { connectTools, fakeClient } from '../helpers/harness.js';
 
 describe('tool catalog', () => {
-  it('exposes exactly seven read-only, documented tools with structured output', async () => {
+  it('exposes exactly these read-only, documented tools with structured output', async () => {
     const harness = await connectTools(fakeClient({}));
     try {
       const { tools } = await harness.mcp.listTools();
       expect(tools.map((t) => t.name).sort()).toEqual([
         'ripio_estimate_trade',
+        'ripio_get_deposit_address',
         'ripio_get_limits',
         'ripio_get_portfolio',
         'ripio_get_prices',
@@ -29,5 +31,10 @@ describe('tool catalog', () => {
     } finally {
       await harness.close();
     }
+  });
+
+  it('tells the model how to hand out deposit addresses', () => {
+    expect(INSTRUCTIONS).toContain('only give an address returned by ripio_get_deposit_address');
+    expect(INSTRUCTIONS).toContain('copied exactly from the tool result in a code block');
   });
 });

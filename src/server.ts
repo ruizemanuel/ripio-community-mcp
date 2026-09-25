@@ -5,6 +5,7 @@ import { RipioApiError } from './ripio/errors.js';
 import { RipioHttp } from './ripio/http.js';
 import type { ToolContext } from './tools/context.js';
 import { registerEstimateTrade } from './tools/estimate-trade.js';
+import { registerGetDepositAddress } from './tools/get-deposit-address.js';
 import { registerGetLimits } from './tools/get-limits.js';
 import { registerGetPortfolio } from './tools/get-portfolio.js';
 import { registerGetPrices } from './tools/get-prices.js';
@@ -22,6 +23,9 @@ export const INSTRUCTIONS = [
   'Values are estimates at Ripio app rates; say so when reporting totals.',
   "Ripio's API does not expose card transactions, in-app buys/sells or bill payments; never invent them.",
   'Amounts are decimal strings: quote them as returned instead of recomputing with floating point.',
+  'Deposit addresses: only give an address returned by ripio_get_deposit_address, together with its network and memo, ' +
+    'copied exactly from the tool result in a code block (never retyped, shortened, or reused for another network or ' +
+    'for Ripio Trade), and always relay its warnings.',
 ].join(' ');
 
 export interface ServerDeps {
@@ -48,5 +52,6 @@ export function createServer(config: Config | RipioApiError, deps: ServerDeps = 
   registerEstimateTrade(server, ctx);
   registerGetLimits(server, ctx);
   registerListOpenOrders(server, ctx);
+  registerGetDepositAddress(server, ctx);
   return server;
 }
