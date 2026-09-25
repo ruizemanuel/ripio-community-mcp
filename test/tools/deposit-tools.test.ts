@@ -97,3 +97,45 @@ describe('ripio_get_deposit_address', () => {
     expect(result.isError).toBe(true);
   });
 });
+
+describe('ripio_verify_deposit_address', () => {
+  it('verifies a pasted address by code', async () => {
+    harness = await connectTools(depositClient());
+    const result = await harness.mcp.callTool({
+      name: 'ripio_verify_deposit_address',
+      arguments: { address: ` ${EVM_ADDRESS} `, asset: 'usdt', network: 'polygon' },
+    });
+    expect(result.isError).toBeFalsy();
+    expect(result.structuredContent).toMatchObject({ status: 'verified', asset: 'USDT' });
+    expect(text(result).split('\n')[0]).toBe(
+      'This is exactly one of your Ripio Wallet deposit addresses and Ripio credits USDT to it via Ethereum (ERC-20), Polygon, BNB Chain (BEP-20).',
+    );
+  });
+
+  it('only reads the addresses when no asset is given', async () => {
+    harness = await connectTools(fakeClient({ walletAddresses: async () => walletAddresses }));
+    const result = await harness.mcp.callTool({
+      name: 'ripio_verify_deposit_address',
+      arguments: { address: `${EVM_ADDRESS.slice(0, -1)}0` },
+    });
+    expect(result.structuredContent).toMatchObject({ status: 'near_miss' });
+  });
+
+  it('names an unknown currency', async () => {
+    harness = await connectTools(
+      depositClient({ walletCurrencyNetworks: reject('not_found', '/wallet/network/currency-networks/nope/') }),
+    );
+    const result = await harness.mcp.callTool({
+      name: 'ripio_verify_deposit_address',
+      arguments: { address: EVM_ADDRESS, asset: 'nope' },
+    });
+    expect(result.isError).toBe(true);
+    expect(text(result)).toBe("Ripio has no currency 'NOPE'.");
+  });
+
+  it('rejects an empty address before calling Ripio', async () => {
+    harness = await connectTools(fakeClient({}));
+    const result = await harness.mcp.callTool({ name: 'ripio_verify_deposit_address', arguments: { address: '' } });
+    expect(result.isError).toBe(true);
+  });
+});

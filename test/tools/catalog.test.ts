@@ -16,6 +16,7 @@ describe('tool catalog', () => {
         'ripio_get_transaction',
         'ripio_list_activity',
         'ripio_list_open_orders',
+        'ripio_verify_deposit_address',
       ]);
       for (const tool of tools) {
         expect(tool.annotations, tool.name).toEqual({
@@ -36,5 +37,6 @@ describe('tool catalog', () => {
   it('tells the model how to hand out deposit addresses', () => {
     expect(INSTRUCTIONS).toContain('only give an address returned by ripio_get_deposit_address');
     expect(INSTRUCTIONS).toContain('copied exactly from the tool result in a code block');
+    expect(INSTRUCTIONS).toContain('offer to check the address they will actually use with ripio_verify_deposit_address');
   });
 });

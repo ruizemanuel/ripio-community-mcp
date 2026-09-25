@@ -12,6 +12,7 @@ import { registerGetPrices } from './tools/get-prices.js';
 import { registerGetTransaction } from './tools/get-transaction.js';
 import { registerListActivity } from './tools/list-activity.js';
 import { registerListOpenOrders } from './tools/list-open-orders.js';
+import { registerVerifyDepositAddress } from './tools/verify-deposit-address.js';
 import { stderrLogger, type Logger } from './tools/result.js';
 
 export const SERVER_NAME = 'ripio-community-mcp';
@@ -26,6 +27,7 @@ export const INSTRUCTIONS = [
   'Deposit addresses: only give an address returned by ripio_get_deposit_address, together with its network and memo, ' +
     'copied exactly from the tool result in a code block (never retyped, shortened, or reused for another network or ' +
     'for Ripio Trade), and always relay its warnings.',
+  'Before the user sends funds, offer to check the address they will actually use with ripio_verify_deposit_address.',
 ].join(' ');
 
 export interface ServerDeps {
@@ -53,5 +55,6 @@ export function createServer(config: Config | RipioApiError, deps: ServerDeps = 
   registerGetLimits(server, ctx);
   registerListOpenOrders(server, ctx);
   registerGetDepositAddress(server, ctx);
+  registerVerifyDepositAddress(server, ctx);
   return server;
 }
