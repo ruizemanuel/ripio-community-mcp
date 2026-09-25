@@ -4,7 +4,7 @@
 
 > **No oficial, hecho por la comunidad, sin relación con Ripio.** Solo lectura. Usalo bajo tu responsabilidad.
 
-Un servidor [MCP](https://modelcontextprotocol.io) que corre en tu compu y le permite a tu asistente de IA (Claude, Cursor, etc.) **leer** tu cuenta de Ripio con **tu propia clave de API**: saldos, movimientos, cotizaciones, límites y órdenes abiertas. No puede mover plata.
+Un servidor [MCP](https://modelcontextprotocol.io) que corre en tu compu y le permite a tu asistente de IA (Claude, Cursor, etc.) **leer** tu cuenta de Ripio con **tu propia clave de API**: saldos, movimientos, cotizaciones, límites, órdenes abiertas y direcciones de depósito. No puede mover plata.
 
 English version: [README.md](README.md)
 
@@ -58,6 +58,20 @@ Para VS Code, Zed y otros clientes, mirá la sección "Add it to your client" de
 - "¿A cuánto está el USDT en la app y en Ripio Trade?"
 - "¿Cuánto me costaría comprar 100 USDT en Ripio Trade?"
 - "¿Cuánto puedo retirar hoy?"
+- "¿A qué dirección mando USDT por Tron?"
+- "¿Esta dirección es mía? Estoy por mandar USDT por Polygon"
+- "¿Cuál es mi CVU y mi alias?"
+
+## Depósitos seguros
+
+Una red equivocada, un memo que falta o un solo carácter distinto pueden hacer perder los fondos. Por eso los depósitos tienen capas extra:
+
+1. **La dirección sale exacta.** Las direcciones y los memos salen tal cual los manda Ripio. El servidor nunca crea direcciones: si Ripio todavía no te asignó una para esa red, te dice que inicies ese depósito en la app.
+2. **Reglas de red.** `ripio_get_deposit_address` no devuelve una dirección hasta que la red está clara, y dice por qué redes se acredita cada moneda. Tu dirección EVM es la misma en todas las redes EVM, pero Ripio acredita cada moneda solo en algunas.
+3. **Verificación por código.** El asistente vuelve a escribir lo que lee, y un modelo de lenguaje puede, muy de vez en cuando, cambiar un carácter. Antes de enviar, pegá la dirección que vas a usar y pedí que la verifique: `ripio_verify_deposit_address` la compara carácter por carácter con tus direcciones reales y avisa si es una copia con errores.
+4. **Checksums de las redes.** La mayoría de las redes (EVM con mayúsculas y minúsculas, Tron, Bitcoin, XRP, Stellar…) tienen checksum, así que la billetera que envía suele rechazar una dirección mal copiada. Las direcciones de Solana no tienen.
+
+Para montos grandes, mandá primero un depósito de prueba chico. Son direcciones de la app de Ripio (Wallet); Ripio Trade usa otras.
 
 ## Seguridad
 
@@ -72,6 +86,7 @@ Para VS Code, Zed y otros clientes, mirá la sección "Add it to your client" de
 - Los valores son estimados al precio de venta de la app; no son una cotización firme.
 - Probado con cuentas de Argentina.
 - El extracto de Ripio Trade se puede leer de a 182 días como máximo; para períodos más viejos, pedilo en tramos de unos 6 meses.
+- Las direcciones de depósito son las de la app de Ripio (Wallet); las de Ripio Trade todavía no están soportadas.
 
 ## Aviso legal
 

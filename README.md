@@ -4,7 +4,7 @@
 
 > **Unofficial, community-built, not affiliated with Ripio.** Read-only. Use at your own risk.
 
-A local [MCP](https://modelcontextprotocol.io) server that lets AI assistants read your [Ripio](https://www.ripio.com) account (balances, activity, prices, limits and open orders) using **your own API key**. It runs on your computer and only talks to `api.ripio.com`.
+A local [MCP](https://modelcontextprotocol.io) server that lets AI assistants read your [Ripio](https://www.ripio.com) account (balances, activity, prices, limits, open orders and deposit addresses) using **your own API key**. It runs on your computer and only talks to `api.ripio.com`.
 
 🇦🇷 Instrucciones en español: [README.es.md](README.es.md)
 
@@ -16,7 +16,7 @@ Ripio has an official remote MCP server. If it works for you, use it. This proje
 | -------------- | ------------------------------------------------------------ | ----------------------------------------------------------------- |
 | Clients        | Only Ripio-approved OAuth clients (Claude, ChatGPT, VS Code) | Any MCP client: Claude Desktop/Code, Cursor, VS Code, Zed, Cline… |
 | Auth           | OAuth in the browser                                         | Your Ripio API key, stored locally                                |
-| Tools          | ~70 endpoint mirrors                                         | 7 tools that answer whole questions                               |
+| Tools          | ~70 endpoint mirrors                                         | 10 tools that answer whole questions                              |
 | Read-only      | Depends on the permission preset you pick                    | Built in: the server can only send GET requests                   |
 | Tool metadata  | No read-only/destructive annotations                         | Every tool is annotated read-only, with typed output              |
 | Can move funds | Yes, with the Full preset                                    | No                                                                |
@@ -25,15 +25,29 @@ Neither can show card transactions, in-app buys/sells or bill payments: Ripio's 
 
 ## Tools
 
-| Tool                     | Ask things like                                                                  |
-| ------------------------ | -------------------------------------------------------------------------------- |
-| `ripio_get_portfolio`    | "How much do I have on Ripio and in what?"                                       |
-| `ripio_list_activity`    | "What were my last withdrawals?" · "Show my Ripio Trade statement for September" |
-| `ripio_get_transaction`  | "Give me the details of transaction 1234"                                        |
-| `ripio_get_prices`       | "What's USDT at right now, in the app and on Ripio Trade?"                       |
-| `ripio_estimate_trade`   | "How much would 100 USDT cost on Ripio Trade?"                                   |
-| `ripio_get_limits`       | "How much can I still withdraw today?"                                           |
-| `ripio_list_open_orders` | "Do I have open orders?"                                                         |
+| Tool                           | Ask things like                                                                  |
+| ------------------------------ | -------------------------------------------------------------------------------- |
+| `ripio_get_portfolio`          | "How much do I have on Ripio and in what?"                                       |
+| `ripio_list_activity`          | "What were my last withdrawals?" · "Show my Ripio Trade statement for September" |
+| `ripio_get_transaction`        | "Give me the details of transaction 1234"                                        |
+| `ripio_get_prices`             | "What's USDT at right now, in the app and on Ripio Trade?"                       |
+| `ripio_estimate_trade`         | "How much would 100 USDT cost on Ripio Trade?"                                   |
+| `ripio_get_limits`             | "How much can I still withdraw today?"                                           |
+| `ripio_list_open_orders`       | "Do I have open orders?"                                                         |
+| `ripio_get_deposit_address`    | "What address do I send USDT to over Tron?"                                      |
+| `ripio_verify_deposit_address` | "Is this address really mine? I'm about to send USDT over Polygon"               |
+| `ripio_get_deposit_accounts`   | "What's my CVU and alias?"                                                       |
+
+## Deposit safety
+
+A wrong network, a missing memo or one mistyped character can lose the funds, so deposits get extra layers:
+
+1. **Exact output.** Addresses and memos come back exactly as Ripio sends them. The server never creates an address: if Ripio hasn't assigned one for a network yet, it tells you to start that deposit in the Ripio app.
+2. **Network rules.** `ripio_get_deposit_address` returns no address until the network is clear, and says which networks credit the asset. Your EVM address is the same on every EVM network, but Ripio only credits each asset on some of them.
+3. **Verification by code.** The assistant retypes what it reads, and a language model can, rarely, change a character. Before sending, paste the address you will actually use and ask to verify it: `ripio_verify_deposit_address` compares it character by character with your real addresses and flags near misses.
+4. **Network checksums.** Most networks (EVM with mixed-case addresses, Tron, Bitcoin, XRP, Stellar…) have a checksum, so the sending wallet usually rejects a mistyped address. Solana addresses have none.
+
+For large amounts, send a small test deposit first. These are Ripio app (Wallet) addresses; Ripio Trade uses different ones.
 
 ## Setup
 
@@ -135,6 +149,7 @@ Found a vulnerability? See [SECURITY.md](SECURITY.md).
 - Tested with Argentinian accounts. Other countries may work for reading, but haven't been tested.
 - Ripio Trade allows 1 request per second without verified documents; the server paces requests for you.
 - Ripio Trade statements can be read up to 182 days at a time; ask for older periods in chunks of about 6 months.
+- Deposit addresses are Ripio app (Wallet) addresses. Ripio Trade deposit addresses aren't supported yet.
 
 ## Development
 
