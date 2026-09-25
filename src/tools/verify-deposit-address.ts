@@ -38,10 +38,7 @@ export function registerVerifyDepositAddress(server: McpServer, ctx: ToolContext
         if (asset !== undefined) {
           const list = currencies.status === 'fulfilled' ? currencies.value : undefined;
           const ticker = canonicalAsset(asset, list);
-          if (currencies.status === 'rejected') {
-            warnings.push(`Could not check whether Ripio accepts ${ticker} deposits app-wide.`);
-            ctx.log(`verify address: currencies unavailable: ${String(currencies.reason)}`);
-          }
+          if (currencies.status === 'rejected') ctx.log(`verify address: currencies unavailable: ${String(currencies.reason)}`);
           if (networks.status === 'rejected') {
             if (networks.reason instanceof RipioApiError && networks.reason.kind === 'not_found') {
               return failText(`Ripio has no currency '${ticker}'.`);
@@ -49,6 +46,7 @@ export function registerVerifyDepositAddress(server: McpServer, ctx: ToolContext
             throw networks.reason;
           }
           const state = currencyDepositState(list?.find((entry) => entry.ticker === ticker));
+          if (state === 'unknown') warnings.push(`Could not check whether Ripio accepts ${ticker} deposits app-wide.`);
           assetInfo = { ticker, networks: networks.value ?? [], depositsDisabled: state === 'disabled' };
         }
         const result = verifyDepositAddress({ address, memo, network, asset: assetInfo, addresses: addresses.value, warnings });

@@ -84,6 +84,16 @@ describe('ripio_get_deposit_address', () => {
     expect(harness.logs.join('\n')).toContain('currencies unavailable');
   });
 
+  it("says it could not check app-wide deposits when Ripio's list lacks the asset", async () => {
+    harness = await connectTools(depositClient());
+    const result = await harness.mcp.callTool({ name: 'ripio_get_deposit_address', arguments: { asset: 'doge', network: 'polygon' } });
+    expect(result.structuredContent).toMatchObject({ asset: 'DOGE', status: 'ok' });
+    expect((result.structuredContent as { warnings: string[] }).warnings[0]).toBe(
+      'Could not check whether Ripio accepts DOGE deposits app-wide.',
+    );
+    expect(harness.logs).toEqual([]);
+  });
+
   it('fails when the addresses cannot be read', async () => {
     harness = await connectTools(depositClient({ walletAddresses: reject('forbidden', '/wallet/addresses/') }));
     const result = await harness.mcp.callTool({ name: 'ripio_get_deposit_address', arguments: { asset: 'USDT', network: 'polygon' } });
@@ -109,6 +119,17 @@ describe('ripio_verify_deposit_address', () => {
     expect(result.structuredContent).toMatchObject({ status: 'verified', asset: 'USDT' });
     expect(text(result).split('\n')[0]).toBe(
       'This is exactly one of your Ripio Wallet deposit addresses and Ripio credits USDT to it via Ethereum (ERC-20), Polygon, BNB Chain (BEP-20).',
+    );
+  });
+
+  it("says it could not check app-wide deposits when Ripio's list lacks the asset", async () => {
+    harness = await connectTools(depositClient());
+    const result = await harness.mcp.callTool({
+      name: 'ripio_verify_deposit_address',
+      arguments: { address: EVM_ADDRESS, asset: 'doge' },
+    });
+    expect((result.structuredContent as { warnings: string[] }).warnings[0]).toBe(
+      'Could not check whether Ripio accepts DOGE deposits app-wide.',
     );
   });
 

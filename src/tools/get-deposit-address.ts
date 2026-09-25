@@ -31,12 +31,10 @@ export function registerGetDepositAddress(server: McpServer, ctx: ToolContext): 
         const list = currencies.status === 'fulfilled' ? currencies.value : undefined;
         const ticker = canonicalAsset(asset, list);
         const warnings: string[] = [];
-        if (currencies.status === 'rejected') {
-          warnings.push(`Could not check whether Ripio accepts ${ticker} deposits app-wide.`);
-          ctx.log(`deposit address: currencies unavailable: ${String(currencies.reason)}`);
-        }
+        if (currencies.status === 'rejected') ctx.log(`deposit address: currencies unavailable: ${String(currencies.reason)}`);
         const currency = list?.find((entry) => entry.ticker === ticker);
         const state = currencyDepositState(currency);
+        if (state === 'unknown') warnings.push(`Could not check whether Ripio accepts ${ticker} deposits app-wide.`);
         if (state === 'fiat') {
           return failText(`${ticker} is deposited by bank transfer, not to a crypto address: use ripio_get_deposit_accounts.`);
         }
