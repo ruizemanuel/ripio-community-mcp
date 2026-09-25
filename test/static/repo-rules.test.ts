@@ -80,4 +80,12 @@ describe('repository rules', () => {
       expect(readFileSync(path, 'utf8'), path).not.toMatch(/\b0x[0-9a-fA-F]{40}\b/);
     }
   });
+
+  it('pins every GitHub Action to a full commit SHA', () => {
+    for (const path of listFiles('.github/workflows')) {
+      for (const line of readFileSync(path, 'utf8').split('\n').filter((l) => /^\s*-?\s*uses:/.test(l))) {
+        expect(line, path).toMatch(/uses:\s*[\w.-]+\/[\w.-]+@[0-9a-f]{40}\s+#\s*v\d/);
+      }
+    }
+  });
 });
