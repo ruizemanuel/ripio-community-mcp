@@ -36,7 +36,7 @@ export function currencyDepositState(currency: WalletCurrency | undefined): Curr
 }
 
 export function canReceive(network: WalletCurrencyNetwork): boolean {
-  return network.receive === true && network.enabled !== false && network.network.enabled !== false;
+  return network.receive === true && network.enabled === true && network.network.enabled === true;
 }
 
 /** How Ripio shows the network to users, e.g. "Tron (TRC-20)". */

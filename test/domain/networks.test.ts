@@ -60,6 +60,12 @@ describe('canReceive', () => {
     expect(canReceive({ ...tron, enabled: false })).toBe(false);
     expect(canReceive({ ...tron, network: { ...tron.network, enabled: false } })).toBe(false);
   });
+
+  it('treats a missing enabled flag as off, as the spec does', () => {
+    expect(canReceive({ ...tron, enabled: null })).toBe(false);
+    expect(canReceive({ ...tron, enabled: undefined })).toBe(false);
+    expect(canReceive({ ...tron, network: { ...tron.network, enabled: null } })).toBe(false);
+  });
 });
 
 describe('resolveNetwork', () => {
