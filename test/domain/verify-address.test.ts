@@ -148,6 +148,21 @@ describe('verifyDepositAddress', () => {
     expect(result).toMatchObject({ status: 'memo_mismatch', expected_memo: '999' });
   });
 
+  it('never confirms a memo that is a number too large to have been read exactly', () => {
+    const stellar = network('stellar', 'Stellar', { use_memo: true });
+    const memo = JSON.parse('12345678901234567891') as number;
+    const result = verifyDepositAddress({
+      address: 'GSYNTHETIC',
+      memo: '12345678901234567891',
+      addresses: [addressOn(stellar, 'GSYNTHETIC', 1, memo)],
+    });
+    expect(result.status).toBe('memo_mismatch');
+    expect(result.expected_memo).toBeUndefined();
+    expect(result.verdict).toBe(
+      'Stellar requires a memo/tag, but Ripio returned one for this address that cannot be read exactly: do not send; check the Ripio app.',
+    );
+  });
+
   it('notes a memo that the network does not use', () => {
     expect(verify({ memo: '42' }).warnings).toContain('This network does not use a memo/tag; the one given is not needed.');
   });

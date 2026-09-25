@@ -133,6 +133,13 @@ describe('memoOf', () => {
   });
 });
 
+describe('memoOf with numbers JSON cannot carry exactly', () => {
+  it.each([['12345678901234567891'], ['1e21']])('refuses %s as JSON.parse reads it', (json) => {
+    const stellar = network('stellar', 'Stellar', { use_memo: true });
+    expect(memoOf(addressOn(stellar, 'G', 1, JSON.parse(json) as number))).toBeNull();
+  });
+});
+
 describe('describeNetworks', () => {
   it('lists every network in Ripio order with what a sender needs to know', () => {
     const networks = describeNetworks('USDT', usdtNetworks, walletAddresses);

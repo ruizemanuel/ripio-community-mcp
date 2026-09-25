@@ -5,6 +5,7 @@ import {
   currentAddresses,
   describeNetworks,
   memoOf,
+  memoSent,
   namesNetwork,
   needsMemo,
   NetworkInfoSchema,
@@ -124,7 +125,8 @@ export function buildDepositAddress(input: DepositAddressInput): DepositAddress 
   const memo = memoOf(entry);
   const memoRequired = needsMemo(entry, chosen);
   if (memoRequired && memo === null) {
-    return withoutAddress('memo_missing', `${label} needs a memo/tag but Ripio returned none. Do not send; check the deposit screen in the Ripio app.`);
+    const returned = memoSent(entry) ? 'returned one that cannot be read exactly' : 'returned none';
+    return withoutAddress('memo_missing', `${label} needs a memo/tag but Ripio ${returned}. Do not send; check the deposit screen in the Ripio app.`);
   }
 
   const receivableCodes = new Set(receivable.map((n) => n.network.code));

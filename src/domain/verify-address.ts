@@ -5,6 +5,7 @@ import {
   currentAddresses,
   isEvmAddress,
   memoOf,
+  memoSent,
   namesNetwork,
   needsMemo,
   networkLabel,
@@ -164,7 +165,8 @@ export function verifyDepositAddress(input: VerifyAddressInput): VerifyAddress {
     const expected = memoOf(memoEntry);
     const label = labelOf(memoEntry);
     if (expected === null) {
-      return answer('memo_mismatch', `${label} requires a memo/tag, but Ripio returned none for this address: do not send; check the Ripio app.`);
+      const returned = memoSent(memoEntry) ? 'returned one for this address that cannot be read exactly' : 'returned none for this address';
+      return answer('memo_mismatch', `${label} requires a memo/tag, but Ripio ${returned}: do not send; check the Ripio app.`);
     }
     if (memo !== expected) {
       return answer(

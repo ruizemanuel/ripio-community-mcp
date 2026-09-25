@@ -204,6 +204,22 @@ describe('buildDepositAddress', () => {
     );
   });
 
+  it('never hands out a numeric memo too large to have been read exactly', () => {
+    const stellar = network('stellar', 'Stellar', { use_memo: true });
+    const memo = JSON.parse('12345678901234567891') as number;
+    const result = buildDepositAddress({
+      asset: 'XLM',
+      depositsDisabled: false,
+      networks: [receiving(stellar, 'Stellar', 0)],
+      addresses: [addressOn(stellar, 'GSYNTHETIC', 1, memo)],
+    });
+    expect(result.status).toBe('memo_missing');
+    expect(result.deposit).toBeUndefined();
+    expect(result.next_step).toBe(
+      'Stellar needs a memo/tag but Ripio returned one that cannot be read exactly. Do not send; check the deposit screen in the Ripio app.',
+    );
+  });
+
   it('mentions a maximum when Ripio lists one', () => {
     const capped = usdtNetworks.map((n) => (n.network.code === 'polygon' ? { ...n, max_amount: '6.00000000' } : n));
     expect(buildDepositAddress(usdt({ network: 'polygon', networks: capped })).warnings).toContain(

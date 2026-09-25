@@ -96,8 +96,12 @@ export function currentAddresses(addresses: WalletAddress[]): WalletAddress[] {
   return [...byCode.values()].filter((entry) => entry.address.trim() !== '');
 }
 
-/** The memo/tag exactly as Ripio sent it, or null when there is none. */
+/**
+ * The memo/tag exactly as Ripio sent it, or null when there is none or it is a number too large for JSON parsing to
+ * have kept every digit (Stellar memo ids are 64-bit).
+ */
 export function memoOf(entry: WalletAddress): string | null {
+  if (typeof entry.memo_id === 'number' && !Number.isSafeInteger(entry.memo_id)) return null;
   const raw = entry.memo_id === null || entry.memo_id === undefined ? '' : String(entry.memo_id);
   return raw.trim() === '' ? null : raw;
 }
