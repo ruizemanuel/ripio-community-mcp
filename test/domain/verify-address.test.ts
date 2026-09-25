@@ -77,6 +77,11 @@ describe('verifyDepositAddress', () => {
     expect(JSON.stringify(result)).not.toContain(EVM_ADDRESS);
   });
 
+  it('does not verify an address that a newer, blank one has replaced', () => {
+    const polygon = network('polygon', 'Polygon');
+    expect(verify({ addresses: [addressOn(polygon, EVM_ADDRESS, 2), addressOn(polygon, '', 3)] }).status).not.toBe('verified');
+  });
+
   it('answers not_yours for an account without addresses', () => {
     expect(verify({ addresses: [] }).status).toBe('not_yours');
   });

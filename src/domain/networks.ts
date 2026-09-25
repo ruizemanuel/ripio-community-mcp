@@ -83,15 +83,17 @@ export function sameAddress(a: string, b: string): boolean {
   return a === b || (isEvmAddress(a) && isEvmAddress(b) && a.toLowerCase() === b.toLowerCase());
 }
 
-/** The newest (highest `version`) non-blank address of each network. */
+/**
+ * The newest (highest `version`) address of each network. A network whose newest address is blank has none: an older
+ * address it replaced is never used instead.
+ */
 export function currentAddresses(addresses: WalletAddress[]): WalletAddress[] {
   const byCode = new Map<string, WalletAddress>();
   for (const entry of addresses) {
-    if (entry.address.trim() === '') continue;
     const best = byCode.get(entry.network.code);
     if (best === undefined || (entry.version ?? 0) > (best.version ?? 0)) byCode.set(entry.network.code, entry);
   }
-  return [...byCode.values()];
+  return [...byCode.values()].filter((entry) => entry.address.trim() !== '');
 }
 
 /** The memo/tag exactly as Ripio sent it, or null when there is none. */

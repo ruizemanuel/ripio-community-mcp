@@ -112,6 +112,13 @@ describe('currentAddresses', () => {
   });
 });
 
+describe('currentAddresses when the newest address is blank', () => {
+  it('treats the network as having no address instead of falling back to an older one', () => {
+    const polygon = network('polygon', 'Polygon');
+    expect(currentAddresses([addressOn(polygon, '0xOLD', 2), addressOn(polygon, '', 3)])).toEqual([]);
+  });
+});
+
 describe('memoOf', () => {
   const ripple = network('ripple', 'Ripple', { use_memo: true });
 

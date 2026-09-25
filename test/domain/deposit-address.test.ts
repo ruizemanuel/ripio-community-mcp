@@ -101,6 +101,14 @@ describe('buildDepositAddress', () => {
     expect(buildDepositAddress(usdt({ network: 'polygon', addresses: [blank] })).status).toBe('no_address');
   });
 
+  it('never falls back to an older address when the newest one is blank', () => {
+    const polygon = network('polygon', 'Polygon');
+    const addresses = [addressOn(polygon, EVM_ADDRESS, 2), addressOn(polygon, '', 3)];
+    const result = buildDepositAddress(usdt({ network: 'polygon', addresses }));
+    expect(result.status).toBe('no_address');
+    expect(result.deposit).toBeUndefined();
+  });
+
   it('answers no_address for an account without any address', () => {
     expect(buildDepositAddress(usdt({ network: 'polygon', addresses: [] })).status).toBe('no_address');
   });
