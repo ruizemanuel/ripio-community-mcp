@@ -14,6 +14,11 @@ export function toDecimal(value: number | string | null | undefined): Decimal | 
   }
 }
 
+/** Ripio sent a value, but not one that reads as a number (e.g. "N/A", "1.234,56" or ""). Null and undefined mean "not sent". */
+export function isUnreadable(value: number | string | null | undefined): boolean {
+  return value !== null && value !== undefined && toDecimal(value) === undefined;
+}
+
 export const add = (a: Decimal, b: Decimal): Decimal => new Big(a).plus(b).toFixed();
 export const sub = (a: Decimal, b: Decimal): Decimal => new Big(a).minus(b).toFixed();
 export const mul = (a: Decimal, b: Decimal): Decimal => new Big(a).times(b).toFixed();

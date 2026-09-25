@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { abs, compare, divide, fixed, isNegative, isZero, round, sum, toDecimal } from '../../src/domain/money.js';
+import { abs, compare, divide, fixed, isNegative, isUnreadable, isZero, round, sum, toDecimal } from '../../src/domain/money.js';
 
 describe('money', () => {
   it('turns numbers and numeric strings into plain decimal strings', () => {
@@ -37,5 +37,12 @@ describe('money', () => {
     expect(isNegative('-0.1')).toBe(true);
     expect(isZero('0.000')).toBe(true);
     expect(compare('2', '10')).toBe(-1);
+  });
+
+  it('tells a value Ripio sent unreadable from one it did not send', () => {
+    for (const value of [null, undefined, '12.5', 0, ' 3 ']) expect(isUnreadable(value), String(value)).toBe(false);
+    for (const value of ['N/A', '1.234,56', '', '  ', Number.NaN, Number.POSITIVE_INFINITY]) {
+      expect(isUnreadable(value), String(value)).toBe(true);
+    }
   });
 });
