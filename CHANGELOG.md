@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.3 — unreleased
+## 0.1.3 — 2026-09-24
 
 - Listed in the official MCP Registry as `io.github.ruizemanuel/ripio-community-mcp` (`mcpName` in package.json, `server.json`); releases publish there too.
 - README badges for npm, CI and license.
