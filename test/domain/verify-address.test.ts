@@ -124,8 +124,30 @@ describe('verifyDepositAddress', () => {
   it("rejects a network where the address is not the account's", () => {
     expect(verify({ asset: usdt, network: 'TRC20' })).toMatchObject({
       status: 'wrong_network',
-      verdict: 'This address is not assigned to Tron (TRC-20) on your account.',
+      verdict:
+        'This address is not assigned to Tron (TRC-20) on your account; ' +
+        'it is your address on Ethereum (ERC-20), Polygon, BNB Chain (BEP-20), Base, Gnosis.',
     });
+  });
+
+  it('asks for one network when the name matches several of the asset', () => {
+    const twins = [
+      receiving(network('ethereum', 'Ethereum'), 'Ethereum (ERC-20)', 0, { standard: 'ERC-20' }),
+      receiving(network('arbitrum', 'Arbitrum'), 'Arbitrum', 1, { standard: 'ERC-20' }),
+    ];
+    const addresses = [addressOn(network('ethereum', 'Ethereum'), EVM_ADDRESS), addressOn(network('arbitrum', 'Arbitrum'), EVM_ADDRESS)];
+    const result = verify({ asset: { ticker: 'USDT', networks: twins, depositsDisabled: false }, network: 'ERC20', addresses });
+    expect(result.status).toBe('wrong_network');
+    expect(result.verdict).toBe(
+      "'ERC20' matches several networks (Ethereum (ERC-20), Arbitrum): verify again with the one the sender will use.",
+    );
+  });
+
+  it('names the networks the address is on when the one given does not match', () => {
+    const tron = addressOn(network('tron', 'Tron'), TRON_ADDRESS);
+    expect(verifyDepositAddress({ address: TRON_ADDRESS, network: 'TRC20', addresses: [tron] }).verdict).toBe(
+      'This address is not assigned to TRC20 on your account; it is your address on Tron.',
+    );
   });
 
   it('does not verify an asset Ripio is not accepting', () => {

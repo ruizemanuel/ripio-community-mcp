@@ -137,10 +137,19 @@ export function verifyDepositAddress(input: VerifyAddressInput): VerifyAddress {
   if (input.network !== undefined) {
     const wanted = input.network;
     const assetMatch = resolveNetwork(wanted, assetNetworks);
+    if (assetMatch.kind === 'many') {
+      const labels = assetMatch.networks.map(networkLabel).join(', ');
+      return answer('wrong_network', `'${wanted}' matches several networks (${labels}): verify again with the one the sender will use.`);
+    }
     const matchedCode = assetMatch.kind === 'one' ? assetMatch.network.network.code : undefined;
     relevant = owned.filter((entry) => entry.network.code === matchedCode || namesNetwork(wanted, entry.network.code, entry.network.name));
     requestedLabel = assetMatch.kind === 'one' ? networkLabel(assetMatch.network) : (relevant[0]?.network.name ?? wanted);
-    if (relevant.length === 0) return answer('wrong_network', `This address is not assigned to ${requestedLabel} on your account.`);
+    if (relevant.length === 0) {
+      return answer(
+        'wrong_network',
+        `This address is not assigned to ${requestedLabel} on your account; it is your address on ${owned.map(labelOf).join(', ')}.`,
+      );
+    }
   }
 
   if (input.asset !== undefined) {
