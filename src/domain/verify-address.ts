@@ -2,6 +2,7 @@ import * as z from 'zod/v4';
 import type { WalletAddress, WalletCurrencyNetwork } from '../ripio/schemas.js';
 import {
   canReceive,
+  conflictingAddresses,
   currentAddresses,
   isEvmAddress,
   memoOf,
@@ -15,7 +16,7 @@ import {
 } from './networks.js';
 
 export const VerifyAddressSchema = z.object({
-  status: z.enum(['verified', 'wrong_network', 'memo_mismatch', 'near_miss', 'not_yours']),
+  status: z.enum(['verified', 'wrong_network', 'memo_mismatch', 'near_miss', 'not_yours', 'conflicting']),
   verdict: z.string(),
   address_networks: z.array(z.object({ code: z.string(), name: z.string() })),
   asset: z.string().optional(),
@@ -109,7 +110,21 @@ export function verifyDepositAddress(input: VerifyAddressInput): VerifyAddress {
   const warnings = (): string[] => [...(input.warnings ?? []), ...notes, VENUE_WARNING];
   const current = currentAddresses(input.addresses);
   const owned = current.filter((entry) => sameAddress(entry.address.trim(), address));
-  if (owned.length === 0) return notOwned(address, current, warnings());
+  if (owned.length === 0) {
+    const tied = conflictingAddresses(input.addresses).filter((entry) => sameAddress(entry.address.trim(), address));
+    if (tied.length > 0) {
+      const names = [...new Set(tied.map((entry) => entry.network.name))].join(', ');
+      return {
+        status: 'conflicting',
+        verdict:
+          `Ripio lists this address for your account on ${names}, but together with a different address or memo at the same version, ` +
+          'so it cannot be verified. Do not send to it; check the deposit screen in the Ripio app.',
+        address_networks: [],
+        warnings: warnings(),
+      };
+    }
+    return notOwned(address, current, warnings());
+  }
 
   const address_networks = owned.map((entry) => ({ code: entry.network.code, name: entry.network.name }));
   const assetNetworks = input.asset?.networks ?? [];

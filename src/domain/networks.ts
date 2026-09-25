@@ -83,11 +83,8 @@ export function sameAddress(a: string, b: string): boolean {
   return a === b || (isEvmAddress(a) && isEvmAddress(b) && a.toLowerCase() === b.toLowerCase());
 }
 
-/**
- * The newest (highest `version`) address of each network. A network has none when its newest address is blank, or when
- * Ripio lists different addresses or memos at that version: an older address is never used instead.
- */
-export function currentAddresses(addresses: WalletAddress[]): WalletAddress[] {
+/** Each network's entries at its newest (highest `version`) version. */
+function newestByNetwork(addresses: WalletAddress[]): WalletAddress[][] {
   const newest = new Map<string, WalletAddress[]>();
   for (const entry of addresses) {
     const tied = newest.get(entry.network.code);
@@ -95,18 +92,41 @@ export function currentAddresses(addresses: WalletAddress[]): WalletAddress[] {
     if (tied === undefined || (entry.version ?? 0) > top) newest.set(entry.network.code, [entry]);
     else if ((entry.version ?? 0) === top) tied.push(entry);
   }
-  return [...newest.values()].flatMap((tied) => {
-    const [first] = tied;
-    if (first === undefined || first.address.trim() === '') return [];
-    const agree = tied.every(
+  return [...newest.values()];
+}
+
+/** Entries tied at a network's newest version agree on the address, the memo and whether a memo is needed. */
+function agree(tied: WalletAddress[]): boolean {
+  const [first] = tied;
+  return (
+    first !== undefined &&
+    tied.every(
       (entry) =>
         sameAddress(entry.address, first.address) &&
         memoOf(entry) === memoOf(first) &&
         memoSent(entry) === memoSent(first) &&
         (entry.network.use_memo === true) === (first.network.use_memo === true),
-    );
-    return agree ? [first] : [];
+    )
+  );
+}
+
+/**
+ * The newest (highest `version`) address of each network. A network has none when its newest address is blank, or when
+ * Ripio lists different addresses or memos at that version: an older address is never used instead.
+ */
+export function currentAddresses(addresses: WalletAddress[]): WalletAddress[] {
+  return newestByNetwork(addresses).flatMap((tied) => {
+    const [first] = tied;
+    if (first === undefined || first.address.trim() === '') return [];
+    return agree(tied) ? [first] : [];
   });
+}
+
+/** Every entry tied at the newest version of a network whose tied entries disagree, so that network has no current address. */
+export function conflictingAddresses(addresses: WalletAddress[]): WalletAddress[] {
+  return newestByNetwork(addresses)
+    .filter((tied) => !agree(tied))
+    .flat();
 }
 
 /**

@@ -225,4 +225,20 @@ describe('verifyDepositAddress', () => {
     const checkFailed = 'Could not check whether Ripio accepts USDT deposits app-wide.';
     expect(verify({ warnings: [checkFailed] }).warnings[0]).toBe(checkFailed);
   });
+
+  it('says an address Ripio lists in a conflicting tie cannot be verified, instead of "not yours"', () => {
+    const polygon = network('polygon', 'Polygon');
+    const tie = [addressOn(polygon, EVM_ADDRESS, 3), addressOn(polygon, '0x0000000000000000000000000000000000000001', 3)];
+    for (const address of [EVM_ADDRESS, EVM_ADDRESS.toLowerCase()]) {
+      const result = verify({ address, addresses: tie });
+      expect(result.status, address).toBe('conflicting');
+      expect(result.verdict).toBe(
+        'Ripio lists this address for your account on Polygon, but together with a different address or memo at the same version, ' +
+          'so it cannot be verified. Do not send to it; check the deposit screen in the Ripio app.',
+      );
+      expect(result.address_networks).toEqual([]);
+      expect(VerifyAddressSchema.safeParse(result).success).toBe(true);
+    }
+    expect(verify({ address: TRON_ADDRESS, addresses: tie }).status).toBe('not_yours');
+  });
 });

@@ -251,6 +251,22 @@ describe('buildDepositAddress', () => {
     expect(warnings).toContain('Send only XRP over Ripple. Ripio credits XRP to this address only via: Ripple. Sending over any other network can lose the funds.');
     expect(warnings.some((w) => w.includes('different address'))).toBe(false);
   });
+
+  it('says Ripio lists conflicting addresses instead of "not assigned yet"', () => {
+    const polygon = network('polygon', 'Polygon');
+    for (const addresses of [
+      [addressOn(polygon, EVM_ADDRESS, 3), addressOn(polygon, '0x0000000000000000000000000000000000000001', 3)],
+      [addressOn(polygon, EVM_ADDRESS, 3), addressOn(polygon, '', 3)],
+    ]) {
+      const result = buildDepositAddress(usdt({ network: 'polygon', addresses }));
+      expect(result.status).toBe('no_address');
+      expect(result.next_step).toBe(
+        'Ripio lists conflicting Polygon addresses or memos for this account, so none can be given safely. ' +
+          'Open the Ripio app, start a USDT deposit on Polygon and use the address it shows.',
+      );
+    }
+    expect(buildDepositAddress(usdt({ network: 'polygon', addresses: [] })).next_step).toContain('has not assigned a Polygon address');
+  });
 });
 
 describe('summarizeDepositAddress', () => {

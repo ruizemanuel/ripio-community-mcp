@@ -2,6 +2,7 @@ import * as z from 'zod/v4';
 import type { WalletAddress, WalletCurrencyNetwork } from '../ripio/schemas.js';
 import {
   canReceive,
+  conflictingAddresses,
   currentAddresses,
   describeNetworks,
   memoOf,
@@ -116,10 +117,14 @@ export function buildDepositAddress(input: DepositAddressInput): DepositAddress 
   const code = chosen.network.code;
   const entry = current.find((candidate) => candidate.network.code === code);
   if (entry === undefined) {
+    const conflicting = conflictingAddresses(input.addresses).some((other) => other.network.code === code);
     return withoutAddress(
       'no_address',
-      `Ripio has not assigned a ${label} address to this account yet. ` +
-        `Open the Ripio app, start a ${asset} deposit and pick ${label} so Ripio assigns one, then ask again.`,
+      conflicting
+        ? `Ripio lists conflicting ${label} addresses or memos for this account, so none can be given safely. ` +
+            `Open the Ripio app, start a ${asset} deposit on ${label} and use the address it shows.`
+        : `Ripio has not assigned a ${label} address to this account yet. ` +
+            `Open the Ripio app, start a ${asset} deposit and pick ${label} so Ripio assigns one, then ask again.`,
     );
   }
   const memo = memoOf(entry);

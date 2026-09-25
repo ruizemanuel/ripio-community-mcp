@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   canonicalAsset,
   canReceive,
+  conflictingAddresses,
   currencyDepositState,
   currentAddresses,
   describeNetworks,
@@ -152,6 +153,26 @@ describe('currentAddresses with a tie at the newest version', () => {
 
   it('keeps a repeated identical entry', () => {
     expect(currentAddresses([addressOn(polygon, '0xA', 3), addressOn(polygon, '0xA', 3)]).map((e) => e.address)).toEqual(['0xA']);
+  });
+});
+
+describe('conflictingAddresses', () => {
+  const polygon = network('polygon', 'Polygon');
+  const ripple = network('ripple', 'Ripple', { use_memo: true });
+
+  it('lists the tied entries of each network whose newest version disagrees', () => {
+    const tie = [addressOn(polygon, '0xA', 3), addressOn(polygon, '0xB', 3)];
+    expect(conflictingAddresses([addressOn(polygon, '0xOLD', 2), ...tie])).toEqual(tie);
+    const memos = [addressOn(ripple, 'r1', 1, '11'), addressOn(ripple, 'r1', 1, '22')];
+    expect(conflictingAddresses(memos)).toEqual(memos);
+    const blankTie = [addressOn(polygon, '', 3), addressOn(polygon, '0xA', 3)];
+    expect(conflictingAddresses(blankTie)).toEqual(blankTie);
+  });
+
+  it('lists nothing for agreeing, repeated, single or blank-only entries', () => {
+    expect(conflictingAddresses(walletAddresses)).toEqual([]);
+    expect(conflictingAddresses([addressOn(polygon, '0xA', 3), addressOn(polygon, '0xA', 3)])).toEqual([]);
+    expect(conflictingAddresses([addressOn(polygon, '', 3)])).toEqual([]);
   });
 });
 
