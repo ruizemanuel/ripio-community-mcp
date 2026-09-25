@@ -163,4 +163,32 @@ describe('RipioHttp', () => {
     await http.get('/wallet/balance/');
     expect(calls.map((call) => call.redirect)).toEqual(['error', 'error']);
   });
+
+  it('does not wait out a Retry-After longer than 10 seconds', async () => {
+    const { http, sleeps } = setup((url) =>
+      isServerTime(url)
+        ? serverTimeReply
+        : { status: 429, body: { error_code: 429, message: 'Too many requests' }, headers: { 'retry-after': '3600' } },
+    );
+    const error = await rejection(http.get('/wallet/balance/'));
+    expect(error.kind).toBe('rate_limited');
+    expect(sleeps).toEqual([]);
+  });
+
+  it('keeps the normal backoff when Retry-After is a date', async () => {
+    let attempts = 0;
+    const { http, sleeps } = setup((url) => {
+      if (isServerTime(url)) return serverTimeReply;
+      attempts += 1;
+      return attempts === 1
+        ? {
+            status: 429,
+            body: { error_code: 429, message: 'Too many requests' },
+            headers: { 'retry-after': 'Wed, 21 Oct 2026 07:28:00 GMT' },
+          }
+        : walletOk({});
+    });
+    await http.get('/wallet/balance/');
+    expect(sleeps).toEqual([500]);
+  });
 });
