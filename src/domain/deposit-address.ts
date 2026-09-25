@@ -138,13 +138,20 @@ export function buildDepositAddress(input: DepositAddressInput): DepositAddress 
         .map((other) => other.network.name),
     ),
   ];
+  const onThisAddress = new Set(current.filter((other) => sameAddress(other.address, entry.address)).map((other) => other.network.code));
+  const viaThisAddress = receivable.filter((n) => onThisAddress.has(n.network.code)).map(networkLabel);
+  const viaOtherAddresses = receivable.filter((n) => !onThisAddress.has(n.network.code)).map(networkLabel);
   const min = positiveAmount(chosen.min_amount);
   const max = positiveAmount(chosen.max_amount);
   const version = entry.version ?? undefined;
   const warnings = [
     ...(input.warnings ?? []),
     ...partialNote(chosen),
-    `${SEND_ONLY}${asset} over ${label}. Ripio credits ${asset} only via: ${credited}. Sending over any other network can lose the funds.`,
+    `${SEND_ONLY}${asset} over ${label}. Ripio credits ${asset} to this address only via: ${viaThisAddress.join(', ')}. ` +
+      'Sending over any other network can lose the funds.',
+    ...(viaOtherAddresses.length > 0
+      ? [`${asset} can also be received on ${viaOtherAddresses.join(', ')}, but with a different address: ask for it by network.`]
+      : []),
     ...(alsoOn.length > 0 ? [`This same address also exists on ${alsoOn.join(', ')}, where Ripio does not credit ${asset}.`] : []),
     ...(memoRequired && memo !== null
       ? [`${MEMO_RULE}: include ${memo} exactly as shown. Without it the deposit cannot be matched to the account and can be lost.`]

@@ -35,6 +35,8 @@ const xrp = (overrides: Partial<DepositAddressInput> = {}): DepositAddressInput 
 });
 
 const CREDITED = 'Ethereum (ERC-20), Polygon, BNB Chain (BEP-20), Tron (TRC-20), The Open Network';
+const SAME_ADDRESS = 'Ethereum (ERC-20), Polygon, BNB Chain (BEP-20)';
+const OTHERS = 'USDT can also be received on Tron (TRC-20), The Open Network, but with a different address: ask for it by network.';
 const VENUE = 'This is a Ripio app (Wallet) address. Ripio Trade uses different deposit addresses.';
 
 describe('buildDepositAddress', () => {
@@ -50,7 +52,8 @@ describe('buildDepositAddress', () => {
     });
     expect(result.deposit?.address).toBe(walletAddresses[1]?.address);
     expect(result.warnings).toEqual([
-      `Send only USDT over Polygon. Ripio credits USDT only via: ${CREDITED}. Sending over any other network can lose the funds.`,
+      `Send only USDT over Polygon. Ripio credits USDT to this address only via: ${SAME_ADDRESS}. Sending over any other network can lose the funds.`,
+      OTHERS,
       'This same address also exists on Base, Gnosis, where Ripio does not credit USDT.',
       'Ripio lists a minimum of 0.1 USDT on this network; smaller deposits may not be credited.',
       VENUE,
@@ -242,13 +245,19 @@ describe('buildDepositAddress', () => {
       'Ripio lists a maximum of 6 USDT on this network; larger deposits may not be credited.',
     );
   });
+
+  it('names only its own network for an address that exists on one network, with no other-address line', () => {
+    const { warnings } = buildDepositAddress(xrp());
+    expect(warnings).toContain('Send only XRP over Ripple. Ripio credits XRP to this address only via: Ripple. Sending over any other network can lose the funds.');
+    expect(warnings.some((w) => w.includes('different address'))).toBe(false);
+  });
 });
 
 describe('summarizeDepositAddress', () => {
   it('puts the address, the network rule and the verification hint on three lines', () => {
     expect(summarizeDepositAddress(buildDepositAddress(usdt({ network: 'polygon' }))).split('\n')).toEqual([
       `USDT deposit address on Polygon: ${EVM_ADDRESS} (no memo)`,
-      `Send only USDT over Polygon. Ripio credits USDT only via: ${CREDITED}. Sending over any other network can lose the funds.`,
+      `Send only USDT over Polygon. Ripio credits USDT to this address only via: ${SAME_ADDRESS}. Sending over any other network can lose the funds.`,
       'Verify it before sending with ripio_verify_deposit_address.',
     ]);
   });
