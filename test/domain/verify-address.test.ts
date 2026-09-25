@@ -124,10 +124,15 @@ describe('verifyDepositAddress', () => {
   it("rejects a network where the address is not the account's", () => {
     expect(verify({ asset: usdt, network: 'TRC20' })).toMatchObject({
       status: 'wrong_network',
-      verdict:
-        'This address is not assigned to Tron (TRC-20) on your account; ' +
-        'it is your address on Ethereum (ERC-20), Polygon, BNB Chain (BEP-20), Base, Gnosis.',
+      verdict: `This address is not assigned to Tron (TRC-20) on your account. Ripio credits USDT to it only via: ${USDT_VIA}.`,
     });
+  });
+
+  it('never points to a network that does not credit the asset when the one given does not match', () => {
+    expect(verify({ asset: usdt, network: 'TRC20' }).verdict).not.toMatch(/Base|Gnosis/);
+    expect(verify({ asset: { ...usdt, depositsDisabled: true }, network: 'TRC20' }).verdict).toBe(
+      'This address is not assigned to Tron (TRC-20) on your account, and Ripio does not credit USDT to this address on any network.',
+    );
   });
 
   it('asks for one network when the name matches several of the asset', () => {

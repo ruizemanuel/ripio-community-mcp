@@ -132,6 +132,10 @@ export function verifyDepositAddress(input: VerifyAddressInput): VerifyAddress {
     warnings: warnings(),
   });
 
+  const depositsDisabled = input.asset?.depositsDisabled === true;
+  const receivable = new Set(depositsDisabled ? [] : assetNetworks.filter(canReceive).map((n) => n.network.code));
+  const credited = owned.filter((entry) => receivable.has(entry.network.code)).map(labelOf);
+
   let relevant = owned;
   let requestedLabel = '';
   if (input.network !== undefined) {
@@ -145,18 +149,20 @@ export function verifyDepositAddress(input: VerifyAddressInput): VerifyAddress {
     relevant = owned.filter((entry) => entry.network.code === matchedCode || namesNetwork(wanted, entry.network.code, entry.network.name));
     requestedLabel = assetMatch.kind === 'one' ? networkLabel(assetMatch.network) : (relevant[0]?.network.name ?? wanted);
     if (relevant.length === 0) {
-      return answer(
-        'wrong_network',
-        `This address is not assigned to ${requestedLabel} on your account; it is your address on ${owned.map(labelOf).join(', ')}.`,
-      );
+      // With an asset, name only the networks that credit it, so the answer never points the sender to a losing one.
+      const where =
+        input.asset === undefined
+          ? `; it is your address on ${owned.map(labelOf).join(', ')}.`
+          : credited.length > 0
+            ? `. Ripio credits ${input.asset.ticker} to it only via: ${credited.join(', ')}.`
+            : `, and Ripio does not credit ${input.asset.ticker} to this address on any network.`;
+      return answer('wrong_network', `This address is not assigned to ${requestedLabel} on your account${where}`);
     }
   }
 
   if (input.asset !== undefined) {
-    const { ticker, depositsDisabled } = input.asset;
+    const { ticker } = input.asset;
     if (depositsDisabled) notes.push(`Ripio does not accept ${ticker} deposits right now.`);
-    const receivable = new Set(depositsDisabled ? [] : assetNetworks.filter(canReceive).map((n) => n.network.code));
-    const credited = owned.filter((entry) => receivable.has(entry.network.code)).map(labelOf);
     assetFields = {
       asset: ticker,
       credited_via: credited,
