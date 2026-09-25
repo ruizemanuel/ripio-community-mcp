@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.3 — 2026-09-25
+
+- `ripio_list_activity` (Ripio Trade): an entry with an unreadable amount takes its direction from its type instead of reading as incoming, and an entry with a blank currency shows `UNKNOWN` and is flagged.
+- `ripio_list_activity` (Wallet): once a page reaches back past `from`, no `next_cursor` is offered.
+- `ripio_get_transaction` says what each field shows as when both the amount and the asset are missing.
+- A rate limit with a long `Retry-After` says how long Ripio asks to wait, and a redirect from Ripio is reported as such instead of being retried as a network error.
+- Deposit tools: a network where Ripio lists conflicting addresses or memos at the newest version says so, instead of "not assigned yet" in `ripio_get_deposit_address` and `not_yours` in `ripio_verify_deposit_address`, which gets the new status `conflicting`.
+
 ## 0.2.2 — 2026-09-25
 
 - `ripio_get_portfolio` warns about each balance Ripio sends in an unreadable form instead of counting it as 0 in silence, and its summary counts those warnings.
