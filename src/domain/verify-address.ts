@@ -6,6 +6,7 @@ import {
   isEvmAddress,
   memoOf,
   namesNetwork,
+  needsMemo,
   networkLabel,
   resolveNetwork,
   sameAddress,
@@ -106,8 +107,9 @@ export function verifyDepositAddress(input: VerifyAddressInput): VerifyAddress {
 
   const address_networks = owned.map((entry) => ({ code: entry.network.code, name: entry.network.name }));
   const assetNetworks = input.asset?.networks ?? [];
+  const assetNetworkOf = (entry: WalletAddress) => assetNetworks.find((n) => n.network.code === entry.network.code);
   const labelOf = (entry: WalletAddress): string => {
-    const match = assetNetworks.find((n) => n.network.code === entry.network.code);
+    const match = assetNetworkOf(entry);
     return match === undefined ? entry.network.name : networkLabel(match);
   };
   let assetFields: Pick<VerifyAddress, 'asset' | 'credited_via' | 'not_credited_via'> = {};
@@ -157,7 +159,7 @@ export function verifyDepositAddress(input: VerifyAddressInput): VerifyAddress {
     notes.push(`Ripio credits ${ticker} to this address only via: ${credited.join(', ')}. Sending over any other network can lose the funds.`);
   }
 
-  const memoEntry = relevant.find((entry) => entry.network.use_memo === true);
+  const memoEntry = relevant.find((entry) => needsMemo(entry, assetNetworkOf(entry)));
   if (memoEntry !== undefined) {
     const expected = memoOf(memoEntry);
     const label = labelOf(memoEntry);

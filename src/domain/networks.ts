@@ -102,6 +102,16 @@ export function memoOf(entry: WalletAddress): string | null {
   return raw.trim() === '' ? null : raw;
 }
 
+/** Ripio sent a memo/tag for this address. */
+export function memoSent(entry: WalletAddress): boolean {
+  return entry.memo_id !== null && entry.memo_id !== undefined && String(entry.memo_id).trim() !== '';
+}
+
+/** A deposit to this address needs a memo/tag when either side of Ripio's data flags the network, or Ripio sent one. */
+export function needsMemo(entry: WalletAddress, network: WalletCurrencyNetwork | undefined): boolean {
+  return entry.network.use_memo === true || network?.network.use_memo === true || memoSent(entry);
+}
+
 /** A minimum or maximum worth mentioning: a decimal other than zero. */
 export function positiveAmount(raw: number | string | null | undefined): Decimal | undefined {
   const value = toDecimal(raw);

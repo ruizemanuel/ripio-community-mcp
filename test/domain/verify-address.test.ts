@@ -4,6 +4,7 @@ import {
   addressOn,
   EVM_ADDRESS,
   network,
+  receiving,
   TRON_ADDRESS,
   usdtNetworks,
   walletAddresses,
@@ -132,6 +133,19 @@ describe('verifyDepositAddress', () => {
       `The address is yours, but Ripple requires the memo/tag ${XRP_MEMO}; without the exact memo the deposit can be lost.`,
     );
     expect(verifyDepositAddress({ ...xrp, memo: '12345678' }).status).toBe('memo_mismatch');
+  });
+
+  it('checks the memo when only the asset network says the network uses one', () => {
+    const stellar = network('stellar', 'Stellar', { use_memo: null });
+    const asset = { ticker: 'XLM', networks: [receiving({ ...stellar, use_memo: true }, 'Stellar', 0)], depositsDisabled: false };
+    const result = verifyDepositAddress({ address: 'GSYNTHETIC', asset, addresses: [addressOn(stellar, 'GSYNTHETIC', 1, '999')] });
+    expect(result).toMatchObject({ status: 'memo_mismatch', expected_memo: '999' });
+  });
+
+  it('checks a memo Ripio sent even when no network flag asks for one', () => {
+    const stellar = network('stellar', 'Stellar');
+    const result = verifyDepositAddress({ address: 'GSYNTHETIC', addresses: [addressOn(stellar, 'GSYNTHETIC', 1, '999')] });
+    expect(result).toMatchObject({ status: 'memo_mismatch', expected_memo: '999' });
   });
 
   it('notes a memo that the network does not use', () => {

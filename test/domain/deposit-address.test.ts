@@ -178,6 +178,32 @@ describe('buildDepositAddress', () => {
     expect(result.deposit).toMatchObject({ address: '0xNEW', address_version: 3 });
   });
 
+  it('asks for a memo when only the address entry says the network uses one', () => {
+    const stellar = network('stellar', 'Stellar', { use_memo: null });
+    const result = buildDepositAddress({
+      asset: 'XLM',
+      depositsDisabled: false,
+      networks: [receiving(stellar, 'Stellar', 0)],
+      addresses: [addressOn({ ...stellar, use_memo: true }, 'GSYNTHETIC', 1, null)],
+    });
+    expect(result.status).toBe('memo_missing');
+    expect(result.deposit).toBeUndefined();
+  });
+
+  it('relays a memo Ripio sent even when no network flag asks for one', () => {
+    const stellar = network('stellar', 'Stellar');
+    const result = buildDepositAddress({
+      asset: 'XLM',
+      depositsDisabled: false,
+      networks: [receiving(stellar, 'Stellar', 0)],
+      addresses: [addressOn(stellar, 'GSYNTHETIC', 1, '999')],
+    });
+    expect(result.deposit).toMatchObject({ memo: '999', memo_required: true });
+    expect(result.warnings).toContain(
+      'This network requires a memo/tag: include 999 exactly as shown. Without it the deposit cannot be matched to the account and can be lost.',
+    );
+  });
+
   it('mentions a maximum when Ripio lists one', () => {
     const capped = usdtNetworks.map((n) => (n.network.code === 'polygon' ? { ...n, max_amount: '6.00000000' } : n));
     expect(buildDepositAddress(usdt({ network: 'polygon', networks: capped })).warnings).toContain(
