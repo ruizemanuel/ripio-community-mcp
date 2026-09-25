@@ -105,4 +105,26 @@ describe('normalizeTradeStatementEntry', () => {
     expect(normalizeTradeStatementEntry({ ...sell, amount: 'N/A' })).toMatchObject({ amount: '0', unreadable: ['amount'] });
     expect(normalizeTradeStatementEntry(sell)).not.toHaveProperty('unreadable');
   });
+
+  it('takes the direction of an entry with an unreadable amount from its type, never from a 0', () => {
+    const [sell] = tradeStatement.statement;
+    if (sell === undefined) throw new Error('fixture');
+    const direction = (operation: string) => normalizeTradeStatementEntry({ ...sell, amount: 'N/A', operation }).direction;
+    expect(direction('Withdrawal')).toBe('out');
+    expect(direction('Fee')).toBe('out');
+    expect(direction('Deposit')).toBe('in');
+    expect(direction('Sell')).toBe('internal');
+    expect(direction('Something new')).toBe('internal');
+    expect(normalizeTradeStatementEntry(sell).direction).toBe('out');
+  });
+
+  it('flags an entry whose currency Ripio sent blank and trims a padded one', () => {
+    const [sell] = tradeStatement.statement;
+    if (sell === undefined) throw new Error('fixture');
+    expect(normalizeTradeStatementEntry({ ...sell, currency: ' ' })).toMatchObject({ asset: 'UNKNOWN', unreadable: ['asset'] });
+    expect(normalizeTradeStatementEntry({ ...sell, currency: ' btc ' })).toMatchObject({ asset: 'BTC' });
+    expect(normalizeTradeStatementEntry({ ...sell, currency: ' btc ' })).not.toHaveProperty('unreadable');
+    const both = normalizeTradeStatementEntry({ ...sell, currency: '', amount: 'N/A', operation: 'Withdrawal' });
+    expect(both).toMatchObject({ asset: 'UNKNOWN', amount: '0', direction: 'out', unreadable: ['amount', 'asset'] });
+  });
 });

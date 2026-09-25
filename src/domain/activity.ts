@@ -1,7 +1,7 @@
 import * as z from 'zod/v4';
 import type { TradeStatementEntry, WalletTransaction } from '../ripio/schemas.js';
 import { toIsoDate } from './dates.js';
-import { abs, isNegative, isZero, toDecimal } from './money.js';
+import { abs, isNegative, isZero, toDecimal, type Decimal } from './money.js';
 
 export const ActivityItemSchema = z.object({
   id: z.string(),
@@ -93,9 +93,17 @@ export function walletTransactionDetail(tx: WalletTransaction): TransactionDetai
   return detail;
 }
 
+/** Without a readable amount there is no sign to read, so only the entry's type can tell its direction. */
+function tradeDirection(type: string, amount: Decimal | undefined): ActivityItem['direction'] {
+  if (amount !== undefined) return isNegative(amount) ? 'out' : 'in';
+  if (type === 'deposit') return 'in';
+  if (type === 'withdrawal' || type === 'fee') return 'out';
+  return 'internal';
+}
+
 export function normalizeTradeStatementEntry(entry: TradeStatementEntry): ActivityItem {
   const readable = toDecimal(entry.amount);
-  const signed = readable ?? '0';
+  const asset = entry.currency.trim().toUpperCase();
   const operation = entry.operation.toLowerCase();
   const type =
     operation.includes('tax') || operation.includes('fee')
@@ -111,13 +119,14 @@ export function normalizeTradeStatementEntry(entry: TradeStatementEntry): Activi
     id: entry.operation_id,
     date: toIsoDate(entry.date),
     type,
-    direction: isNegative(signed) ? 'out' : 'in',
-    asset: entry.currency.toUpperCase(),
-    amount: abs(signed),
+    direction: tradeDirection(type, readable),
+    asset: asset === '' ? 'UNKNOWN' : asset,
+    amount: abs(readable ?? '0'),
     status: 'completed',
     description: entry.operation,
   };
-  if (readable === undefined) item.unreadable = ['amount'];
+  const unreadable = [...(readable === undefined ? ['amount' as const] : []), ...(asset === '' ? ['asset' as const] : [])];
+  if (unreadable.length > 0) item.unreadable = unreadable;
   return item;
 }
 
