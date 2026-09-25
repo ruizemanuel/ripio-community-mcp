@@ -29,11 +29,11 @@ export function failText(text: string): CallToolResult {
   return { content: [{ type: 'text', text }], isError: true };
 }
 
-/** Permission names as shown in Ripio → Perfil → API. Other endpoints get generic advice. */
+/** Permission names as shown in Ripio → Profile → API (English interface). Other endpoints get generic advice. */
 const SCOPE_BY_PATH: Array<[RegExp, string]> = [
   [/^\/wallet\/balance\//, 'Balance'],
   [/^\/trade\/user\/balances/, 'Balance'],
-  [/^\/trade\/user\/statement/, 'Extracto'],
+  [/^\/trade\/user\/statement/, 'Statement'],
   [/^\/trade\/(orders|user\/trading-fees)/, 'Trading'],
 ];
 
@@ -50,18 +50,18 @@ export function userMessage(error: unknown): string {
     case 'config':
       return error.message;
     case 'auth_token':
-      return 'Ripio rejected the API key (invalid or revoked). Create a new key in Ripio → Perfil → API and update RIPIO_API_KEY / RIPIO_API_SECRET.';
+      return 'Ripio rejected the API key (invalid or revoked). Create a new key in Ripio → Profile → API and update RIPIO_API_KEY / RIPIO_API_SECRET.';
     case 'auth_signature':
       return "Ripio rejected the request signature: RIPIO_API_SECRET doesn't match RIPIO_API_KEY.";
     case 'auth_clock':
       return "Ripio rejected the request time even after re-syncing the clock. Check your computer's date and time.";
     case 'forbidden': {
-      // Keys made with the README's "Solo lectura" preset have every read permission, so a changed IP is likelier.
+      // Keys made with the README's "Read-only" preset have every read permission, so a changed IP is likelier.
       const scope = scopeFor(error.endpoint);
-      const ip = `Ripio denied access to ${error.endpoint ?? 'this endpoint'}. If your key only allows specific IPs, your public IP may have changed: add the new one to the key in Ripio → Perfil → API.`;
+      const ip = `Ripio denied access to ${error.endpoint ?? 'this endpoint'}. If your key only allows specific IPs, your public IP may have changed: add the new one to the key in Ripio → Profile → API.`;
       return scope
         ? `${ip} Otherwise the key lacks the "${scope}" permission.`
-        : `${ip} Otherwise use a key with the full "Solo lectura" preset.`;
+        : `${ip} Otherwise use a key with the full "Read-only" preset.`;
     }
     case 'not_found':
       return `Not found: ${error.endpoint ?? 'the requested resource'}.`;

@@ -36,6 +36,14 @@ describe('repository rules', () => {
     expect(manifest.version).toBe(pkg.version);
   });
 
+  it('keeps English text free of Ripio’s Spanish UI labels (README.es.md is the Spanish guide)', () => {
+    const spanish = /Perfil|Configuración|Solo lectura|Nueva clave|IPs específicas|Sin restricción|Extracto|Consultar/;
+    const english = [...sources, ...['README.md', 'manifest.json'].map((path) => ({ path, text: readFileSync(path, 'utf8') }))];
+    for (const { path, text } of english) {
+      expect(text, path).not.toMatch(spanish);
+    }
+  });
+
   it('commits no secrets or personal data in fixtures', () => {
     for (const path of listFiles('test/fixtures')) {
       const text = readFileSync(path, 'utf8');

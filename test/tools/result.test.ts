@@ -12,9 +12,9 @@ describe('userMessage', () => {
     [error('auth_signature', 'Invalid signature', { status: 401 }), "RIPIO_API_SECRET doesn't match RIPIO_API_KEY"],
     [error('auth_clock', 'Invalid timestamp', { status: 401 }), 'even after re-syncing the clock'],
     [error('forbidden', 'Forbidden', { status: 403, endpoint: '/wallet/balance/' }), 'lacks the "Balance" permission'],
-    [error('forbidden', 'Forbidden', { status: 403, endpoint: '/trade/user/statement' }), 'lacks the "Extracto" permission'],
+    [error('forbidden', 'Forbidden', { status: 403, endpoint: '/trade/user/statement' }), 'lacks the "Statement" permission'],
     [error('forbidden', 'Forbidden', { status: 403, endpoint: '/trade/orders/open' }), 'lacks the "Trading" permission'],
-    [error('forbidden', 'Forbidden', { status: 403, endpoint: '/wallet/transactions/' }), 'full "Solo lectura" preset'],
+    [error('forbidden', 'Forbidden', { status: 403, endpoint: '/wallet/transactions/' }), 'full "Read-only" preset'],
     [error('not_found', 'HTTP 404', { status: 404, endpoint: '/wallet/transactions/9/' }), 'Not found: /wallet/transactions/9/.'],
     [error('bad_request', 'Invalid pair', { status: 400 }), 'Ripio rejected the request: Invalid pair'],
     [error('bad_request', 'rail only applies to source "wallet".'), 'rail only applies to source "wallet".'],
@@ -29,7 +29,7 @@ describe('userMessage', () => {
 });
 
 describe('userMessage for 403', () => {
-  it('leads with a changed public IP, the likeliest cause for a "Solo lectura" key with an allowlist', () => {
+  it('leads with a changed public IP, the likeliest cause for a "Read-only" key with an allowlist', () => {
     const message = userMessage(error('forbidden', 'Forbidden', { status: 403, endpoint: '/wallet/balance/' }));
     expect(message.startsWith('Ripio denied access to /wallet/balance/.')).toBe(true);
     expect(message.indexOf('public IP may have changed')).toBeGreaterThan(-1);
