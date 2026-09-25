@@ -44,7 +44,12 @@ export function createServer(config: Config | RipioApiError, deps: ServerDeps = 
     (config instanceof RipioApiError
       ? config
       : createRipioClient(
-          new RipioHttp({ apiKey: config.apiKey, apiSecret: config.apiSecret, tradeRps: config.tradeRps }),
+          new RipioHttp({
+            apiKey: config.apiKey,
+            apiSecret: config.apiSecret,
+            tradeRps: config.tradeRps,
+            userAgent: `${SERVER_NAME}/${SERVER_VERSION}`,
+          }),
         ));
   const ctx: ToolContext = { client, now: deps.now ?? (() => new Date()), log };
   const server = new McpServer({ name: SERVER_NAME, version: SERVER_VERSION }, { instructions: INSTRUCTIONS });

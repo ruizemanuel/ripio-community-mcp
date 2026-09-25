@@ -31,6 +31,8 @@ export interface RipioHttpOptions {
   tradeRps?: number;
   timeoutMs?: number;
   maxRetries?: number;
+  /** Sent as User-Agent so Ripio can tell this client apart. */
+  userAgent?: string;
 }
 
 export interface GetOptions {
@@ -50,6 +52,7 @@ export class RipioHttp {
   private readonly tradeIntervalMs: number;
   private readonly timeoutMs: number;
   private readonly maxRetries: number;
+  private readonly userAgent: string;
   private clockOffsetMs: number | undefined;
   private clockSync: Promise<number> | undefined;
   private nextTradeSlotMs = 0;
@@ -64,6 +67,7 @@ export class RipioHttp {
     this.tradeIntervalMs = 1000 / (options.tradeRps ?? 1);
     this.timeoutMs = options.timeoutMs ?? 15_000;
     this.maxRetries = options.maxRetries ?? 2;
+    this.userAgent = options.userAgent ?? 'ripio-community-mcp';
   }
 
   async get(path: string, options: GetOptions = {}): Promise<unknown> {
@@ -102,7 +106,7 @@ export class RipioHttp {
     }
     const offset = signed ? await this.clockOffset() : 0;
     if (url.pathname.startsWith('/trade/')) await this.waitForTradeSlot();
-    const headers: Record<string, string> = { Accept: 'application/json' };
+    const headers: Record<string, string> = { Accept: 'application/json', 'User-Agent': this.userAgent };
     if (signed) {
       const timestamp = String(Math.round(this.now() + offset));
       headers.Authorization = this.apiKey;

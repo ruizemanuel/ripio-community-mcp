@@ -191,4 +191,18 @@ describe('RipioHttp', () => {
     await http.get('/wallet/balance/');
     expect(sleeps).toEqual([500]);
   });
+
+  it('identifies itself with a User-Agent', async () => {
+    const { http, calls } = setup((url) => (isServerTime(url) ? serverTimeReply : walletOk({})), {
+      userAgent: 'ripio-community-mcp/9.9.9',
+    });
+    await http.get('/wallet/balance/');
+    expect(calls.map((call) => call.headers['User-Agent'])).toEqual(['ripio-community-mcp/9.9.9', 'ripio-community-mcp/9.9.9']);
+  });
+
+  it('uses the package name as the default User-Agent', async () => {
+    const { http, calls } = setup((url) => (isServerTime(url) ? serverTimeReply : walletOk({})));
+    await http.get('/wallet/balance/');
+    expect(calls[0]?.headers['User-Agent']).toBe('ripio-community-mcp');
+  });
 });
