@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it } from 'vitest';
-import { PAGE_DATE_FILTER_NOTE, TRADE_COVERAGE_NOTE, WALLET_COVERAGE_NOTE } from '../../src/domain/activity.js';
+import { PAGE_DATE_FILTER_NOTE, TRADE_COVERAGE_NOTE, UNREADABLE_NOTE, WALLET_COVERAGE_NOTE } from '../../src/domain/activity.js';
 import { decodeCursor, encodeCursor } from '../../src/domain/cursor.js';
 import type { TradeStatementQuery } from '../../src/ripio/trade.js';
 import type { WalletTransactionsQuery } from '../../src/ripio/wallet.js';
@@ -14,7 +14,7 @@ afterEach(async () => {
 });
 
 const text = (result: { content?: unknown }): string =>
-  ((result.content as Array<{ text?: string }> | undefined) ?? []).map((part) => part.text ?? '').join(' ');
+  ((result.content as Array<{ text?: string }> | undefined) ?? []).map((part) => part.text ?? '').join('\n');
 
 describe('ripio_list_activity', () => {
   it('lists Wallet movements by default with coverage notes and an opaque cursor', async () => {
@@ -97,6 +97,14 @@ describe('ripio_list_activity', () => {
     expect(result.isError).toBe(true);
     expect(text(result)).toContain(message);
   });
+
+  it('says how many movements came with missing or unreadable data', async () => {
+    const broken = { ...walletWithdrawal, amount_from: 'N/A', amount_to: null };
+    harness = await connectTools(fakeClient({ walletTransactions: async () => ({ results: [broken, walletWithdrawal], nc: null, pc: null }) }));
+    const result = await harness.mcp.callTool({ name: 'ripio_list_activity', arguments: {} });
+    expect((result.structuredContent as { coverage_notes: string[] }).coverage_notes).toContain(UNREADABLE_NOTE);
+    expect(text(result).split('\n')[0]).toBe('2 Wallet movements, 1 with missing or unreadable data (see "unreadable").');
+  });
 });
 
 describe('ripio_get_transaction', () => {
@@ -147,5 +155,11 @@ describe('ripio_get_transaction', () => {
     harness = await connectTools(fakeClient({}));
     const result = await harness.mcp.callTool({ name: 'ripio_get_transaction', arguments: { id } });
     expect(result.isError).toBe(true);
+  });
+
+  it('says when Ripio sent the amount missing or unreadable', async () => {
+    harness = await connectTools(fakeClient({ walletTransaction: async () => ({ ...walletWithdrawal, amount_from: 'N/A', amount_to: null }) }));
+    const result = await harness.mcp.callTool({ name: 'ripio_get_transaction', arguments: { id: 1002 } });
+    expect(text(result).split('\n')[0]).toMatch(/ Ripio sent the amount missing or unreadable; it shows as 0\.$/);
   });
 });

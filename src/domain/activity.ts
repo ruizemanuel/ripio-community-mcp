@@ -115,3 +115,10 @@ export function normalizeTradeStatementEntry(entry: TradeStatementEntry): Activi
   if (readable === undefined) item.unreadable = ['amount'];
   return item;
 }
+
+export const UNREADABLE_NOTE =
+  'Some movements came from Ripio with a missing or unreadable amount or asset: they show "0" or "UNKNOWN" and are flagged in "unreadable".';
+
+export function unreadableNotes(items: ActivityItem[]): string[] {
+  return items.some((item) => item.unreadable !== undefined) ? [UNREADABLE_NOTE] : [];
+}

@@ -6,6 +6,7 @@ import {
   normalizeWalletTransaction,
   PAGE_DATE_FILTER_NOTE,
   TRADE_COVERAGE_NOTE,
+  unreadableNotes,
   WALLET_COVERAGE_NOTE,
   type ActivityPage,
 } from '../domain/activity.js';
@@ -22,8 +23,10 @@ const MAX_TRADE_RANGE_MS = 182 * 86_400_000;
 
 function summarize(page: ActivityPage): string {
   const venue = page.source === 'wallet' ? 'Wallet' : 'Ripio Trade';
+  const flagged = page.items.filter((item) => item.unreadable !== undefined).length;
+  const incomplete = flagged === 0 ? '.' : `, ${flagged} with missing or unreadable data (see "unreadable").`;
   const more = page.next_cursor === undefined ? '' : ' More available: pass next_cursor as cursor.';
-  return `${page.items.length} ${venue} movements.${more}`;
+  return `${page.items.length} ${venue} movements${incomplete}${more}`;
 }
 
 export function registerListActivity(server: McpServer, ctx: ToolContext): void {
@@ -67,6 +70,7 @@ export function registerListActivity(server: McpServer, ctx: ToolContext): void 
             .filter((item) => isWithin(item.date, args.from, args.to));
           const notes = [WALLET_COVERAGE_NOTE];
           if (args.from !== undefined || args.to !== undefined) notes.push(PAGE_DATE_FILTER_NOTE);
+          notes.push(...unreadableNotes(items));
           const result: ActivityPage = {
             source,
             items,
@@ -109,7 +113,7 @@ export function registerListActivity(server: McpServer, ctx: ToolContext): void 
           source,
           items,
           next_cursor: currentPage < totalPages ? encodeCursor('trade', String(currentPage + 1)) : undefined,
-          coverage_notes: [TRADE_COVERAGE_NOTE],
+          coverage_notes: [TRADE_COVERAGE_NOTE, ...unreadableNotes(items)],
         };
         return ok(result, summarize(result));
       }),
