@@ -63,6 +63,18 @@ describe('verifyDepositAddress', () => {
     expect(result.verdict).toContain('by 1 character.');
   });
 
+  it('flags a lowercase EVM copy with an extra character as a mistyped copy', () => {
+    const result = verify({ address: `${EVM_ADDRESS.toLowerCase()}.` });
+    expect(result.status).toBe('near_miss');
+    expect(result.near_miss).toEqual({ distance: 1 });
+  });
+
+  it('never reports a near miss by 0 characters for an upper-case 0X prefix', () => {
+    const result = verify({ address: `0X${EVM_ADDRESS.slice(2)}` });
+    expect(result.status).not.toBe('verified');
+    expect(result.near_miss?.distance).not.toBe(0);
+  });
+
   it('is case-sensitive for addresses that are not EVM', () => {
     const tron = addressOn(network('tron', 'Tron'), TRON_ADDRESS);
     expect(verifyDepositAddress({ address: TRON_ADDRESS.toLowerCase(), addresses: [tron] }).status).not.toBe('verified');

@@ -67,7 +67,8 @@ export function levenshtein(a: string, b: string): number {
 function notOwned(address: string, current: WalletAddress[], warnings: string[]): VerifyAddress {
   let best: { candidate: string; distance: number; fold: boolean } | undefined;
   for (const candidate of new Set(current.map((entry) => entry.address.trim()))) {
-    const fold = isEvmAddress(candidate) && isEvmAddress(address);
+    // The case of an EVM address only carries its checksum, so compare a 0x-prefixed copy without it.
+    const fold = isEvmAddress(candidate) && address.startsWith('0x');
     const distance = fold ? levenshtein(address.toLowerCase(), candidate.toLowerCase()) : levenshtein(address, candidate);
     if (best === undefined || distance < best.distance) best = { candidate, distance, fold };
   }
