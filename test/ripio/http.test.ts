@@ -205,4 +205,28 @@ describe('RipioHttp', () => {
     await http.get('/wallet/balance/');
     expect(calls[0]?.headers['User-Agent']).toBe('ripio-community-mcp');
   });
+
+  it('waits out a Retry-After of exactly 10 seconds', async () => {
+    let attempts = 0;
+    const { http, sleeps } = setup((url) => {
+      if (isServerTime(url)) return serverTimeReply;
+      attempts += 1;
+      return attempts === 1
+        ? { status: 429, body: { error_code: 429, message: 'Too many requests' }, headers: { 'retry-after': '10' } }
+        : walletOk({});
+    });
+    await http.get('/wallet/balance/');
+    expect(sleeps).toEqual([10_000]);
+  });
+
+  it('fails fast on a Retry-After of 11 seconds', async () => {
+    const { http, sleeps } = setup((url) =>
+      isServerTime(url)
+        ? serverTimeReply
+        : { status: 429, body: { error_code: 429, message: 'Too many requests' }, headers: { 'retry-after': '11' } },
+    );
+    const error = await rejection(http.get('/wallet/balance/'));
+    expect(error).toMatchObject({ kind: 'rate_limited', retryAfterMs: 11_000 });
+    expect(sleeps).toEqual([]);
+  });
 });

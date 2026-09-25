@@ -1,5 +1,6 @@
 import type { CallToolResult } from '@modelcontextprotocol/server';
 import { RipioApiError } from '../ripio/errors.js';
+import { MAX_RETRY_AFTER_MS } from '../ripio/http.js';
 
 export type Logger = (message: string) => void;
 
@@ -45,6 +46,14 @@ function scopeFor(endpoint: string | undefined): string | undefined {
   return SCOPE_BY_PATH.find(([pattern]) => pattern.test(endpoint))?.[1];
 }
 
+/** A Retry-After as a person would say it: "45 seconds", "about 12 minutes", "about 3 hours". */
+function waitText(ms: number): string {
+  const seconds = Math.ceil(ms / 1000);
+  if (seconds < 120) return `${seconds} seconds`;
+  const minutes = Math.ceil(seconds / 60);
+  return minutes < 120 ? `about ${minutes} minutes` : `about ${Math.ceil(minutes / 60)} hours`;
+}
+
 export function userMessage(error: unknown): string {
   if (!(error instanceof RipioApiError)) {
     return 'Unexpected error while talking to Ripio. Check the server logs (stderr).';
@@ -71,8 +80,13 @@ export function userMessage(error: unknown): string {
       return `Not found: ${error.endpoint ?? 'the requested resource'}.`;
     case 'bad_request':
       return error.status === undefined ? error.message : `Ripio rejected the request: ${error.message}`;
-    case 'rate_limited':
-      return 'Ripio rate limit reached (Ripio Trade allows 1 request/second without verified documents). Try again in a few seconds.';
+    case 'rate_limited': {
+      const wait =
+        error.retryAfterMs !== undefined && error.retryAfterMs > MAX_RETRY_AFTER_MS
+          ? `Ripio asks to wait ${waitText(error.retryAfterMs)} before trying again.`
+          : 'Try again in a few seconds.';
+      return `Ripio rate limit reached (Ripio Trade allows 1 request/second without verified documents). ${wait}`;
+    }
     case 'upstream':
       return `Ripio API unavailable${error.status === undefined ? '' : ` (HTTP ${error.status})`}: ${error.message}. Try again later.`;
     case 'schema':

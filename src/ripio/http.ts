@@ -5,7 +5,7 @@ import { parseRetryAfter, unwrapResponse } from './unwrap.js';
 export const RIPIO_BASE_URL = 'https://api.ripio.com';
 const SERVER_TIME_PATH = '/trade/public/server-time';
 /** The longest Retry-After worth waiting out inside one tool call; beyond it the error goes back to the user. */
-const MAX_RETRY_AFTER_MS = 10_000;
+export const MAX_RETRY_AFTER_MS = 10_000;
 
 export interface FetchResponseLike {
   status: number;

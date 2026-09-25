@@ -64,3 +64,21 @@ describe('fail', () => {
     expect(logs.join('\n')).toContain('wallet: Required');
   });
 });
+
+describe('userMessage for 429', () => {
+  const limited = (retryAfterMs?: number) =>
+    userMessage(error('rate_limited', 'Too many requests', { status: 429, retryAfterMs }));
+
+  it('says how long Ripio asks to wait when that is longer than the server waits by itself', () => {
+    expect(limited(30_000)).toContain('Ripio asks to wait 30 seconds before trying again.');
+    expect(limited(3_600_000)).toContain('Ripio asks to wait about 60 minutes before trying again.');
+    expect(limited(7_200_000)).toContain('Ripio asks to wait about 2 hours before trying again.');
+  });
+
+  it('keeps "a few seconds" when the server already waited, or Ripio gave no usable wait', () => {
+    for (const short of [undefined, 2_000, 10_000]) {
+      expect(limited(short), String(short)).toContain('Try again in a few seconds.');
+      expect(limited(short), String(short)).not.toContain('asks to wait');
+    }
+  });
+});
