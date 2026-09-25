@@ -3,7 +3,8 @@
 ## 0.2.1 — 2026-09-25
 
 - Requests to Ripio never follow redirects, don't wait out a `Retry-After` longer than 10 seconds, and identify themselves with a `User-Agent`.
-- `ripio_get_deposit_address`: a network needs every Ripio flag on to receive; a network where Ripio lists conflicting addresses or memos at the newest version gets no address; negative minimums are ignored; a warning says when Ripio's currency list could not confirm that deposits are open.
+- Both deposit tools: a network needs every Ripio flag on to receive; a network where Ripio lists conflicting addresses or memos at the newest version has no current address; a warning says when Ripio's currency list could not confirm that deposits are open.
+- `ripio_get_deposit_address`: negative minimums and maximums are ignored.
 - `ripio_verify_deposit_address`: ignores spaces around Ripio's own address and memo, flags a lowercase EVM copy with an extra character as a mistyped copy, and explains an ambiguous network or a network the address is not on.
 - A 403 on the deposit endpoints names the "General data" permission.
 - CI and release workflows pin their actions by commit SHA.
