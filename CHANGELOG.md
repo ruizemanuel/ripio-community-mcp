@@ -6,6 +6,7 @@
 - `ripio_list_activity` and `ripio_get_transaction` flag movements whose amount or asset Ripio sent missing or unreadable (`unreadable`), and say so in the summary.
 - `ripio_get_deposit_address` lists only the networks where the address itself credits the asset, and names the networks that need a different address.
 - `ripio_get_deposit_accounts` warns that, depending on the deposit currency set in the Ripio app, pesos sent to the CVU may be converted to crypto.
+
 ## 0.2.1 — 2026-09-25
 
 - Requests to Ripio never follow redirects, don't wait out a `Retry-After` longer than 10 seconds, and identify themselves with a `User-Agent`.
