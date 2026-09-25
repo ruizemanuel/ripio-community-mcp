@@ -7,7 +7,11 @@ import type {
   TradePriceEstimate,
   TradeStatement,
   TradeTicker,
+  WalletAddress,
   WalletBalance,
+  WalletCurrency,
+  WalletCurrencyNetwork,
+  WalletDepositAccount,
   WalletLimit,
   WalletRail,
   WalletRate,
@@ -25,7 +29,11 @@ import {
   type TradeStatementQuery,
 } from './trade.js';
 import {
+  getCurrencyNetworks,
+  getDepositAccounts,
+  getWalletAddresses,
   getWalletBalance,
+  getWalletCurrencies,
   getWalletLimits,
   getWalletRails,
   getWalletRates,
@@ -42,6 +50,10 @@ export interface RipioClient {
   walletTransaction(id: number): Promise<WalletTransaction>;
   walletLimits(query: RailQuery): Promise<WalletLimit[]>;
   walletRails(query: RailQuery): Promise<WalletRail[]>;
+  walletAddresses(): Promise<WalletAddress[]>;
+  walletCurrencyNetworks(currency: string): Promise<WalletCurrencyNetwork[]>;
+  walletCurrencies(): Promise<WalletCurrency[]>;
+  walletDepositAccounts(): Promise<WalletDepositAccount[]>;
   tradeBalances(): Promise<TradeBalance[]>;
   tradeTickers(): Promise<TradeTicker[]>;
   tradeStatement(query: TradeStatementQuery): Promise<TradeStatement>;
@@ -50,7 +62,7 @@ export interface RipioClient {
   tradeOpenOrders(query: OpenOrdersQuery): Promise<TradeOpenOrders>;
 }
 
-export const CACHE_TTL_MS = { rates: 10_000, tickers: 10_000, fees: 300_000 } as const;
+export const CACHE_TTL_MS = { rates: 10_000, tickers: 10_000, fees: 300_000, currencies: 300_000 } as const;
 
 export function createRipioClient(http: RipioHttp, now: () => number = Date.now): RipioClient {
   const cache = new TtlCache(now);
@@ -61,6 +73,11 @@ export function createRipioClient(http: RipioHttp, now: () => number = Date.now)
     walletTransaction: (id) => getWalletTransaction(http, id),
     walletLimits: (query) => getWalletLimits(http, query),
     walletRails: (query) => getWalletRails(http, query),
+    // Addresses can rotate and network status can change, so neither is cached.
+    walletAddresses: () => getWalletAddresses(http),
+    walletCurrencyNetworks: (currency) => getCurrencyNetworks(http, currency),
+    walletCurrencies: () => cache.getOrLoad('wallet-currencies', CACHE_TTL_MS.currencies, () => getWalletCurrencies(http)),
+    walletDepositAccounts: () => getDepositAccounts(http),
     tradeBalances: () => getTradeBalances(http),
     tradeTickers: () => cache.getOrLoad('trade-tickers', CACHE_TTL_MS.tickers, () => getTradeTickers(http)),
     tradeStatement: (query) => getTradeStatement(http, query),

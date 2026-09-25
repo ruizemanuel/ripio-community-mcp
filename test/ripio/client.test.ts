@@ -107,4 +107,89 @@ describe('Ripio client', () => {
     await expect(client.walletRates()).rejects.toBeInstanceOf(RipioApiError);
     await expect(client.walletRates()).resolves.toEqual([]);
   });
+
+  it('returns deposit addresses exactly as Ripio sends them, unfiltered and never cached', async () => {
+    const entry = {
+      address: '0x52908400098527886E0F7030069857D2E4169EE7',
+      memo_id: null,
+      version: 3,
+      network: { id: 7, code: 'polygon', name: 'Polygon', status_tag: 'NORMAL', deliver_time: 1, enabled: true, use_memo: false },
+    };
+    const { client, calls } = setup({ '/wallet/addresses/': () => walletOk([entry]) });
+    const [first] = await client.walletAddresses();
+    expect(first?.address).toBe('0x52908400098527886E0F7030069857D2E4169EE7');
+    expect(first?.network).toEqual({
+      code: 'polygon',
+      name: 'Polygon',
+      status_tag: 'NORMAL',
+      deliver_time: 1,
+      enabled: true,
+      use_memo: false,
+    });
+    await client.walletAddresses();
+    const addressCalls = calls.filter((c) => c.url.pathname === '/wallet/addresses/');
+    expect(addressCalls.map((c) => c.url.search)).toEqual(['', '']);
+  });
+
+  it('keeps a numeric memo as Ripio sends it', async () => {
+    const entry = { address: 'rAddr', memo_id: 123456789, version: 1, network: { code: 'ripple', name: 'Ripple', use_memo: true } };
+    const { client } = setup({ '/wallet/addresses/': () => walletOk([entry]) });
+    await expect(client.walletAddresses()).resolves.toMatchObject([{ memo_id: 123456789 }]);
+  });
+
+  it('asks for the networks of a currency with the ticker in the path and never caches them', async () => {
+    const network = {
+      currency: 'AAPLx',
+      currency_balance_id: 1,
+      network: { id: 3, code: 'ethereum', name: 'Ethereum', status_tag: 'NORMAL', deliver_time: '~15 min', enabled: true, use_memo: false },
+      native_network: true,
+      standard: 'ERC-20',
+      network_standard: 'Ethereum (ERC-20)',
+      fee: '0.50',
+      send: true,
+      receive: true,
+      order: 0,
+      enabled: true,
+      min_amount: null,
+      max_amount: null,
+      is_partial_disabled_send: false,
+      is_partial_disabled_receive: false,
+      messages: [{ level: 'warning', title: 'currency_network_bridge_alert', values: { currency: 'USDC.e' }, location: ['receive'] }],
+    };
+    const path = '/wallet/network/currency-networks/AAPLx/';
+    const { client, calls } = setup({ [path]: () => walletOk([network]) });
+    const [first] = await client.walletCurrencyNetworks('AAPLx');
+    expect(first).toMatchObject({ standard: 'ERC-20', receive: true, network: { code: 'ethereum', deliver_time: '~15 min' } });
+    expect(first?.messages?.[0]).toEqual({
+      level: 'warning',
+      title: 'currency_network_bridge_alert',
+      values: { currency: 'USDC.e' },
+      location: ['receive'],
+    });
+    await client.walletCurrencyNetworks('AAPLx');
+    expect(calls.filter((c) => c.url.pathname === path)).toHaveLength(2);
+  });
+
+  it('caches the currency list for 5 minutes', async () => {
+    const actions = [{ transaction_type: 'deposit', enabled: true, rails: ['crypto', 'ripio'] }];
+    const usdt = { ticker: 'USDT', name: 'Tether', type: 'ERC20_TOKEN', decimals: 6, actions };
+    const { client, calls, clock } = setup({ '/wallet/currencies/': () => walletOk([usdt]) });
+    await expect(client.walletCurrencies()).resolves.toEqual([{ ticker: 'USDT', name: 'Tether', type: 'ERC20_TOKEN', actions }]);
+    await client.walletCurrencies();
+    clock.now += 300_001;
+    await client.walletCurrencies();
+    expect(calls.filter((c) => c.url.pathname === '/wallet/currencies/')).toHaveLength(2);
+  });
+
+  it('parses Ripio deposit accounts', async () => {
+    const account = {
+      type: 'cvu',
+      account_number: 'CVU-SYNTHETIC-0001',
+      account_label: 'synthetic.alias',
+      currency: 'ARS',
+      deposit_constraint: null,
+    };
+    const { client } = setup({ '/wallet/banking/deposit-accounts/': () => walletOk([account]) });
+    await expect(client.walletDepositAccounts()).resolves.toEqual([account]);
+  });
 });

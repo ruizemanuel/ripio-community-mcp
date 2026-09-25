@@ -158,6 +158,74 @@ export const TradeOpenOrdersSchema = z.object({
 export type TradeOpenOrders = z.infer<typeof TradeOpenOrdersSchema>;
 export type TradeOpenOrder = TradeOpenOrders['orders'][number];
 
+const WalletNetworkSchema = z.object({
+  code: z.string(),
+  name: z.string(),
+  status_tag: OptionalString,
+  /** Minutes in practice; Ripio's docs show strings like "~15 min". */
+  deliver_time: OptionalNumeric,
+  enabled: z.boolean().nullish(),
+  use_memo: z.boolean().nullish(),
+});
+export type WalletNetwork = z.infer<typeof WalletNetworkSchema>;
+
+export const WalletAddressesSchema = z.array(
+  z.object({
+    address: z.string(),
+    memo_id: Numeric.nullish(),
+    version: z.number().nullish(),
+    network: WalletNetworkSchema,
+  }),
+);
+export type WalletAddress = z.infer<typeof WalletAddressesSchema>[number];
+
+const NetworkMessageSchema = z.object({
+  level: OptionalString,
+  title: OptionalString,
+  values: z.record(z.string(), z.unknown()).nullish(),
+  location: z.array(z.string()).nullish(),
+});
+export type NetworkMessage = z.infer<typeof NetworkMessageSchema>;
+
+export const WalletCurrencyNetworksSchema = z.array(
+  z.object({
+    network: WalletNetworkSchema,
+    standard: OptionalString,
+    network_standard: OptionalString,
+    receive: z.boolean().nullish(),
+    enabled: z.boolean().nullish(),
+    order: z.number().nullish(),
+    min_amount: OptionalNumeric,
+    max_amount: OptionalNumeric,
+    is_partial_disabled_receive: z.boolean().nullish(),
+    messages: z.array(NetworkMessageSchema).nullish(),
+  }),
+);
+export type WalletCurrencyNetwork = z.infer<typeof WalletCurrencyNetworksSchema>[number];
+
+export const WalletCurrenciesSchema = z.array(
+  z.object({
+    ticker: z.string(),
+    name: OptionalString,
+    type: OptionalString,
+    actions: z
+      .array(z.object({ transaction_type: z.string(), enabled: z.boolean().nullish(), rails: z.array(z.string()).nullish() }))
+      .nullish(),
+  }),
+);
+export type WalletCurrency = z.infer<typeof WalletCurrenciesSchema>[number];
+
+export const WalletDepositAccountsSchema = z.array(
+  z.object({
+    type: z.string(),
+    account_number: z.string(),
+    account_label: OptionalString,
+    currency: z.string(),
+    deposit_constraint: z.object({ same_holder: z.unknown().optional() }).nullish(),
+  }),
+);
+export type WalletDepositAccount = z.infer<typeof WalletDepositAccountsSchema>[number];
+
 /** Validates a Ripio `data` payload. Unknown fields are dropped; missing essentials fail loudly. */
 export function parseResponse<S extends z.ZodType>(schema: S, data: unknown, endpoint: string): z.output<S> {
   const result = schema.safeParse(data);
