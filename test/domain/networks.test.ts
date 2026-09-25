@@ -194,6 +194,13 @@ describe('describeNetworks', () => {
     expect(only?.typical_minutes).toBeUndefined();
   });
 
+  it('drops a negative minimum or maximum', () => {
+    const odd = receiving(network('polygon', 'Polygon'), 'Polygon', 1, { min_amount: '-1', max_amount: '-5.5' });
+    const [only] = describeNetworks('USDT', [odd], []);
+    expect(only?.min_amount).toBeUndefined();
+    expect(only?.max_amount).toBeUndefined();
+  });
+
   it('turns partial outages, congestion and receive notices into notes', () => {
     const polygon = receiving(network('polygon', 'Polygon', { status_tag: 'CONGESTED' }), 'Polygon', 1, {
       is_partial_disabled_receive: true,

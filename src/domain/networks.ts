@@ -1,6 +1,6 @@
 import * as z from 'zod/v4';
 import type { NetworkMessage, WalletAddress, WalletCurrency, WalletCurrencyNetwork } from '../ripio/schemas.js';
-import { isZero, toDecimal, type Decimal } from './money.js';
+import { isNegative, isZero, toDecimal, type Decimal } from './money.js';
 
 export const NetworkInfoSchema = z.object({
   code: z.string(),
@@ -123,10 +123,10 @@ export function needsMemo(entry: WalletAddress, network: WalletCurrencyNetwork |
   return entry.network.use_memo === true || network?.network.use_memo === true || memoSent(entry);
 }
 
-/** A minimum or maximum worth mentioning: a decimal other than zero. */
+/** A minimum or maximum worth mentioning: a decimal above zero. */
 export function positiveAmount(raw: number | string | null | undefined): Decimal | undefined {
   const value = toDecimal(raw);
-  return value !== undefined && !isZero(value) ? value : undefined;
+  return value !== undefined && !isZero(value) && !isNegative(value) ? value : undefined;
 }
 
 function typicalMinutes(raw: number | string | null | undefined): number | undefined {
