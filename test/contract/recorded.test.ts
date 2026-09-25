@@ -2,6 +2,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { buildDepositAddress, DepositAddressSchema } from '../../src/domain/deposit-address.js';
 import { buildPortfolio } from '../../src/domain/portfolio.js';
+import { verifyDepositAddress } from '../../src/domain/verify-address.js';
 import {
   TradeBalancesSchema,
   TradeEstimateSchema,
@@ -75,4 +76,12 @@ describe.skipIf(present.length === 0)('recorded Ripio responses (anonymized)', (
       expect(DepositAddressSchema.safeParse(polygon).success).toBe(true);
     },
   );
+
+  it.skipIf(!existsSync(file('wallet-addresses')))('verifies a recorded address and rejects a changed copy', () => {
+    const addresses = WalletAddressesSchema.parse(read('wallet-addresses'));
+    const [first] = addresses;
+    if (first === undefined) return;
+    expect(verifyDepositAddress({ address: first.address, addresses }).status).toBe('verified');
+    expect(verifyDepositAddress({ address: `${first.address}x`, addresses }).status).toBe('near_miss');
+  });
 });
