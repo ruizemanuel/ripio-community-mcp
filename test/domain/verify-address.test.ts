@@ -241,4 +241,18 @@ describe('verifyDepositAddress', () => {
     }
     expect(verify({ address: TRON_ADDRESS, addresses: tie }).status).toBe('not_yours');
   });
+
+  it('says a conflicting network cannot be verified even when the address is current on other networks', () => {
+    const polygon = network('polygon', 'Polygon');
+    const addresses = [
+      addressOn(network('ethereum', 'Ethereum'), EVM_ADDRESS, 3),
+      addressOn(polygon, EVM_ADDRESS, 3),
+      addressOn(polygon, '0x0000000000000000000000000000000000000001', 3),
+    ];
+    const result = verify({ address: EVM_ADDRESS, network: 'polygon', asset: usdt, addresses });
+    expect(result.status).toBe('conflicting');
+    expect(result.verdict).toContain('Ripio lists this address for your account on Polygon, but together with a different address or memo');
+    expect(result.address_networks).toEqual([{ code: 'ethereum', name: 'Ethereum' }]);
+    expect(verify({ address: EVM_ADDRESS, network: 'ethereum', asset: usdt, addresses }).status).toBe('verified');
+  });
 });

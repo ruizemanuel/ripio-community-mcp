@@ -45,6 +45,12 @@ const NOT_YOURS =
   'This is not one of your Ripio Wallet deposit addresses. Do not send to it expecting it to reach your Ripio app account. ' +
   'Ripio Trade addresses are not checked here.';
 
+/** Ripio lists the address, but in a tie it disagrees with itself on, so nothing on those networks can be verified. */
+const conflictVerdict = (tied: WalletAddress[]): string =>
+  `Ripio lists this address for your account on ${[...new Set(tied.map((entry) => entry.network.name))].join(', ')}, ` +
+  'but together with a different address or memo at the same version, so it cannot be verified. ' +
+  'Do not send to it; check the deposit screen in the Ripio app.';
+
 const ADDRESS_ONLY =
   'Only the address was checked. To confirm that Ripio credits the asset on the network the sender will use, ' +
   'verify again with the asset and network.';
@@ -112,17 +118,7 @@ export function verifyDepositAddress(input: VerifyAddressInput): VerifyAddress {
   const owned = current.filter((entry) => sameAddress(entry.address.trim(), address));
   if (owned.length === 0) {
     const tied = conflictingAddresses(input.addresses).filter((entry) => sameAddress(entry.address.trim(), address));
-    if (tied.length > 0) {
-      const names = [...new Set(tied.map((entry) => entry.network.name))].join(', ');
-      return {
-        status: 'conflicting',
-        verdict:
-          `Ripio lists this address for your account on ${names}, but together with a different address or memo at the same version, ` +
-          'so it cannot be verified. Do not send to it; check the deposit screen in the Ripio app.',
-        address_networks: [],
-        warnings: warnings(),
-      };
-    }
+    if (tied.length > 0) return { status: 'conflicting', verdict: conflictVerdict(tied), address_networks: [], warnings: warnings() };
     return notOwned(address, current, warnings());
   }
 
@@ -164,6 +160,12 @@ export function verifyDepositAddress(input: VerifyAddressInput): VerifyAddress {
     relevant = owned.filter((entry) => entry.network.code === matchedCode || namesNetwork(wanted, entry.network.code, entry.network.name));
     requestedLabel = assetMatch.kind === 'one' ? networkLabel(assetMatch.network) : (relevant[0]?.network.name ?? wanted);
     if (relevant.length === 0) {
+      const tied = conflictingAddresses(input.addresses).filter(
+        (entry) =>
+          sameAddress(entry.address.trim(), address) &&
+          (entry.network.code === matchedCode || namesNetwork(wanted, entry.network.code, entry.network.name)),
+      );
+      if (tied.length > 0) return answer('conflicting', conflictVerdict(tied));
       // With an asset, name only the networks that credit it, so the answer never points the sender to a losing one.
       const where =
         input.asset === undefined
