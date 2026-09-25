@@ -36,6 +36,28 @@ describe('repository rules', () => {
     expect(manifest.version).toBe(pkg.version);
   });
 
+  it('describes the same npm package, name and version to the MCP Registry', () => {
+    const pkg = JSON.parse(readFileSync('package.json', 'utf8')) as { name: string; version: string; mcpName?: string };
+    const server = JSON.parse(readFileSync('server.json', 'utf8')) as {
+      name: string;
+      version: string;
+      description: string;
+      packages: Array<{ registryType: string; identifier: string; version: string; transport: { type: string } }>;
+    };
+    expect(pkg.mcpName).toBe('io.github.ruizemanuel/ripio-community-mcp');
+    expect(server.name).toBe(pkg.mcpName);
+    expect(server.version).toBe(pkg.version);
+    expect(server.description.length).toBeLessThanOrEqual(100);
+    expect(server.packages).toEqual([
+      expect.objectContaining({
+        registryType: 'npm',
+        identifier: pkg.name,
+        version: pkg.version,
+        transport: { type: 'stdio' },
+      }),
+    ]);
+  });
+
   it('keeps English text free of Ripio’s Spanish UI labels (README.es.md is the Spanish guide)', () => {
     const spanish = /Perfil|Configuración|Solo lectura|Nueva clave|IPs específicas|Sin restricción|Extracto|Consultar/;
     const english = [...sources, ...['README.md', 'manifest.json'].map((path) => ({ path, text: readFileSync(path, 'utf8') }))];

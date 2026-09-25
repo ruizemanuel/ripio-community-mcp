@@ -1,5 +1,7 @@
 # ripio-community-mcp (español)
 
+[![npm](https://img.shields.io/npm/v/ripio-community-mcp)](https://www.npmjs.com/package/ripio-community-mcp) [![CI](https://github.com/ruizemanuel/ripio-community-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/ruizemanuel/ripio-community-mcp/actions/workflows/ci.yml) [![License: MIT](https://img.shields.io/npm/l/ripio-community-mcp)](LICENSE)
+
 > **No oficial, hecho por la comunidad, sin relación con Ripio.** Solo lectura. Usalo bajo tu responsabilidad.
 
 Un servidor [MCP](https://modelcontextprotocol.io) que corre en tu compu y le permite a tu asistente de IA (Claude, Cursor, etc.) **leer** tu cuenta de Ripio con **tu propia clave de API**: saldos, movimientos, cotizaciones, límites y órdenes abiertas. No puede mover plata.

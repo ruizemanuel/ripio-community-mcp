@@ -1,5 +1,7 @@
 # ripio-community-mcp
 
+[![npm](https://img.shields.io/npm/v/ripio-community-mcp)](https://www.npmjs.com/package/ripio-community-mcp) [![CI](https://github.com/ruizemanuel/ripio-community-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/ruizemanuel/ripio-community-mcp/actions/workflows/ci.yml) [![License: MIT](https://img.shields.io/npm/l/ripio-community-mcp)](LICENSE)
+
 > **Unofficial, community-built, not affiliated with Ripio.** Read-only. Use at your own risk.
 
 A local [MCP](https://modelcontextprotocol.io) server that lets AI assistants read your [Ripio](https://www.ripio.com) account (balances, activity, prices, limits and open orders) using **your own API key**. It runs on your computer and only talks to `api.ripio.com`.

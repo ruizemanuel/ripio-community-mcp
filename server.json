@@ -1,0 +1,45 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.ruizemanuel/ripio-community-mcp",
+  "title": "Ripio (community, read-only)",
+  "description": "Unofficial, read-only MCP server for your Ripio account: balances, activity, prices and limits.",
+  "repository": {
+    "url": "https://github.com/ruizemanuel/ripio-community-mcp",
+    "source": "github"
+  },
+  "websiteUrl": "https://github.com/ruizemanuel/ripio-community-mcp#readme",
+  "version": "0.1.2",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "ripio-community-mcp",
+      "version": "0.1.2",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "RIPIO_API_KEY",
+          "description": "Your Ripio API key. Create a read-only key in Ripio > Profile > API.",
+          "isRequired": true,
+          "isSecret": true,
+          "format": "string"
+        },
+        {
+          "name": "RIPIO_API_SECRET",
+          "description": "The secret shown once when you create the key.",
+          "isRequired": true,
+          "isSecret": true,
+          "format": "string"
+        },
+        {
+          "name": "RIPIO_TRADE_RPS",
+          "description": "Ripio Trade requests per second: 1 by default, up to 3.5 with verified documents.",
+          "isRequired": false,
+          "isSecret": false,
+          "format": "number"
+        }
+      ]
+    }
+  ]
+}

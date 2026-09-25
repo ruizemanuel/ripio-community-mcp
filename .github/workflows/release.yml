@@ -36,3 +36,19 @@ jobs:
       - run: gh release create "${GITHUB_REF_NAME}" ripio-community-mcp.mcpb --title "${GITHUB_REF_NAME}" --generate-notes
         env:
           GH_TOKEN: ${{ github.token }}
+      # The MCP Registry checks mcpName against npm, so wait until the new version is visible there.
+      - name: Wait for the npm release to be visible
+        run: |
+          for i in $(seq 1 30); do
+            npm view "ripio-community-mcp@${GITHUB_REF_NAME#v}" version --prefer-online && exit 0
+            sleep 10
+          done
+          exit 1
+      # Pinned mcp-publisher, verified against the registry's published checksum; logs in with OIDC (no token).
+      - name: Publish to the MCP Registry
+        run: |
+          curl -fsSL -o mcp-publisher.tar.gz https://github.com/modelcontextprotocol/registry/releases/download/v1.8.1/mcp-publisher_linux_amd64.tar.gz
+          echo "a06c9096dcb9727c13555b6be26c7effa707b01f06a4c561ba7a3635443cf2cc  mcp-publisher.tar.gz" | sha256sum -c -
+          tar xzf mcp-publisher.tar.gz mcp-publisher
+          ./mcp-publisher login github-oidc
+          ./mcp-publisher publish
