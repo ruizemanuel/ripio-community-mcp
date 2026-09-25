@@ -226,6 +226,16 @@ describe('buildDepositAddress', () => {
     expect(buildDepositAddress(usdt({ network: 'polygon', addresses })).status).toBe('no_address');
   });
 
+  it('never hands out an address without its memo because of the order Ripio lists a tie in', () => {
+    const stellar = network('stellar', 'Stellar', { use_memo: false });
+    const tie = [addressOn(stellar, 'GSYNTHETIC', 3, null), addressOn(stellar, 'GSYNTHETIC', 3, JSON.parse('12345678901234567891') as number)];
+    for (const addresses of [tie, [...tie].reverse()]) {
+      const result = buildDepositAddress({ asset: 'XLM', depositsDisabled: false, networks: [receiving(stellar, 'Stellar', 0)], addresses });
+      expect(result.status).not.toBe('ok');
+      expect(result.deposit).toBeUndefined();
+    }
+  });
+
   it('mentions a maximum when Ripio lists one', () => {
     const capped = usdtNetworks.map((n) => (n.network.code === 'polygon' ? { ...n, max_amount: '6.00000000' } : n));
     expect(buildDepositAddress(usdt({ network: 'polygon', networks: capped })).warnings).toContain(

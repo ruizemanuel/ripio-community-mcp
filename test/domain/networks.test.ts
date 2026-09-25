@@ -139,6 +139,17 @@ describe('currentAddresses with a tie at the newest version', () => {
     expect(currentAddresses([addressOn(ripple, 'r1', 1, '11'), addressOn(ripple, 'r1', 1, '22')])).toEqual([]);
   });
 
+  it('keeps no address when tied entries disagree on whether a memo is needed, in either order', () => {
+    const stellar = network('stellar', 'Stellar', { use_memo: false });
+    const plain = addressOn(stellar, 'G1', 3, null);
+    const unreadableMemo = addressOn(stellar, 'G1', 3, JSON.parse('12345678901234567891') as number);
+    const flagged = addressOn({ ...stellar, use_memo: true }, 'G1', 3, null);
+    expect(currentAddresses([plain, unreadableMemo])).toEqual([]);
+    expect(currentAddresses([unreadableMemo, plain])).toEqual([]);
+    expect(currentAddresses([plain, flagged])).toEqual([]);
+    expect(currentAddresses([flagged, plain])).toEqual([]);
+  });
+
   it('keeps a repeated identical entry', () => {
     expect(currentAddresses([addressOn(polygon, '0xA', 3), addressOn(polygon, '0xA', 3)]).map((e) => e.address)).toEqual(['0xA']);
   });

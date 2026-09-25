@@ -98,7 +98,13 @@ export function currentAddresses(addresses: WalletAddress[]): WalletAddress[] {
   return [...newest.values()].flatMap((tied) => {
     const [first] = tied;
     if (first === undefined || first.address.trim() === '') return [];
-    const agree = tied.every((entry) => sameAddress(entry.address, first.address) && memoOf(entry) === memoOf(first));
+    const agree = tied.every(
+      (entry) =>
+        sameAddress(entry.address, first.address) &&
+        memoOf(entry) === memoOf(first) &&
+        memoSent(entry) === memoSent(first) &&
+        (entry.network.use_memo === true) === (first.network.use_memo === true),
+    );
     return agree ? [first] : [];
   });
 }
