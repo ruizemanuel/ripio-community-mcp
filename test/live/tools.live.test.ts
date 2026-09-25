@@ -63,4 +63,20 @@ describe.skipIf(!enabled)('live: every tool against a real account (read-only ke
   it('ripio_list_open_orders', async () => {
     await call('ripio_list_open_orders');
   });
+
+  it('ripio_get_deposit_address and ripio_verify_deposit_address (USDT)', async () => {
+    expect((await call('ripio_get_deposit_address', { asset: 'USDT' })).status).toBe('choose_network');
+    const polygon = await call('ripio_get_deposit_address', { asset: 'USDT', network: 'polygon' });
+    expect(polygon.status).toBe('ok');
+    const address = (polygon.deposit as { address: string }).address;
+    expect((await call('ripio_verify_deposit_address', { address, asset: 'USDT', network: 'polygon' })).status).toBe('verified');
+    const other = address.slice(-1).toLowerCase() === '0' ? '1' : '0';
+    expect((await call('ripio_verify_deposit_address', { address: `${address.slice(0, -1)}${other}` })).status).toBe('near_miss');
+    expect((await call('ripio_get_deposit_address', { asset: 'USDT', network: 'base' })).status).toBe('unsupported_network');
+    expect(['no_address', 'ok']).toContain((await call('ripio_get_deposit_address', { asset: 'USDT', network: 'tron' })).status);
+  });
+
+  it('ripio_get_deposit_accounts', async () => {
+    await call('ripio_get_deposit_accounts');
+  });
 });
