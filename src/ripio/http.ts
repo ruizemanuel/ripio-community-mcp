@@ -13,7 +13,7 @@ export interface FetchResponseLike {
 
 export type FetchLike = (
   url: string,
-  init: { method: 'GET'; headers: Record<string, string>; signal: AbortSignal },
+  init: { method: 'GET'; headers: Record<string, string>; signal: AbortSignal; redirect: 'error' },
 ) => Promise<FetchResponseLike>;
 
 export type Query = Record<string, string | number | undefined>;
@@ -113,7 +113,7 @@ export class RipioHttp {
     let retryAfter: string | null;
     let text: string;
     try {
-      const response = await this.fetchFn(url.toString(), { method: 'GET', headers, signal: controller.signal });
+      const response = await this.fetchFn(url.toString(), { method: 'GET', headers, signal: controller.signal, redirect: 'error' });
       status = response.status;
       retryAfter = response.headers.get('retry-after');
       text = await response.text();

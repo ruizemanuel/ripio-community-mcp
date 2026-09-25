@@ -157,4 +157,10 @@ describe('RipioHttp', () => {
     await http.get('/wallet/rates/', { signed: false });
     expect(sleeps).toEqual([1000, 2000]);
   });
+
+  it('refuses to follow redirects, so a signed request never leaves api.ripio.com', async () => {
+    const { http, calls } = setup((url) => (isServerTime(url) ? serverTimeReply : walletOk({})));
+    await http.get('/wallet/balance/');
+    expect(calls.map((call) => call.redirect)).toEqual(['error', 'error']);
+  });
 });

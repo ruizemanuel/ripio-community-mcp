@@ -6,6 +6,7 @@ export interface RecordedCall {
   url: URL;
   method: string;
   headers: Record<string, string>;
+  redirect: string | undefined;
 }
 
 /** A fetch stand-in: `reply` decides each answer; every call is recorded. */
@@ -13,7 +14,7 @@ export function fakeFetch(reply: (url: URL, index: number) => FakeReply): { fetc
   const calls: RecordedCall[] = [];
   const fetch: FetchLike = (url, init) => {
     const parsed = new URL(url);
-    calls.push({ url: parsed, method: init.method, headers: init.headers });
+    calls.push({ url: parsed, method: init.method, headers: init.headers, redirect: init.redirect });
     const result = reply(parsed, calls.length - 1);
     if (result === 'hang') {
       return new Promise((_, reject) => {
