@@ -1,10 +1,16 @@
 import { afterEach, describe, expect, it } from 'vitest';
-import { PAGE_DATE_FILTER_NOTE, TRADE_COVERAGE_NOTE, UNREADABLE_NOTE, WALLET_COVERAGE_NOTE } from '../../src/domain/activity.js';
+import {
+  PAGE_DATE_FILTER_NOTE,
+  PAGE_REACHED_FROM_NOTE,
+  TRADE_COVERAGE_NOTE,
+  UNREADABLE_NOTE,
+  WALLET_COVERAGE_NOTE,
+} from '../../src/domain/activity.js';
 import { decodeCursor, encodeCursor } from '../../src/domain/cursor.js';
 import type { TradeStatementQuery } from '../../src/ripio/trade.js';
 import type { WalletTransactionsQuery } from '../../src/ripio/wallet.js';
 import { RipioApiError } from '../../src/ripio/errors.js';
-import { tradeStatement, walletTransactionPage, walletWithdrawal } from '../fixtures/synthetic.js';
+import { tradeStatement, walletSwap, walletTransactionPage, walletWithdrawal } from '../fixtures/synthetic.js';
 import { connectTools, fakeClient, type Harness } from '../helpers/harness.js';
 
 let harness: Harness | undefined;
@@ -55,7 +61,7 @@ describe('ripio_list_activity', () => {
     const page = result.structuredContent as { items: Array<{ id: string }>; coverage_notes: string[] };
     expect(queries[0]?.cursor).toBe('ripio-next-token');
     expect(page.items.map((i) => i.id)).toEqual(['1001', '1002']);
-    expect(page.coverage_notes).toEqual([WALLET_COVERAGE_NOTE, PAGE_DATE_FILTER_NOTE]);
+    expect(page.coverage_notes).toEqual([WALLET_COVERAGE_NOTE, PAGE_REACHED_FROM_NOTE]);
   });
 
   it('reads the Ripio Trade statement with UTC ranges and page cursors', async () => {
@@ -113,6 +119,27 @@ describe('ripio_list_activity', () => {
     const result = await harness.mcp.callTool({ name: 'ripio_list_activity', arguments: { source: 'trade' } });
     expect((result.structuredContent as { coverage_notes: string[] }).coverage_notes).toEqual([TRADE_COVERAGE_NOTE, UNREADABLE_NOTE]);
     expect(text(result).split('\n')[0]).toMatch(/^1 Ripio Trade movements, 1 with missing or unreadable data \(see "unreadable"\)\./);
+  });
+
+  it('offers no next Wallet page once the page reaches back past from', async () => {
+    let reply = walletTransactionPage;
+    harness = await connectTools(fakeClient({ walletTransactions: async () => reply }));
+    const { mcp } = harness;
+    const list = async (from: string) =>
+      (await mcp.callTool({ name: 'ripio_list_activity', arguments: { from } })).structuredContent as {
+        next_cursor?: string;
+        coverage_notes: string[];
+      };
+    const reached = await list('2025-06-01');
+    expect(reached.next_cursor).toBeUndefined();
+    expect(reached.coverage_notes).toEqual([WALLET_COVERAGE_NOTE, PAGE_REACHED_FROM_NOTE]);
+    for (const from of ['2025-01-01', '2025-03-10']) {
+      const open = await list(from);
+      expect(open.next_cursor, from).toBeDefined();
+      expect(open.coverage_notes, from).toEqual([WALLET_COVERAGE_NOTE, PAGE_DATE_FILTER_NOTE]);
+    }
+    reply = { ...walletTransactionPage, results: [{ ...walletSwap, created_at: 'not a date' }] };
+    expect((await list('2025-06-01')).next_cursor).toBeDefined();
   });
 });
 

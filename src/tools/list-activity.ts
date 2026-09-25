@@ -5,6 +5,7 @@ import {
   normalizeTradeStatementEntry,
   normalizeWalletTransaction,
   PAGE_DATE_FILTER_NOTE,
+  PAGE_REACHED_FROM_NOTE,
   TRADE_COVERAGE_NOTE,
   unreadableNotes,
   WALLET_COVERAGE_NOTE,
@@ -65,16 +66,18 @@ export function registerListActivity(server: McpServer, ctx: ToolContext): void 
             currency,
             cursor: args.cursor === undefined ? undefined : decodeCursor(args.cursor, 'wallet'),
           });
-          const items = page.results
-            .map(normalizeWalletTransaction)
-            .filter((item) => isWithin(item.date, args.from, args.to));
+          const all = page.results.map(normalizeWalletTransaction);
+          const items = all.filter((item) => isWithin(item.date, args.from, args.to));
+          // Ripio lists Wallet movements newest first: once a page reaches before `from`, older pages hold nothing in range.
+          const reachedFrom = args.from !== undefined && all.some((item) => !isWithin(item.date, args.from));
           const notes = [WALLET_COVERAGE_NOTE];
-          if (args.from !== undefined || args.to !== undefined) notes.push(PAGE_DATE_FILTER_NOTE);
+          if (reachedFrom) notes.push(PAGE_REACHED_FROM_NOTE);
+          else if (args.from !== undefined || args.to !== undefined) notes.push(PAGE_DATE_FILTER_NOTE);
           notes.push(...unreadableNotes(items));
           const result: ActivityPage = {
             source,
             items,
-            next_cursor: page.nc ? encodeCursor('wallet', page.nc) : undefined,
+            next_cursor: page.nc && !reachedFrom ? encodeCursor('wallet', page.nc) : undefined,
             coverage_notes: notes,
           };
           return ok(result, summarize(result));

@@ -144,7 +144,7 @@ Found a vulnerability? See [SECURITY.md](SECURITY.md).
 ## Limitations
 
 - Ripio's API doesn't expose card transactions, in-app buys/sells or bill payments. Since 2026-07-21 they are not in the activity feed.
-- On Wallet activity, `from`/`to` filter the page Ripio returns; follow `next_cursor` for older items.
+- On Wallet activity, `from`/`to` filter the page Ripio returns; follow `next_cursor` for older items. Once a page reaches back past `from`, no `next_cursor` is offered.
 - Values are estimates at Ripio app sell rates, not firm quotes.
 - Tested with Argentinian accounts. Other countries may work for reading, but haven't been tested.
 - Ripio Trade allows 1 request per second without verified documents; the server paces requests for you.

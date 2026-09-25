@@ -42,6 +42,8 @@ export const TRADE_COVERAGE_NOTE =
   'Ripio Trade returns the last 6 months by default and only accepts ranges of up to 182 days: set both from and to for older activity.';
 export const PAGE_DATE_FILTER_NOTE =
   'Date filters are applied to this page only; follow next_cursor for older movements.';
+export const PAGE_REACHED_FROM_NOTE =
+  'Date filters are applied to this page only; it already reaches back past from, so no older page has movements in range.';
 
 const STATUS_NAMES: Record<string, string> = { COM: 'completed', PEN: 'pending', CAN: 'cancelled', REJ: 'rejected' };
 
