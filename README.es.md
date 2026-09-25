@@ -4,7 +4,7 @@
 
 > **No oficial, hecho por la comunidad, sin relación con Ripio.** Solo lectura. Usalo bajo tu responsabilidad.
 
-Un servidor [MCP](https://modelcontextprotocol.io) que corre en tu compu y le permite a tu asistente de IA (Claude, Cursor, etc.) **leer** tu cuenta de Ripio con **tu propia clave de API**: saldos, movimientos, cotizaciones, límites, órdenes abiertas y direcciones de depósito. No puede mover plata.
+Un servidor [MCP](https://modelcontextprotocol.io) que corre en tu compu y le permite a tu asistente de IA (Claude Desktop, Claude Code, Cursor, VS Code y cualquier cliente que corra servidores MCP locales) **leer** tu cuenta de Ripio con **tu propia clave de API**: saldos, movimientos, cotizaciones, límites, órdenes abiertas y direcciones de depósito. No puede mover plata.
 
 English version: [README.md](README.md)
 

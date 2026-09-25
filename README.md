@@ -12,14 +12,14 @@ A local [MCP](https://modelcontextprotocol.io) server that lets AI assistants re
 
 Ripio has an official remote MCP server. If it works for you, use it. This project exists for the cases it doesn't cover:
 
-|                | Official (`api.ripio.com/mcp`)                               | ripio-community-mcp                                               |
-| -------------- | ------------------------------------------------------------ | ----------------------------------------------------------------- |
-| Clients        | Only Ripio-approved OAuth clients (Claude, ChatGPT, VS Code) | Any MCP client: Claude Desktop/Code, Cursor, VS Code, Zed, Cline… |
-| Auth           | OAuth in the browser                                         | Your Ripio API key, stored locally                                |
-| Tools          | ~70 endpoint mirrors                                         | 10 tools that answer whole questions                              |
-| Read-only      | Depends on the permission preset you pick                    | Built in: the server can only send GET requests                   |
-| Tool metadata  | No read-only/destructive annotations                         | Every tool is annotated read-only, with typed output              |
-| Can move funds | Yes, with the Full preset                                    | No                                                                |
+|                | Official (`api.ripio.com/mcp`)                               | ripio-community-mcp                                                                               |
+| -------------- | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------- |
+| Clients        | Only Ripio-approved OAuth clients (Claude, ChatGPT, VS Code) | Any MCP client that runs local (stdio) servers: Claude Desktop/Code, Cursor, VS Code, Zed, Cline… |
+| Auth           | OAuth in the browser                                         | Your Ripio API key, stored locally                                                                |
+| Tools          | ~70 endpoint mirrors                                         | 10 tools that answer whole questions                                                              |
+| Read-only      | Depends on the permission preset you pick                    | Built in: the server can only send GET requests                                                   |
+| Tool metadata  | No read-only/destructive annotations                         | Every tool is annotated read-only, with typed output                                              |
+| Can move funds | Yes, with the Full preset                                    | No                                                                                                |
 
 Neither can show card transactions, in-app buys/sells or bill payments: Ripio's public API doesn't expose them.
 
