@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.0 — 2026-09-25
+
+- `ripio_get_deposit_address`: the Ripio app (Wallet) deposit address for an asset and network, with its memo/tag, the networks that credit the asset and the warnings to relay. It returns no address while the network is unclear, doesn't credit the asset, has deposits disabled or lacks a required memo, and it never creates one.
+- `ripio_verify_deposit_address`: checks by code that an address (and memo) is exactly one of your Wallet deposit addresses on a network that credits the asset, and flags mistyped copies.
+- `ripio_get_deposit_accounts`: Ripio's bank-deposit accounts for fiat (CVU and alias).
+- README: deposit safety.
+
 ## 0.1.3 — 2026-09-24
 
 - Listed in the official MCP Registry as `io.github.ruizemanuel/ripio-community-mcp` (`mcpName` in package.json, `server.json`); releases publish there too.

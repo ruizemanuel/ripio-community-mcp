@@ -17,7 +17,7 @@ import { registerVerifyDepositAddress } from './tools/verify-deposit-address.js'
 import { stderrLogger, type Logger } from './tools/result.js';
 
 export const SERVER_NAME = 'ripio-community-mcp';
-export const SERVER_VERSION = '0.1.3';
+export const SERVER_VERSION = '0.2.0';
 
 export const INSTRUCTIONS = [
   'Unofficial, community-built, read-only MCP server for Ripio (not affiliated with Ripio).',
