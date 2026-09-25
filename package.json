@@ -1,6 +1,6 @@
 {
   "name": "ripio-community-mcp",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Unofficial, community-built, read-only MCP server for Ripio. Not affiliated with Ripio.",
   "license": "MIT",
   "author": "Emanuel Ruiz (https://github.com/ruizemanuel)",

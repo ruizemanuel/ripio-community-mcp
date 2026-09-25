@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.2 — unreleased
+
+- English text (README, bundle descriptions, error messages) uses the labels of Ripio's English interface; the Spanish guide stays in README.es.md.
+
 ## 0.1.1 — 2026-09-24
 
 - `ripio_get_transaction` accepts the id as the string `ripio_list_activity` returns.
