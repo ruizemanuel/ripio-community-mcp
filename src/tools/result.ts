@@ -35,6 +35,7 @@ const SCOPE_BY_PATH: Array<[RegExp, string]> = [
   [/^\/trade\/user\/balances/, 'Balance'],
   [/^\/trade\/user\/statement/, 'Statement'],
   [/^\/trade\/(orders|user\/trading-fees)/, 'Trading'],
+  [/^\/wallet\/(addresses|network\/currency-networks|currencies|banking\/deposit-accounts)\//, 'General data'],
 ];
 
 const DEPOSIT_ACCOUNTS_NOTE = ' Ripio only offers deposit accounts through the API to users in Argentina and Brazil.';

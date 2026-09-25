@@ -41,6 +41,15 @@ describe('userMessage for 403', () => {
     expect(message).toContain('public IP may have changed');
     expect(message.endsWith('Ripio only offers deposit accounts through the API to users in Argentina and Brazil.')).toBe(true);
   });
+
+  it('names the "General data" permission for the deposit endpoints', () => {
+    const endpoints = ['/wallet/addresses/', '/wallet/network/currency-networks/USDT/', '/wallet/currencies/', '/wallet/banking/deposit-accounts/'];
+    for (const endpoint of endpoints) {
+      expect(userMessage(error('forbidden', 'Forbidden', { status: 403, endpoint })), endpoint).toContain(
+        'Otherwise the key lacks the "General data" permission.',
+      );
+    }
+  });
 });
 
 describe('fail', () => {
