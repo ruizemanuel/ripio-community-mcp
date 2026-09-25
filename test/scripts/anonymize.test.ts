@@ -78,4 +78,62 @@ describe('anonymize', () => {
     };
     expect(anonymize(input, half)).toEqual(input);
   });
+
+  it('gives the same placeholder to the same value, so a shared address stays shared', () => {
+    const out = anonymize(
+      [
+        { address: '0xSAME', network: { code: 'polygon', name: 'Polygon' } },
+        { address: '0xSAME', network: { code: 'base', name: 'Base' } },
+        { address: 'TOTHER', network: { code: 'tron', name: 'Tron' } },
+      ],
+      half,
+    ) as Array<{ address: string; network: { code: string; name: string } }>;
+    expect(out[0]?.address).toMatch(/^redacted-\d+$/);
+    expect(out[1]?.address).toBe(out[0]?.address);
+    expect(out[2]?.address).not.toBe(out[0]?.address);
+    expect(out.map((entry) => entry.network)).toEqual([
+      { code: 'polygon', name: 'Polygon' },
+      { code: 'base', name: 'Base' },
+      { code: 'tron', name: 'Tron' },
+    ]);
+  });
+
+  it('redacts deposit addresses, memos, account numbers and labels but keeps public network metadata', () => {
+    const publicPart = {
+      network: { code: 'ripple', name: 'Ripple', status_tag: 'NORMAL', deliver_time: 1, use_memo: true },
+      standard: 'TRC-20',
+      network_standard: 'Tron (TRC-20)',
+      order: 5,
+      fee_tag: 'LOW',
+      messages: [{ level: 'warning', title: 'currency_network_bridge_alert', values: { currency: 'USDC.e' }, location: ['receive'] }],
+      ticker: 'USDT',
+      decimals: 6,
+      color: '#53AE94',
+      categories: ['Stablecoin'],
+      actions: [{ transaction_type: 'deposit', enabled: true, rails: ['crypto', 'ripio'] }],
+    };
+    const privatePart = {
+      address: 'rSomeAddress',
+      memo_id: 123456789,
+      account_number: 'CVU-0001',
+      account_label: 'my.alias',
+      deposit_constraint: { same_holder: '123.456.789-00' },
+    };
+    const out = anonymize({ ...publicPart, ...privatePart }, half) as typeof publicPart & typeof privatePart;
+    expect(out).toMatchObject(publicPart);
+    for (const value of [out.address, out.account_number, out.account_label, out.deposit_constraint.same_holder]) {
+      expect(value).toMatch(/^redacted-\d+$/);
+    }
+    expect(out.memo_id).not.toBe(123456789);
+  });
+
+  it('keeps a name only next to a network code or a ticker', () => {
+    const out = anonymize(
+      { name: 'Jane Doe', network: { code: 'tron', name: 'Tron' }, currency: { ticker: 'USDT', name: 'Tether' } },
+      half,
+    ) as { name: string; network: { name: string }; currency: { name: string } };
+    expect(out.name).toMatch(/^redacted-\d+$/);
+    expect(out.network.name).toBe('Tron');
+    expect(out.currency.name).toBe('Tether');
+  });
 });

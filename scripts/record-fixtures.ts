@@ -24,11 +24,25 @@ const targets: Array<[name: string, path: string, options?: GetOptions]> = [
   ['trade-fees', '/trade/user/trading-fees', { query: { pair: 'USDT_ARS' } }],
   ['trade-open-orders', '/trade/orders/open'],
   ['trade-estimate-usdt-ars', '/trade/orders/estimate-price/USDT_ARS', { query: { amount: 1, side: 'buy' } }],
+  ['wallet-addresses', '/wallet/addresses/'],
+  ['wallet-currency-networks-usdt', '/wallet/network/currency-networks/USDT/'],
+  ['wallet-currency-networks-usdc', '/wallet/network/currency-networks/USDC/'],
+  ['wallet-currencies', '/wallet/currencies/'],
+  ['wallet-deposit-accounts', '/wallet/banking/deposit-accounts/'],
 ];
+
+// `npm run record-fixtures -- wallet-addresses …` records only the named targets and leaves the other files alone.
+const only = new Set(process.argv.slice(2));
+const unknown = [...only].filter((name) => !targets.some(([target]) => target === name));
+if (unknown.length > 0) {
+  console.error(`unknown targets: ${unknown.join(', ')}`);
+  process.exit(1);
+}
+const selected = only.size === 0 ? targets : targets.filter(([name]) => only.has(name));
 
 const outDir = 'test/fixtures/recorded';
 mkdirSync(outDir, { recursive: true });
-for (const [name, path, options] of targets) {
+for (const [name, path, options] of selected) {
   try {
     const data = await http.get(path, options);
     writeFileSync(`${outDir}/${name}.json`, `${JSON.stringify(anonymize(data), null, 2)}\n`);

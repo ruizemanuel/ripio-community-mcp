@@ -74,4 +74,10 @@ describe('repository rules', () => {
       expect(text, path).not.toMatch(/\b\d{22}\b/);
     }
   });
+
+  it('commits no real deposit addresses in recorded fixtures', () => {
+    for (const path of listFiles('test/fixtures/recorded')) {
+      expect(readFileSync(path, 'utf8'), path).not.toMatch(/\b0x[0-9a-fA-F]{40}\b/);
+    }
+  });
 });
