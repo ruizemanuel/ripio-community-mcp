@@ -1,5 +1,6 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
+import { buildDepositAddress, DepositAddressSchema } from '../../src/domain/deposit-address.js';
 import { buildPortfolio } from '../../src/domain/portfolio.js';
 import {
   TradeBalancesSchema,
@@ -61,4 +62,17 @@ describe.skipIf(present.length === 0)('recorded Ripio responses (anonymized)', (
       expect(entry.address).toMatch(/^redacted-\d+$/);
     }
   });
+
+  it.skipIf(!existsSync(file('wallet-addresses')) || !existsSync(file('wallet-currency-networks-usdt')))(
+    'builds USDT deposit answers from recorded data',
+    () => {
+      const addresses = WalletAddressesSchema.parse(read('wallet-addresses'));
+      const networks = WalletCurrencyNetworksSchema.parse(read('wallet-currency-networks-usdt'));
+      const input = { asset: 'USDT', depositsDisabled: false, networks, addresses };
+      expect(buildDepositAddress(input).status).toBe('choose_network');
+      const polygon = buildDepositAddress({ ...input, network: 'polygon' });
+      expect(['ok', 'no_address']).toContain(polygon.status);
+      expect(DepositAddressSchema.safeParse(polygon).success).toBe(true);
+    },
+  );
 });
