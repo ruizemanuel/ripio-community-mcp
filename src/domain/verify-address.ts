@@ -66,7 +66,7 @@ export function levenshtein(a: string, b: string): number {
 
 function notOwned(address: string, current: WalletAddress[], warnings: string[]): VerifyAddress {
   let best: { candidate: string; distance: number; fold: boolean } | undefined;
-  for (const candidate of new Set(current.map((entry) => entry.address))) {
+  for (const candidate of new Set(current.map((entry) => entry.address.trim()))) {
     const fold = isEvmAddress(candidate) && isEvmAddress(address);
     const distance = fold ? levenshtein(address.toLowerCase(), candidate.toLowerCase()) : levenshtein(address, candidate);
     if (best === undefined || distance < best.distance) best = { candidate, distance, fold };
@@ -75,7 +75,7 @@ function notOwned(address: string, current: WalletAddress[], warnings: string[])
     return { status: 'not_yours', verdict: NOT_YOURS, address_networks: [], warnings };
   }
   const { candidate, distance, fold } = best;
-  const networks = current.filter((entry) => entry.address === candidate).map((entry) => entry.network.name);
+  const networks = current.filter((entry) => entry.address.trim() === candidate).map((entry) => entry.network.name);
   const positions: number[] = [];
   if (address.length === candidate.length) {
     for (let i = 0; i < address.length; i += 1) {
@@ -107,7 +107,7 @@ export function verifyDepositAddress(input: VerifyAddressInput): VerifyAddress {
   const notes: string[] = [];
   const warnings = (): string[] => [...(input.warnings ?? []), ...notes, VENUE_WARNING];
   const current = currentAddresses(input.addresses);
-  const owned = current.filter((entry) => sameAddress(entry.address, address));
+  const owned = current.filter((entry) => sameAddress(entry.address.trim(), address));
   if (owned.length === 0) return notOwned(address, current, warnings());
 
   const address_networks = owned.map((entry) => ({ code: entry.network.code, name: entry.network.name }));
@@ -172,7 +172,7 @@ export function verifyDepositAddress(input: VerifyAddressInput): VerifyAddress {
       const returned = memoSent(memoEntry) ? 'returned one for this address that cannot be read exactly' : 'returned none for this address';
       return answer('memo_mismatch', `${label} requires a memo/tag, but Ripio ${returned}: do not send; check the Ripio app.`);
     }
-    if (memo !== expected) {
+    if (memo !== expected.trim()) {
       return answer(
         'memo_mismatch',
         `The address is yours, but ${label} requires the memo/tag ${expected}; without the exact memo the deposit can be lost.`,

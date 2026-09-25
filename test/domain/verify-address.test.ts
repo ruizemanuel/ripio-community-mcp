@@ -175,6 +175,13 @@ describe('verifyDepositAddress', () => {
     expect(verify({ asset: usdt }).warnings).not.toContain(addressOnly);
   });
 
+  it("ignores spaces around Ripio's own address and memo when comparing", () => {
+    const tron = addressOn(network('tron', 'Tron'), ` ${TRON_ADDRESS} `);
+    expect(verifyDepositAddress({ address: TRON_ADDRESS, addresses: [tron] }).status).toBe('verified');
+    const padded = addressOn(xrpAddress.network, XRP_ADDRESS, 1, ` ${XRP_MEMO} `);
+    expect(verifyDepositAddress({ address: XRP_ADDRESS, memo: XRP_MEMO, addresses: [padded] }).status).toBe('verified');
+  });
+
   it('puts caller warnings first', () => {
     const checkFailed = 'Could not check whether Ripio accepts USDT deposits app-wide.';
     expect(verify({ warnings: [checkFailed] }).warnings[0]).toBe(checkFailed);
