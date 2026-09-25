@@ -43,11 +43,13 @@ Neither can show card transactions, in-app buys/sells or bill payments: Ripio's 
 A wrong network, a missing memo or one mistyped character can lose the funds, so deposits get extra layers:
 
 1. **Exact output.** Addresses and memos come back exactly as Ripio sends them. The server never creates an address: if Ripio hasn't assigned one for a network yet, it tells you to start that deposit in the Ripio app.
-2. **Network rules.** `ripio_get_deposit_address` returns no address until the network is clear, and says which networks credit the asset. Your EVM address is the same on every EVM network, but Ripio only credits each asset on some of them.
+2. **Network rules.** `ripio_get_deposit_address` returns no address until the network is clear. Along with the address, it names the networks where that same address credits the asset, and the ones that need a different address. Your EVM address is the same on every EVM network, but Ripio only credits each asset on some of them.
 3. **Verification by code.** The assistant retypes what it reads, and a language model can, rarely, change a character. Before sending, paste the address you will actually use and ask to verify it: `ripio_verify_deposit_address` compares it character by character with your real addresses and flags near misses.
 4. **Network checksums.** Most networks (EVM with mixed-case addresses, Tron, Bitcoin, XRP, Stellar…) have a checksum, so the sending wallet usually rejects a mistyped address. Solana addresses have none.
 
 For large amounts, send a small test deposit first. These are Ripio app (Wallet) addresses; Ripio Trade uses different ones.
+
+Pesos sent to your CVU are credited in the deposit currency set in your Ripio app profile: if that is a crypto, they are converted automatically. `ripio_get_deposit_accounts` reminds you of this.
 
 ## Setup
 
@@ -134,7 +136,7 @@ claude mcp add --env RIPIO_API_KEY=your-key --env RIPIO_API_SECRET=your-secret -
 ## Security model
 
 - **Read-only by construction.** The HTTP client can only send GET requests, and a test fails the build if anything else appears in the code. Even a key with write permissions can't be used to move funds through this server.
-- **One host.** It only talks to `https://api.ripio.com`. No telemetry.
+- **One host.** It only talks to `https://api.ripio.com` and never follows redirects, so a signed request can't end up anywhere else. No telemetry.
 - **Your keys stay yours.** They are read from environment variables (or your keychain, in Claude Desktop) and never logged or sent to the model.
 - **Least privilege.** Use a "Read-only" key with an IP allowlist. Revoke it any time in Ripio → Profile → API.
 - **Verifiable builds.** npm releases are published from GitHub Actions with [provenance](https://docs.npmjs.com/generating-provenance-statements).
