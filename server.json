@@ -8,12 +8,12 @@
     "source": "github"
   },
   "websiteUrl": "https://github.com/ruizemanuel/ripio-community-mcp#readme",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "packages": [
     {
       "registryType": "npm",
       "identifier": "ripio-community-mcp",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "transport": {
         "type": "stdio"
       },
