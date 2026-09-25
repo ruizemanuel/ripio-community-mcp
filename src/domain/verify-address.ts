@@ -44,6 +44,10 @@ const NOT_YOURS =
   'This is not one of your Ripio Wallet deposit addresses. Do not send to it expecting it to reach your Ripio app account. ' +
   'Ripio Trade addresses are not checked here.';
 
+const ADDRESS_ONLY =
+  'Only the address was checked. To confirm that Ripio credits the asset on the network the sender will use, ' +
+  'verify again with the asset and network.';
+
 const plural = (count: number, word: string): string => `${word}${count === 1 ? '' : 's'}`;
 
 /** Edit distance: insertions, deletions and substitutions. */
@@ -179,6 +183,7 @@ export function verifyDepositAddress(input: VerifyAddressInput): VerifyAddress {
     notes.push('This network does not use a memo/tag; the one given is not needed.');
   }
 
+  if (input.asset === undefined) notes.push(ADDRESS_ONLY);
   const creditedText =
     input.asset === undefined ? '' : ` and Ripio credits ${input.asset.ticker} to it via ${(assetFields.credited_via ?? []).join(', ')}`;
   return answer('verified', `This is exactly one of your Ripio Wallet deposit addresses${creditedText}.`);

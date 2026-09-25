@@ -15,7 +15,7 @@ export function registerVerifyDepositAddress(server: McpServer, ctx: ToolContext
       description:
         "Checks with code, character by character, that an address (and memo/tag) someone is about to send to is exactly one of the account's " +
         'Ripio app (Wallet) deposit addresses, on a network that credits the asset, and flags mistyped copies. Pass the address as pasted ' +
-        'from where it will actually be used. Ripio Trade addresses are not checked.',
+        'from where it will actually be used, plus the asset and network the sender will use. Ripio Trade addresses are not checked.',
       inputSchema: z.object({
         address: z.string().min(1).max(200).describe('The address exactly as pasted.'),
         asset: TickerInput.optional(),

@@ -167,6 +167,14 @@ describe('verifyDepositAddress', () => {
     expect(verify({ memo: '42' }).warnings).toContain('This network does not use a memo/tag; the one given is not needed.');
   });
 
+  it('says that only the address was checked when no asset is given', () => {
+    const addressOnly =
+      'Only the address was checked. To confirm that Ripio credits the asset on the network the sender will use, ' +
+      'verify again with the asset and network.';
+    expect(verify().warnings).toContain(addressOnly);
+    expect(verify({ asset: usdt }).warnings).not.toContain(addressOnly);
+  });
+
   it('puts caller warnings first', () => {
     const checkFailed = 'Could not check whether Ripio accepts USDT deposits app-wide.';
     expect(verify({ warnings: [checkFailed] }).warnings[0]).toBe(checkFailed);
