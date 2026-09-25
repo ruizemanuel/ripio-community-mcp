@@ -10,7 +10,7 @@ import { decodeCursor, encodeCursor } from '../../src/domain/cursor.js';
 import type { TradeStatementQuery } from '../../src/ripio/trade.js';
 import type { WalletTransactionsQuery } from '../../src/ripio/wallet.js';
 import { RipioApiError } from '../../src/ripio/errors.js';
-import { tradeStatement, walletSwap, walletTransactionPage, walletWithdrawal } from '../fixtures/synthetic.js';
+import { tradeStatement, walletDeposit, walletSwap, walletTransactionPage, walletWithdrawal } from '../fixtures/synthetic.js';
 import { connectTools, fakeClient, type Harness } from '../helpers/harness.js';
 
 let harness: Harness | undefined;
@@ -140,6 +140,22 @@ describe('ripio_list_activity', () => {
     }
     reply = { ...walletTransactionPage, results: [{ ...walletSwap, created_at: 'not a date' }] };
     expect((await list('2025-06-01')).next_cursor).toBeDefined();
+  });
+
+  it('judges the Wallet cut-off by the oldest movement on the page, and never by to', async () => {
+    let reply = walletTransactionPage;
+    harness = await connectTools(fakeClient({ walletTransactions: async () => reply }));
+    const { mcp } = harness;
+    const list = async (args: Record<string, string>) =>
+      (await mcp.callTool({ name: 'ripio_list_activity', arguments: args })).structuredContent as {
+        next_cursor?: string;
+        coverage_notes: string[];
+      };
+    const beforeTo = await list({ from: '2025-01-01', to: '2025-02-28' });
+    expect(beforeTo.next_cursor).toBeDefined();
+    expect(beforeTo.coverage_notes).toEqual([WALLET_COVERAGE_NOTE, PAGE_DATE_FILTER_NOTE]);
+    reply = { ...walletTransactionPage, results: [walletSwap, walletDeposit, walletWithdrawal] };
+    expect((await list({ from: '2025-06-01' })).next_cursor).toBeDefined();
   });
 });
 

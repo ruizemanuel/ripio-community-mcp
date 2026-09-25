@@ -68,8 +68,10 @@ export function registerListActivity(server: McpServer, ctx: ToolContext): void 
           });
           const all = page.results.map(normalizeWalletTransaction);
           const items = all.filter((item) => isWithin(item.date, args.from, args.to));
-          // Ripio lists Wallet movements newest first: once a page reaches before `from`, older pages hold nothing in range.
-          const reachedFrom = args.from !== undefined && all.some((item) => !isWithin(item.date, args.from));
+          // Ripio lists Wallet movements newest first: once the page's oldest movement is before `from`, older pages hold nothing
+          // in range. Only the oldest one counts, so a single movement out of order never hides the rest.
+          const oldest = all.findLast((item) => !Number.isNaN(Date.parse(item.date)));
+          const reachedFrom = args.from !== undefined && oldest !== undefined && !isWithin(oldest.date, args.from);
           const notes = [WALLET_COVERAGE_NOTE];
           if (reachedFrom) notes.push(PAGE_REACHED_FROM_NOTE);
           else if (args.from !== undefined || args.to !== undefined) notes.push(PAGE_DATE_FILTER_NOTE);
