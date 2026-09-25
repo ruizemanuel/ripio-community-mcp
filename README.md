@@ -105,7 +105,7 @@ claude mcp add --env RIPIO_API_KEY=your-key --env RIPIO_API_SECRET=your-secret -
 }
 ```
 
-**Any other MCP client** (Cline, Continue…): add a stdio server with command `npx`, arguments `-y ripio-community-mcp`, and the environment variables below. See your client's MCP documentation for where that goes.
+**Any other MCP client** (Cline, Continue…): add a stdio server with command `npx`, arguments `-y ripio-community-mcp`, and the environment variables below. See your client's MCP documentation for where that goes. It is also listed in the official [MCP Registry](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.ruizemanuel/ripio-community-mcp) as `io.github.ruizemanuel/ripio-community-mcp`, so clients that install from the registry can find it there.
 
 > **Windows:** if the server doesn't start (for example, "Connection closed"), launch `npx` through `cmd`. In Claude Code, end the command with `-- cmd /c npx -y ripio-community-mcp`; in JSON configs, use `"command": "cmd"` and `"args": ["/c", "npx", "-y", "ripio-community-mcp"]`.
 

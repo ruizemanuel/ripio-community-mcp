@@ -47,7 +47,7 @@ claude mcp add --env RIPIO_API_KEY=tu-clave --env RIPIO_API_SECRET=tu-secret --t
 }
 ```
 
-Para VS Code, Zed y otros clientes, mirá la sección "Add it to your client" del [README en inglés](README.md#2-add-it-to-your-client).
+Para VS Code, Zed y otros clientes, mirá la sección "Add it to your client" del [README en inglés](README.md#2-add-it-to-your-client). También está en el [MCP Registry](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.ruizemanuel/ripio-community-mcp) oficial como `io.github.ruizemanuel/ripio-community-mcp`, para los clientes que instalan desde ahí.
 
 > **Windows:** si el servidor no arranca (por ejemplo, "Connection closed"), ejecutá `npx` a través de `cmd`. En Claude Code, terminá el comando con `-- cmd /c npx -y ripio-community-mcp`; en las configuraciones JSON, usá `"command": "cmd"` y `"args": ["/c", "npx", "-y", "ripio-community-mcp"]`.
 
