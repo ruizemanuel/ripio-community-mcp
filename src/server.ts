@@ -5,6 +5,7 @@ import { RipioApiError } from './ripio/errors.js';
 import { RipioHttp } from './ripio/http.js';
 import type { ToolContext } from './tools/context.js';
 import { registerEstimateTrade } from './tools/estimate-trade.js';
+import { registerGetDepositAccounts } from './tools/get-deposit-accounts.js';
 import { registerGetDepositAddress } from './tools/get-deposit-address.js';
 import { registerGetLimits } from './tools/get-limits.js';
 import { registerGetPortfolio } from './tools/get-portfolio.js';
@@ -56,5 +57,6 @@ export function createServer(config: Config | RipioApiError, deps: ServerDeps = 
   registerListOpenOrders(server, ctx);
   registerGetDepositAddress(server, ctx);
   registerVerifyDepositAddress(server, ctx);
+  registerGetDepositAccounts(server, ctx);
   return server;
 }

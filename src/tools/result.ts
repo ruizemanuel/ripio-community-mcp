@@ -37,6 +37,8 @@ const SCOPE_BY_PATH: Array<[RegExp, string]> = [
   [/^\/trade\/(orders|user\/trading-fees)/, 'Trading'],
 ];
 
+const DEPOSIT_ACCOUNTS_NOTE = ' Ripio only offers deposit accounts through the API to users in Argentina and Brazil.';
+
 function scopeFor(endpoint: string | undefined): string | undefined {
   if (endpoint === undefined) return undefined;
   return SCOPE_BY_PATH.find(([pattern]) => pattern.test(endpoint))?.[1];
@@ -59,9 +61,10 @@ export function userMessage(error: unknown): string {
       // Keys made with the README's "Read-only" preset have every read permission, so a changed IP is likelier.
       const scope = scopeFor(error.endpoint);
       const ip = `Ripio denied access to ${error.endpoint ?? 'this endpoint'}. If your key only allows specific IPs, your public IP may have changed: add the new one to the key in Ripio → Profile → API.`;
-      return scope
+      const message = scope
         ? `${ip} Otherwise the key lacks the "${scope}" permission.`
         : `${ip} Otherwise use a key with the full "Read-only" preset.`;
+      return error.endpoint?.startsWith('/wallet/banking/deposit-accounts/') ? `${message}${DEPOSIT_ACCOUNTS_NOTE}` : message;
     }
     case 'not_found':
       return `Not found: ${error.endpoint ?? 'the requested resource'}.`;

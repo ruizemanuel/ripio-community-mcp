@@ -18,7 +18,7 @@ describe('stdio entrypoint', () => {
     await client.connect(transport);
     try {
       const { tools } = await client.listTools();
-      expect(tools).toHaveLength(9);
+      expect(tools).toHaveLength(10);
       const result = await client.callTool({ name: 'ripio_get_portfolio', arguments: {} });
       expect(result.isError).toBe(true);
       expect(JSON.stringify(result.content)).toContain('RIPIO_API_KEY and RIPIO_API_SECRET not set');

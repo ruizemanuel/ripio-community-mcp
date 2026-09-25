@@ -1,5 +1,6 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
+import { buildDepositAccounts } from '../../src/domain/deposit-accounts.js';
 import { buildDepositAddress, DepositAddressSchema } from '../../src/domain/deposit-address.js';
 import { buildPortfolio } from '../../src/domain/portfolio.js';
 import { verifyDepositAddress } from '../../src/domain/verify-address.js';
@@ -83,5 +84,11 @@ describe.skipIf(present.length === 0)('recorded Ripio responses (anonymized)', (
     if (first === undefined) return;
     expect(verifyDepositAddress({ address: first.address, addresses }).status).toBe('verified');
     expect(verifyDepositAddress({ address: `${first.address}x`, addresses }).status).toBe('near_miss');
+  });
+
+  it.skipIf(!existsSync(file('wallet-deposit-accounts')))('builds deposit accounts from recorded data', () => {
+    const accounts = WalletDepositAccountsSchema.parse(read('wallet-deposit-accounts'));
+    const result = buildDepositAccounts(accounts);
+    for (const account of result.accounts) expect(account.account_number).toMatch(/^redacted-\d+$/);
   });
 });

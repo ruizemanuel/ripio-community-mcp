@@ -9,6 +9,7 @@ describe('tool catalog', () => {
       const { tools } = await harness.mcp.listTools();
       expect(tools.map((t) => t.name).sort()).toEqual([
         'ripio_estimate_trade',
+        'ripio_get_deposit_accounts',
         'ripio_get_deposit_address',
         'ripio_get_limits',
         'ripio_get_portfolio',

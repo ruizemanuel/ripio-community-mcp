@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import type { RipioClient } from '../../src/ripio/client.js';
 import { RipioApiError } from '../../src/ripio/errors.js';
-import { EVM_ADDRESS, usdtNetworks, walletAddresses, walletCurrencies } from '../fixtures/deposits.js';
+import { cvuAccount, EVM_ADDRESS, usdtNetworks, walletAddresses, walletCurrencies } from '../fixtures/deposits.js';
 import { connectTools, fakeClient, type Harness } from '../helpers/harness.js';
 
 let harness: Harness | undefined;
@@ -137,5 +137,31 @@ describe('ripio_verify_deposit_address', () => {
     harness = await connectTools(fakeClient({}));
     const result = await harness.mcp.callTool({ name: 'ripio_verify_deposit_address', arguments: { address: '' } });
     expect(result.isError).toBe(true);
+  });
+});
+
+describe('ripio_get_deposit_accounts', () => {
+  it('returns the CVU and alias with the transfer rule', async () => {
+    harness = await connectTools(fakeClient({ walletDepositAccounts: async () => [cvuAccount] }));
+    const result = await harness.mcp.callTool({ name: 'ripio_get_deposit_accounts', arguments: {} });
+    expect(result.isError).toBeFalsy();
+    expect(result.structuredContent).toMatchObject({ accounts: [{ type: 'cvu', account_number: 'CVU-SYNTHETIC-0001' }] });
+    expect(text(result).split('\n')[0]).toBe('CVU (ARS): CVU-SYNTHETIC-0001, alias synthetic.alias.ripio');
+  });
+
+  it('explains a missing deposit account instead of a bare 404', async () => {
+    harness = await connectTools(fakeClient({ walletDepositAccounts: reject('not_found', '/wallet/banking/deposit-accounts/') }));
+    const result = await harness.mcp.callTool({ name: 'ripio_get_deposit_accounts', arguments: {} });
+    expect(result.isError).toBe(true);
+    expect(text(result)).toBe(
+      "Ripio has no deposit account provisioned for this user; Ripio's documentation says to contact Ripio support.",
+    );
+  });
+
+  it('adds the country rule to a 403', async () => {
+    harness = await connectTools(fakeClient({ walletDepositAccounts: reject('forbidden', '/wallet/banking/deposit-accounts/') }));
+    const result = await harness.mcp.callTool({ name: 'ripio_get_deposit_accounts', arguments: {} });
+    expect(result.isError).toBe(true);
+    expect(text(result)).toContain('users in Argentina and Brazil');
   });
 });

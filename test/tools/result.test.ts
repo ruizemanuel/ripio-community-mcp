@@ -35,6 +35,12 @@ describe('userMessage for 403', () => {
     expect(message.indexOf('public IP may have changed')).toBeGreaterThan(-1);
     expect(message.indexOf('public IP may have changed')).toBeLessThan(message.indexOf('permission'));
   });
+
+  it('adds the country rule to a 403 on deposit accounts', () => {
+    const message = userMessage(error('forbidden', 'Forbidden', { status: 403, endpoint: '/wallet/banking/deposit-accounts/' }));
+    expect(message).toContain('public IP may have changed');
+    expect(message.endsWith('Ripio only offers deposit accounts through the API to users in Argentina and Brazil.')).toBe(true);
+  });
 });
 
 describe('fail', () => {
