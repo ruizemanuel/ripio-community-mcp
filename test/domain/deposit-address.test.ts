@@ -220,6 +220,12 @@ describe('buildDepositAddress', () => {
     );
   });
 
+  it('hands out no address when Ripio lists two at the newest version', () => {
+    const polygon = network('polygon', 'Polygon');
+    const addresses = [addressOn(polygon, EVM_ADDRESS, 3), addressOn(polygon, '0x0000000000000000000000000000000000000001', 3)];
+    expect(buildDepositAddress(usdt({ network: 'polygon', addresses })).status).toBe('no_address');
+  });
+
   it('mentions a maximum when Ripio lists one', () => {
     const capped = usdtNetworks.map((n) => (n.network.code === 'polygon' ? { ...n, max_amount: '6.00000000' } : n));
     expect(buildDepositAddress(usdt({ network: 'polygon', networks: capped })).warnings).toContain(

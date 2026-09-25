@@ -125,6 +125,25 @@ describe('currentAddresses when the newest address is blank', () => {
   });
 });
 
+describe('currentAddresses with a tie at the newest version', () => {
+  const polygon = network('polygon', 'Polygon');
+  const ripple = network('ripple', 'Ripple', { use_memo: true });
+
+  it('keeps no address when two different ones share the newest version, in either order', () => {
+    expect(currentAddresses([addressOn(polygon, '0xA', 3), addressOn(polygon, '0xB', 3)])).toEqual([]);
+    expect(currentAddresses([addressOn(polygon, '0xA', 3), addressOn(polygon, '', 3)])).toEqual([]);
+    expect(currentAddresses([addressOn(polygon, '', 3), addressOn(polygon, '0xA', 3)])).toEqual([]);
+  });
+
+  it('keeps no address when the same address has two memos at the newest version', () => {
+    expect(currentAddresses([addressOn(ripple, 'r1', 1, '11'), addressOn(ripple, 'r1', 1, '22')])).toEqual([]);
+  });
+
+  it('keeps a repeated identical entry', () => {
+    expect(currentAddresses([addressOn(polygon, '0xA', 3), addressOn(polygon, '0xA', 3)]).map((e) => e.address)).toEqual(['0xA']);
+  });
+});
+
 describe('memoOf', () => {
   const ripple = network('ripple', 'Ripple', { use_memo: true });
 

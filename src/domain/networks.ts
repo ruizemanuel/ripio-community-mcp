@@ -84,16 +84,23 @@ export function sameAddress(a: string, b: string): boolean {
 }
 
 /**
- * The newest (highest `version`) address of each network. A network whose newest address is blank has none: an older
- * address it replaced is never used instead.
+ * The newest (highest `version`) address of each network. A network has none when its newest address is blank, or when
+ * Ripio lists different addresses or memos at that version: an older address is never used instead.
  */
 export function currentAddresses(addresses: WalletAddress[]): WalletAddress[] {
-  const byCode = new Map<string, WalletAddress>();
+  const newest = new Map<string, WalletAddress[]>();
   for (const entry of addresses) {
-    const best = byCode.get(entry.network.code);
-    if (best === undefined || (entry.version ?? 0) > (best.version ?? 0)) byCode.set(entry.network.code, entry);
+    const tied = newest.get(entry.network.code);
+    const top = tied?.[0]?.version ?? 0;
+    if (tied === undefined || (entry.version ?? 0) > top) newest.set(entry.network.code, [entry]);
+    else if ((entry.version ?? 0) === top) tied.push(entry);
   }
-  return [...byCode.values()].filter((entry) => entry.address.trim() !== '');
+  return [...newest.values()].flatMap((tied) => {
+    const [first] = tied;
+    if (first === undefined || first.address.trim() === '') return [];
+    const agree = tied.every((entry) => sameAddress(entry.address, first.address) && memoOf(entry) === memoOf(first));
+    return agree ? [first] : [];
+  });
 }
 
 /**
