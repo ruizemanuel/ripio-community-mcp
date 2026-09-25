@@ -2,7 +2,7 @@
   "manifest_version": "0.4",
   "name": "ripio-community-mcp",
   "display_name": "Ripio (community, read-only)",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Read your Ripio account from Claude: balances, activity, prices, limits, open orders and deposit addresses. Unofficial and read-only.",
   "long_description": "Unofficial, community-built MCP server for Ripio. Not affiliated with Ripio. It uses your own Ripio API key (create a read-only key in Ripio > Profile > API), runs on your computer and can only send read (GET) requests to api.ripio.com.",
   "author": { "name": "Emanuel Ruiz", "url": "https://github.com/ruizemanuel" },
