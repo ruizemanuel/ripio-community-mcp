@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.3 — unreleased
+
+- Listed in the official MCP Registry as `io.github.ruizemanuel/ripio-community-mcp` (`mcpName` in package.json, `server.json`); releases publish there too.
+- README badges for npm, CI and license.
+
 ## 0.1.2 — 2026-09-24
 
 - English text (README, bundle descriptions, error messages) uses the labels of Ripio's English interface; the Spanish guide stays in README.es.md.
