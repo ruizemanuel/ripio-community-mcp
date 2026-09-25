@@ -62,6 +62,17 @@ describe('normalizeWalletTransaction', () => {
     expect(noAsset).toMatchObject({ asset: 'UNKNOWN', unreadable: ['asset'] });
     expect(normalizeWalletTransaction(walletDeposit)).not.toHaveProperty('unreadable');
   });
+
+  it('never shows the amount of one side under the currency of the other', () => {
+    expect(normalizeWalletTransaction({ ...walletSwap, from_currency: null })).toMatchObject({ asset: 'UNKNOWN', amount: '100', unreadable: ['asset'] });
+    expect(normalizeWalletTransaction({ ...walletSwap, from_currency: ' ' })).toMatchObject({ asset: 'UNKNOWN', unreadable: ['asset'] });
+    expect(normalizeWalletTransaction({ ...walletSwap, amount_from: 'N/A' })).toMatchObject({ asset: 'USDT', amount: '0', unreadable: ['amount'] });
+    const converted = normalizeWalletTransaction({ ...walletDeposit, to_currency: null, amount_to: '0.0001' });
+    expect(converted).toMatchObject({ asset: 'UNKNOWN', amount: '0.0001', unreadable: ['asset'] });
+    const netOnly = normalizeWalletTransaction({ ...walletWithdrawal, amount_from: null });
+    expect(netOnly).toMatchObject({ asset: 'USDT', amount: '24.5' });
+    expect(netOnly).not.toHaveProperty('unreadable');
+  });
 });
 
 describe('normalizeTradeStatementEntry', () => {

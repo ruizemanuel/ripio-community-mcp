@@ -53,18 +53,23 @@ export function normalizeWalletTransaction(tx: WalletTransaction): ActivityItem 
   const type = tx.transaction_type.toLowerCase();
   const incoming = type === 'deposit';
   const direction: ActivityItem['direction'] = incoming ? 'in' : type === 'withdrawal' ? 'out' : 'internal';
-  const currency = [incoming ? tx.to_currency : tx.from_currency, tx.to_currency, tx.from_currency].find((c) => c?.trim());
-  const amount = toDecimal(incoming ? tx.amount_to : tx.amount_from) ?? toDecimal(tx.amount_to);
+  const [asset, otherAsset] = (incoming ? [tx.to_currency, tx.from_currency] : [tx.from_currency, tx.to_currency]).map((c) => {
+    const trimmed = c?.trim();
+    return trimmed ? trimmed.toUpperCase() : undefined;
+  });
+  // Borrow amount_to (a withdrawal's net amount) only when both sides carry the same asset: a swap's sides differ.
+  const sameAsset = asset !== undefined && asset === otherAsset;
+  const amount = toDecimal(incoming ? tx.amount_to : tx.amount_from) ?? (sameAsset ? toDecimal(tx.amount_to) : undefined);
   const item: ActivityItem = {
     id: String(tx.id),
     date: toIsoDate(tx.created_at),
     type,
     direction,
-    asset: currency?.toUpperCase() ?? 'UNKNOWN',
+    asset: asset ?? 'UNKNOWN',
     amount: amount ?? '0',
     status: statusName(tx.status),
   };
-  const unreadable = [...(amount === undefined ? ['amount' as const] : []), ...(currency === undefined ? ['asset' as const] : [])];
+  const unreadable = [...(amount === undefined ? ['amount' as const] : []), ...(asset === undefined ? ['asset' as const] : [])];
   if (unreadable.length > 0) item.unreadable = unreadable;
   const fee = toDecimal(tx.fee);
   if (fee !== undefined && !isZero(fee)) {
