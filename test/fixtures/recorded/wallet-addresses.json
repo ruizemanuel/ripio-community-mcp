@@ -1,0 +1,198 @@
+[
+  {
+    "address": "redacted-1",
+    "memo_id": null,
+    "network": {
+      "id": 100002,
+      "code": "ethereum",
+      "name": "Ethereum",
+      "status_tag": "NORMAL",
+      "deliver_time": 10,
+      "enabled": true,
+      "use_memo": false
+    },
+    "version": 100003
+  },
+  {
+    "address": "redacted-1",
+    "memo_id": null,
+    "network": {
+      "id": 100004,
+      "code": "avalanche",
+      "name": "AVAX C-Chain",
+      "status_tag": "NORMAL",
+      "deliver_time": 1,
+      "enabled": true,
+      "use_memo": false
+    },
+    "version": 100003
+  },
+  {
+    "address": "redacted-1",
+    "memo_id": null,
+    "network": {
+      "id": 100005,
+      "code": "rootstock",
+      "name": "Rootstock",
+      "status_tag": "NORMAL",
+      "deliver_time": 7,
+      "enabled": true,
+      "use_memo": false
+    },
+    "version": 100003
+  },
+  {
+    "address": "redacted-1",
+    "memo_id": null,
+    "network": {
+      "id": 100006,
+      "code": "gnosis",
+      "name": "Gnosis",
+      "status_tag": "NORMAL",
+      "deliver_time": 2,
+      "enabled": true,
+      "use_memo": false
+    },
+    "version": 100003
+  },
+  {
+    "address": "redacted-1",
+    "memo_id": null,
+    "network": {
+      "id": 100007,
+      "code": "base",
+      "name": "Base",
+      "status_tag": "NORMAL",
+      "deliver_time": 2,
+      "enabled": true,
+      "use_memo": false
+    },
+    "version": 100003
+  },
+  {
+    "address": "redacted-1",
+    "memo_id": null,
+    "network": {
+      "id": 100008,
+      "code": "zksync",
+      "name": "zkSync Era",
+      "status_tag": "NORMAL",
+      "deliver_time": 3,
+      "enabled": true,
+      "use_memo": false
+    },
+    "version": 100003
+  },
+  {
+    "address": "redacted-1",
+    "memo_id": null,
+    "network": {
+      "id": 100009,
+      "code": "arbitrum",
+      "name": "Arbitrum",
+      "status_tag": "NORMAL",
+      "deliver_time": 1,
+      "enabled": true,
+      "use_memo": false
+    },
+    "version": 100003
+  },
+  {
+    "address": "redacted-1",
+    "memo_id": null,
+    "network": {
+      "id": 100010,
+      "code": "celo",
+      "name": "Celo",
+      "status_tag": "NORMAL",
+      "deliver_time": 1,
+      "enabled": true,
+      "use_memo": false
+    },
+    "version": 100003
+  },
+  {
+    "address": "redacted-1",
+    "memo_id": null,
+    "network": {
+      "id": 100011,
+      "code": "bsc",
+      "name": "BNB Chain",
+      "status_tag": "NORMAL",
+      "deliver_time": 1,
+      "enabled": true,
+      "use_memo": false
+    },
+    "version": 100003
+  },
+  {
+    "address": "redacted-1",
+    "memo_id": null,
+    "network": {
+      "id": 100012,
+      "code": "polygon",
+      "name": "Polygon",
+      "status_tag": "NORMAL",
+      "deliver_time": 1,
+      "enabled": true,
+      "use_memo": false
+    },
+    "version": 100003
+  },
+  {
+    "address": "redacted-1",
+    "memo_id": null,
+    "network": {
+      "id": 100013,
+      "code": "optimism",
+      "name": "Optimism",
+      "status_tag": "NORMAL",
+      "deliver_time": 2,
+      "enabled": true,
+      "use_memo": false
+    },
+    "version": 100003
+  },
+  {
+    "address": "redacted-1",
+    "memo_id": null,
+    "network": {
+      "id": 100014,
+      "code": "worldchain",
+      "name": "Worldchain",
+      "status_tag": "NORMAL",
+      "deliver_time": 2,
+      "enabled": true,
+      "use_memo": false
+    },
+    "version": 100003
+  },
+  {
+    "address": "redacted-1",
+    "memo_id": null,
+    "network": {
+      "id": 100015,
+      "code": "plasma",
+      "name": "Plasma",
+      "status_tag": "NORMAL",
+      "deliver_time": 1,
+      "enabled": true,
+      "use_memo": false
+    },
+    "version": 100003
+  },
+  {
+    "address": "redacted-1",
+    "memo_id": null,
+    "network": {
+      "id": 100016,
+      "code": "hyperevm",
+      "name": "HyperEVM",
+      "status_tag": "NORMAL",
+      "deliver_time": 1,
+      "enabled": true,
+      "use_memo": false
+    },
+    "version": 100003
+  }
+]

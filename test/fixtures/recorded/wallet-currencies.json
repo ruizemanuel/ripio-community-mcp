@@ -1,0 +1,3261 @@
+[
+  {
+    "ticker": "UXD",
+    "name": "Criptodólar",
+    "symbol": "UXD",
+    "decimals": 18,
+    "type": "CRYPTO",
+    "color": "#0EFBB4",
+    "categories": [
+      "🔥 Criptodólar",
+      "Stablecoin",
+      "Blockchain"
+    ],
+    "currency_balance_id": 87,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": false,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "ARS",
+    "name": "Pesos Argentinos",
+    "symbol": "ARS",
+    "decimals": 2,
+    "type": "FIAT",
+    "color": "",
+    "categories": [],
+    "currency_balance_id": 8,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "bank",
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "bank",
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "WARS",
+    "name": "wARS",
+    "symbol": "WARS",
+    "decimals": 2,
+    "type": "CRYPTO",
+    "color": "#FFFFFF",
+    "categories": [
+      "Stablecoin",
+      "WFIAT"
+    ],
+    "currency_balance_id": 1998,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "WAL30RD",
+    "name": "Bono AL30-RD",
+    "symbol": "WAL30RD",
+    "decimals": 0,
+    "type": "CRYPTO",
+    "color": "#FFFFFF",
+    "categories": [
+      "Other"
+    ],
+    "currency_balance_id": 9798,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "BTC",
+    "name": "Bitcoin",
+    "symbol": "BTC",
+    "decimals": 8,
+    "type": "CRYPTO",
+    "color": "#feb402",
+    "categories": [
+      "Blockchain"
+    ],
+    "currency_balance_id": 56,
+    "is_favorite": true,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "ETH",
+    "name": "Ethereum",
+    "symbol": "ETH",
+    "decimals": 18,
+    "type": "CRYPTO",
+    "color": "#3C3C3D",
+    "categories": [
+      "Blockchain"
+    ],
+    "currency_balance_id": 90,
+    "is_favorite": true,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "WBRL",
+    "name": "wBRL",
+    "symbol": "WBRL",
+    "decimals": 2,
+    "type": "CRYPTO",
+    "color": "#FFFFFF",
+    "categories": [
+      "Stablecoin",
+      "WFIAT"
+    ],
+    "currency_balance_id": 4756,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "USDT",
+    "name": "Tether",
+    "symbol": "USDT",
+    "decimals": 6,
+    "type": "ERC20_TOKEN",
+    "color": "#53AE94",
+    "categories": [
+      "Stablecoin"
+    ],
+    "currency_balance_id": 16,
+    "is_favorite": true,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "USDC",
+    "name": "USD Coin",
+    "symbol": "USDC",
+    "decimals": 6,
+    "type": "ERC20_TOKEN",
+    "color": "#2776ca",
+    "categories": [
+      "Stablecoin"
+    ],
+    "currency_balance_id": 12,
+    "is_favorite": true,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "AAPLx",
+    "name": "Apple xStock",
+    "symbol": "AAPLx",
+    "decimals": 8,
+    "type": "XTOKEN",
+    "color": "#FFFFFF",
+    "categories": [
+      "xStocks"
+    ],
+    "currency_balance_id": 9167,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "AAVE",
+    "name": "Aave",
+    "symbol": "AAVE",
+    "decimals": 18,
+    "type": "ERC20_TOKEN",
+    "color": "#373D51",
+    "categories": [
+      "DeFi"
+    ],
+    "currency_balance_id": 2,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "ACX",
+    "name": "Across Protocol",
+    "symbol": "ACX",
+    "decimals": 18,
+    "type": "CRYPTO",
+    "color": "#FFFFFF",
+    "categories": [
+      "Blockchain"
+    ],
+    "currency_balance_id": 3,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": false,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "ADA",
+    "name": "Cardano",
+    "symbol": "ADA",
+    "decimals": 6,
+    "type": "CRYPTO",
+    "color": "#0033AD",
+    "categories": [
+      "Blockchain"
+    ],
+    "currency_balance_id": 10,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "ALGO",
+    "name": "Algorand",
+    "symbol": "ALGO",
+    "decimals": 6,
+    "type": "CRYPTO",
+    "color": "#404040",
+    "categories": [
+      "Blockchain",
+      "DeFi"
+    ],
+    "currency_balance_id": 8,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "ARB",
+    "name": "Arbitrum",
+    "symbol": "ARB",
+    "decimals": 18,
+    "type": "CRYPTO",
+    "color": "#003AF1",
+    "categories": [
+      "Blockchain",
+      "DeFi"
+    ],
+    "currency_balance_id": 5,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "ATOM",
+    "name": "Cosmos",
+    "symbol": "ATOM",
+    "decimals": 18,
+    "type": "CRYPTO",
+    "color": "#2E3148",
+    "categories": [
+      "Blockchain"
+    ],
+    "currency_balance_id": 3,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "AVAX",
+    "name": "Avalanche",
+    "symbol": "AVAX",
+    "decimals": 18,
+    "type": "CRYPTO",
+    "color": "#E84142",
+    "categories": [
+      "Blockchain"
+    ],
+    "currency_balance_id": 4,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "AXS",
+    "name": "Axie Infinity",
+    "symbol": "AXS",
+    "decimals": 18,
+    "type": "ERC20_TOKEN",
+    "color": "#0055D5",
+    "categories": [
+      "Gaming",
+      "NFT"
+    ],
+    "currency_balance_id": 3,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "BAT",
+    "name": "Basic Attention Token",
+    "symbol": "BAT",
+    "decimals": 18,
+    "type": "ERC20_TOKEN",
+    "color": "#FF5000",
+    "categories": [
+      "Others"
+    ],
+    "currency_balance_id": 48,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "BCH",
+    "name": "Bitcoin Cash",
+    "symbol": "BCH",
+    "decimals": 8,
+    "type": "CRYPTO",
+    "color": "#0AC18E",
+    "categories": [
+      "Blockchain"
+    ],
+    "currency_balance_id": 80,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "BNB",
+    "name": "Binance Coin",
+    "symbol": "BNB",
+    "decimals": 18,
+    "type": "CRYPTO",
+    "color": null,
+    "categories": [],
+    "currency_balance_id": 29,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "CELO",
+    "name": "Celo",
+    "symbol": "CELO",
+    "decimals": 18,
+    "type": "CRYPTO",
+    "color": null,
+    "categories": [],
+    "currency_balance_id": 66,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "CHZ",
+    "name": "Chiliz",
+    "symbol": "CHZ",
+    "decimals": 18,
+    "type": "ERC20_TOKEN",
+    "color": "#CD0124",
+    "categories": [
+      "Gaming",
+      "NFT"
+    ],
+    "currency_balance_id": 54,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "CRCLx",
+    "name": "Circle xStock",
+    "symbol": "CRCLx",
+    "decimals": 8,
+    "type": "XTOKEN",
+    "color": "#FFFFFF",
+    "categories": [
+      "xStocks"
+    ],
+    "currency_balance_id": 5201,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "DAI",
+    "name": "Dai",
+    "symbol": "DAI",
+    "decimals": 18,
+    "type": "ERC20_TOKEN",
+    "color": "#fd024f",
+    "categories": [
+      "Stablecoin"
+    ],
+    "currency_balance_id": 87,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "DOGE",
+    "name": "Dogecoin",
+    "symbol": "DOGE",
+    "decimals": 8,
+    "type": "CRYPTO",
+    "color": "#c2a633",
+    "categories": [
+      "Blockchain",
+      "Meme"
+    ],
+    "currency_balance_id": 51,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "DOT",
+    "name": "Polkadot",
+    "symbol": "DOT",
+    "decimals": 10,
+    "type": "CRYPTO",
+    "color": "#1E1E1E",
+    "categories": [
+      "Blockchain"
+    ],
+    "currency_balance_id": 91,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "ENA",
+    "name": "Ethena",
+    "symbol": "ENA",
+    "decimals": 18,
+    "type": "CRYPTO",
+    "color": "#FFFFFF",
+    "categories": [
+      "Blockchain"
+    ],
+    "currency_balance_id": 26,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "ENS",
+    "name": "Ethereum Name Service",
+    "symbol": "ENS",
+    "decimals": 18,
+    "type": "ERC20_TOKEN",
+    "color": "#76A5F3",
+    "categories": [
+      "Community",
+      "Others"
+    ],
+    "currency_balance_id": 35,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "ETHFI",
+    "name": "ether.fi",
+    "symbol": "ETHFI",
+    "decimals": 18,
+    "type": "CRYPTO",
+    "color": "#FFFFFF",
+    "categories": [
+      "Blockchain"
+    ],
+    "currency_balance_id": 63,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "GLDx",
+    "name": "Gold xStock",
+    "symbol": "GLDx",
+    "decimals": 8,
+    "type": "XTOKEN",
+    "color": "#FFFFFF",
+    "categories": [
+      "xStocks"
+    ],
+    "currency_balance_id": 5117,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "GNO",
+    "name": "Gnosis",
+    "symbol": "GNO",
+    "decimals": 18,
+    "type": "CRYPTO",
+    "color": "#008000",
+    "categories": [
+      "Blockchain"
+    ],
+    "currency_balance_id": 27,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "GOOGLx",
+    "name": "Alphabet xStock",
+    "symbol": "GOOGLx",
+    "decimals": 8,
+    "type": "XTOKEN",
+    "color": "#FFFFFF",
+    "categories": [
+      "xStocks"
+    ],
+    "currency_balance_id": 3435,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "GRAM",
+    "name": "Gram",
+    "symbol": "GRAM",
+    "decimals": 9,
+    "type": "CRYPTO",
+    "color": "#0098EA",
+    "categories": [
+      "Blockchain"
+    ],
+    "currency_balance_id": 9470,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "HOODx",
+    "name": "Robinhood xStock",
+    "symbol": "HOODx",
+    "decimals": 8,
+    "type": "XTOKEN",
+    "color": "#FFFFFF",
+    "categories": [
+      "xStocks"
+    ],
+    "currency_balance_id": 1786,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "HYPE",
+    "name": "Hyperliquid",
+    "symbol": "HYPE",
+    "decimals": 18,
+    "type": "CRYPTO",
+    "color": "#92FFE2",
+    "categories": [
+      "Blockchain"
+    ],
+    "currency_balance_id": 6100,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "LAC",
+    "name": "LaCoin",
+    "symbol": "LAC",
+    "decimals": 18,
+    "type": "CRYPTO",
+    "color": null,
+    "categories": [
+      "Blockchain",
+      "DeFi"
+    ],
+    "currency_balance_id": 100,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "LAND1RD",
+    "name": "Landtoken",
+    "symbol": "LAND1RD",
+    "decimals": 0,
+    "type": "CRYPTO",
+    "color": "#3F3631",
+    "categories": [
+      "Other"
+    ],
+    "currency_balance_id": 5688,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "LINK",
+    "name": "Chainlink",
+    "symbol": "LINK",
+    "decimals": 18,
+    "type": "ERC20_TOKEN",
+    "color": "#2A5ADA",
+    "categories": [
+      "DeFi"
+    ],
+    "currency_balance_id": 39,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "LTC",
+    "name": "Litecoin",
+    "symbol": "LTC",
+    "decimals": 8,
+    "type": "CRYPTO",
+    "color": "#345D9D",
+    "categories": [
+      "Blockchain"
+    ],
+    "currency_balance_id": 60,
+    "is_favorite": true,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "MANA",
+    "name": "Decentraland",
+    "symbol": "MANA",
+    "decimals": 18,
+    "type": "ERC20_TOKEN",
+    "color": "#FFC95B",
+    "categories": [
+      "Gaming",
+      "NFT"
+    ],
+    "currency_balance_id": 65,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "MATIC",
+    "name": "Polygon",
+    "symbol": "MATIC",
+    "decimals": 18,
+    "type": "ERC20_TOKEN",
+    "color": "#8247e5",
+    "categories": [
+      "Blockchain"
+    ],
+    "currency_balance_id": 65,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": false,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "MSTRx",
+    "name": "MicroStrategy xStock",
+    "symbol": "MSTRx",
+    "decimals": 8,
+    "type": "XTOKEN",
+    "color": "#FFFFFF",
+    "categories": [
+      "xStocks"
+    ],
+    "currency_balance_id": 1136,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "NARS",
+    "name": "Num Finance ARS",
+    "symbol": "NARS",
+    "decimals": 18,
+    "type": "CRYPTO",
+    "color": "#7DEFFF",
+    "categories": [
+      "Stablecoin"
+    ],
+    "currency_balance_id": 87,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": false,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "NMR",
+    "name": "Numeraire",
+    "symbol": "NMR",
+    "decimals": 18,
+    "type": "ERC20_TOKEN",
+    "color": null,
+    "categories": [
+      "Others"
+    ],
+    "currency_balance_id": 62,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "NVDAx",
+    "name": "NVIDIA xStock",
+    "symbol": "NVDAx",
+    "decimals": 8,
+    "type": "XTOKEN",
+    "color": "#FFFFFF",
+    "categories": [
+      "xStocks"
+    ],
+    "currency_balance_id": 4358,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "ONDO",
+    "name": "Ondo Finance",
+    "symbol": "ONDO",
+    "decimals": 18,
+    "type": "CRYPTO",
+    "color": "#FFFFFF",
+    "categories": [
+      "Blockchain"
+    ],
+    "currency_balance_id": 55,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "OP",
+    "name": "Optimism",
+    "symbol": "OP",
+    "decimals": 18,
+    "type": "CRYPTO",
+    "color": "#FF586B",
+    "categories": [
+      "DeFi"
+    ],
+    "currency_balance_id": 26,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "PAXG",
+    "name": "Pax Gold",
+    "symbol": "PAXG",
+    "decimals": 18,
+    "type": "ERC20_TOKEN",
+    "color": "#e5cb22",
+    "categories": [
+      "Others"
+    ],
+    "currency_balance_id": 29,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "PIXEL",
+    "name": "Pixels",
+    "symbol": "PIXEL",
+    "decimals": 18,
+    "type": "ERC20_TOKEN",
+    "color": null,
+    "categories": [
+      "Gaming"
+    ],
+    "currency_balance_id": 38,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "POL",
+    "name": "Polygon",
+    "symbol": "POL",
+    "decimals": 18,
+    "type": "ERC20_TOKEN",
+    "color": "#8247e5",
+    "categories": [
+      "Blockchain"
+    ],
+    "currency_balance_id": 17,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "PYUSD",
+    "name": "PayPal USD",
+    "symbol": "PYUSD",
+    "decimals": 6,
+    "type": "ERC20_TOKEN",
+    "color": "#0071F3",
+    "categories": [
+      "Stablecoin"
+    ],
+    "currency_balance_id": 86,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": false,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "QQQx",
+    "name": "Nasdaq xStock",
+    "symbol": "QQQx",
+    "decimals": 8,
+    "type": "XTOKEN",
+    "color": "#FFFFFF",
+    "categories": [
+      "xStocks"
+    ],
+    "currency_balance_id": 7840,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "RIF",
+    "name": "Rootstock Infrastructure Framework",
+    "symbol": "RIF",
+    "decimals": 18,
+    "type": "CRYPTO",
+    "color": "#4B5CF0",
+    "categories": [
+      "Blockchain"
+    ],
+    "currency_balance_id": 4144,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "RLUSD",
+    "name": "Ripple USD",
+    "symbol": "RLUSD",
+    "decimals": 18,
+    "type": "CRYPTO",
+    "color": "#23292F",
+    "categories": [
+      "Stablecoin"
+    ],
+    "currency_balance_id": 4314,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "RPC",
+    "name": "Ripio Coin",
+    "symbol": "RPC",
+    "decimals": 18,
+    "type": "ERC20_TOKEN",
+    "color": "#fab913",
+    "categories": [
+      "Community"
+    ],
+    "currency_balance_id": 29,
+    "is_favorite": true,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "RSR",
+    "name": "Reserve Rights",
+    "symbol": "RSR",
+    "decimals": 18,
+    "type": "ERC20_TOKEN",
+    "color": null,
+    "categories": [
+      "Others"
+    ],
+    "currency_balance_id": 42,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "S",
+    "name": "Sonic",
+    "symbol": "S",
+    "decimals": 18,
+    "type": "CRYPTO",
+    "color": "#FFFFFF",
+    "categories": [
+      "Others"
+    ],
+    "currency_balance_id": 39,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "SHIB",
+    "name": "Shiba Inu",
+    "symbol": "SHIB",
+    "decimals": 18,
+    "type": "ERC20_TOKEN",
+    "color": "#FFA409",
+    "categories": [
+      "Blockchain",
+      "Meme"
+    ],
+    "currency_balance_id": 42,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "SLP",
+    "name": "Smooth Love Potion",
+    "symbol": "SLP",
+    "decimals": 0,
+    "type": "ERC20_TOKEN",
+    "color": "#55bb93",
+    "categories": [
+      "Gaming",
+      "NFT"
+    ],
+    "currency_balance_id": 41,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "SOL",
+    "name": "Solana",
+    "symbol": "SOL",
+    "decimals": 9,
+    "type": "CRYPTO",
+    "color": "#8479DA",
+    "categories": [
+      "Blockchain"
+    ],
+    "currency_balance_id": 47,
+    "is_favorite": true,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "SPYx",
+    "name": "SP500 xStock",
+    "symbol": "SPYx",
+    "decimals": 8,
+    "type": "XTOKEN",
+    "color": "#FFFFFF",
+    "categories": [
+      "xStocks"
+    ],
+    "currency_balance_id": 8215,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "SUI",
+    "name": "Sui",
+    "symbol": "SUI",
+    "decimals": 9,
+    "type": "CRYPTO",
+    "color": "#FFFFFF",
+    "categories": [
+      "Blockchain"
+    ],
+    "currency_balance_id": 89,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "SWEAT",
+    "name": "SWEAT",
+    "symbol": "SWEAT",
+    "decimals": 18,
+    "type": "CRYPTO",
+    "color": "#fe0c75",
+    "categories": [
+      "Gaming",
+      "Other"
+    ],
+    "currency_balance_id": 3725,
+    "is_favorite": false,
+    "new": false,
+    "actions": []
+  },
+  {
+    "ticker": "TAO",
+    "name": "Bittensor",
+    "symbol": "TAO",
+    "decimals": 9,
+    "type": "CRYPTO",
+    "color": "#FFFFFF",
+    "categories": [
+      "Blockchain"
+    ],
+    "currency_balance_id": 67,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "TON",
+    "name": "Toncoin",
+    "symbol": "TON",
+    "decimals": 9,
+    "type": "CRYPTO",
+    "color": null,
+    "categories": [
+      "Blockchain"
+    ],
+    "currency_balance_id": 87,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": false,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "TRUMP",
+    "name": "OFFICIAL TRUMP",
+    "symbol": "TRUMP",
+    "decimals": 6,
+    "type": "CRYPTO",
+    "color": "#FFD700",
+    "categories": [
+      "Meme",
+      "Others"
+    ],
+    "currency_balance_id": 69,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "TRX",
+    "name": "Tron",
+    "symbol": "TRX",
+    "decimals": 18,
+    "type": "CRYPTO",
+    "color": "#FF001D",
+    "categories": [
+      "Blockchain"
+    ],
+    "currency_balance_id": 62,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "TSLAx",
+    "name": "Tesla xStock",
+    "symbol": "TSLAx",
+    "decimals": 8,
+    "type": "XTOKEN",
+    "color": "#FFFFFF",
+    "categories": [
+      "xStocks"
+    ],
+    "currency_balance_id": 4947,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "UMA",
+    "name": "Universal Market Access",
+    "symbol": "UMA",
+    "decimals": 18,
+    "type": "CRYPTO",
+    "color": null,
+    "categories": [
+      "Others"
+    ],
+    "currency_balance_id": 62,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "UNI",
+    "name": "UniSwap",
+    "symbol": "UNI",
+    "decimals": 18,
+    "type": "ERC20_TOKEN",
+    "color": "#ff007a",
+    "categories": [
+      "DeFi"
+    ],
+    "currency_balance_id": 22,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "USD",
+    "name": "Dólares",
+    "symbol": "USD",
+    "decimals": 2,
+    "type": "FIAT",
+    "color": "#79a471",
+    "categories": [
+      "FIAT"
+    ],
+    "currency_balance_id": 17,
+    "is_favorite": false,
+    "new": false,
+    "actions": []
+  },
+  {
+    "ticker": "USDAR",
+    "name": "Dolar Argentino",
+    "symbol": "USDAR",
+    "decimals": 6,
+    "type": "CRYPTO",
+    "color": "#083A2F",
+    "categories": [
+      "Stablecoin"
+    ],
+    "currency_balance_id": 7615,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "USDL",
+    "name": "Dollar Lift",
+    "symbol": "USDL",
+    "decimals": 18,
+    "type": "ERC20_TOKEN",
+    "color": "#CEFD51",
+    "categories": [
+      "Stablecoin"
+    ],
+    "currency_balance_id": 96,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": false,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "VIRTUAL",
+    "name": "Virtuals Protocol",
+    "symbol": "VIRTUAL",
+    "decimals": 18,
+    "type": "CRYPTO",
+    "color": "#FFFFFF",
+    "categories": [
+      "Blockchain"
+    ],
+    "currency_balance_id": 41,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": false,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "WCLP",
+    "name": "wCLP",
+    "symbol": "WCLP",
+    "decimals": 2,
+    "type": "CRYPTO",
+    "color": "#ED342F",
+    "categories": [
+      "Stablecoin",
+      "WFIAT"
+    ],
+    "currency_balance_id": 7271,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "WCOP",
+    "name": "wCOP",
+    "symbol": "WCOP",
+    "decimals": 2,
+    "type": "CRYPTO",
+    "color": "#FFFFFF",
+    "categories": [
+      "Stablecoin",
+      "WFIAT"
+    ],
+    "currency_balance_id": 9066,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "WIF",
+    "name": "Dogwifhat",
+    "symbol": "WIF",
+    "decimals": 6,
+    "type": "CRYPTO",
+    "color": "#7E5B2C",
+    "categories": [
+      "Others",
+      "Meme"
+    ],
+    "currency_balance_id": 6644,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "swap",
+        "enabled": false,
+        "rails": [
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "WLD",
+    "name": "Worldcoin",
+    "symbol": "WLD",
+    "decimals": 18,
+    "type": "ERC20_TOKEN",
+    "color": "#D1D0CE",
+    "categories": [
+      "Others"
+    ],
+    "currency_balance_id": 45,
+    "is_favorite": false,
+    "new": true,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "WMXN",
+    "name": "wMXN",
+    "symbol": "WMXN",
+    "decimals": 2,
+    "type": "CRYPTO",
+    "color": "#FFFFFF",
+    "categories": [
+      "Stablecoin",
+      "WFIAT"
+    ],
+    "currency_balance_id": 4802,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "WPEN",
+    "name": "wPEN",
+    "symbol": "WPEN",
+    "decimals": 2,
+    "type": "CRYPTO",
+    "color": "#FFFFFF",
+    "categories": [
+      "Stablecoin",
+      "WFIAT"
+    ],
+    "currency_balance_id": 6033,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "XAUT",
+    "name": "Tether Gold",
+    "symbol": "XAUT",
+    "decimals": 6,
+    "type": "ERC20_TOKEN",
+    "color": "#D3B25B",
+    "categories": [
+      "Commodities",
+      "Blockchain"
+    ],
+    "currency_balance_id": 9696,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "XLM",
+    "name": "Stellar",
+    "symbol": "XLM",
+    "decimals": 7,
+    "type": "CRYPTO",
+    "color": "#000000",
+    "categories": [
+      "Blockchain"
+    ],
+    "currency_balance_id": 33,
+    "is_favorite": true,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "XPL",
+    "name": "Plasma",
+    "symbol": "XPL",
+    "decimals": 18,
+    "type": "CRYPTO",
+    "color": "#2A5A4F",
+    "categories": [
+      "Blockchain"
+    ],
+    "currency_balance_id": 9082,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "XRP",
+    "name": "XRP",
+    "symbol": "XRP",
+    "decimals": 6,
+    "type": "CRYPTO",
+    "color": "#23292F",
+    "categories": [
+      "Blockchain"
+    ],
+    "currency_balance_id": 40,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  },
+  {
+    "ticker": "ZK",
+    "name": "zkSync",
+    "symbol": "ZK",
+    "decimals": 18,
+    "type": "ERC20_TOKEN",
+    "color": null,
+    "categories": [
+      "Blockchain"
+    ],
+    "currency_balance_id": 24,
+    "is_favorite": false,
+    "new": false,
+    "actions": [
+      {
+        "transaction_type": "deposit",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "swap",
+        "enabled": true,
+        "rails": [
+          "ripio"
+        ]
+      },
+      {
+        "transaction_type": "withdrawal",
+        "enabled": true,
+        "rails": [
+          "crypto",
+          "ripio"
+        ]
+      }
+    ]
+  }
+]

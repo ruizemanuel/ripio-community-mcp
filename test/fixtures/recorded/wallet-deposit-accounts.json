@@ -1,0 +1,9 @@
+[
+  {
+    "type": "cvu",
+    "account_number": "redacted-1",
+    "account_label": "redacted-2",
+    "currency": "ARS",
+    "deposit_constraint": null
+  }
+]

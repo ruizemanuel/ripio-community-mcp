@@ -8,7 +8,11 @@ import {
   TradeOpenOrdersSchema,
   TradeStatementSchema,
   TradeTickersSchema,
+  WalletAddressesSchema,
   WalletBalanceSchema,
+  WalletCurrenciesSchema,
+  WalletCurrencyNetworksSchema,
+  WalletDepositAccountsSchema,
   WalletLimitsSchema,
   WalletRailsSchema,
   WalletRatesSchema,
@@ -31,6 +35,11 @@ const cases = [
   ['trade-fees', TradeFeesSchema],
   ['trade-open-orders', TradeOpenOrdersSchema],
   ['trade-estimate-usdt-ars', TradeEstimateSchema],
+  ['wallet-addresses', WalletAddressesSchema],
+  ['wallet-currency-networks-usdt', WalletCurrencyNetworksSchema],
+  ['wallet-currency-networks-usdc', WalletCurrencyNetworksSchema],
+  ['wallet-currencies', WalletCurrenciesSchema],
+  ['wallet-deposit-accounts', WalletDepositAccountsSchema],
 ] as const;
 const present = cases.filter(([name]) => existsSync(file(name)));
 
@@ -45,5 +54,11 @@ describe.skipIf(present.length === 0)('recorded Ripio responses (anonymized)', (
     const trade = existsSync(file('trade-balances')) ? TradeBalancesSchema.parse(read('trade-balances')) : undefined;
     const rates = existsSync(file('wallet-rates')) ? WalletRatesSchema.parse(read('wallet-rates')) : undefined;
     expect(() => buildPortfolio({ wallet, trade, rates, asOf: new Date(), includeZero: false })).not.toThrow();
+  });
+
+  it.skipIf(!existsSync(file('wallet-addresses')))('keeps recorded deposit addresses redacted', () => {
+    for (const entry of WalletAddressesSchema.parse(read('wallet-addresses'))) {
+      expect(entry.address).toMatch(/^redacted-\d+$/);
+    }
   });
 });
