@@ -46,12 +46,15 @@ function scopeFor(endpoint: string | undefined): string | undefined {
   return SCOPE_BY_PATH.find(([pattern]) => pattern.test(endpoint))?.[1];
 }
 
-/** A Retry-After as a person would say it: "45 seconds", "about 12 minutes", "about 3 hours". */
+/** A Retry-After as a person would say it: "45 seconds", "about 12 minutes", "about 3 hours" or "more than a day". */
 function waitText(ms: number): string {
   const seconds = Math.ceil(ms / 1000);
   if (seconds < 120) return `${seconds} seconds`;
-  const minutes = Math.ceil(seconds / 60);
-  return minutes < 120 ? `about ${minutes} minutes` : `about ${Math.ceil(minutes / 60)} hours`;
+  // Each unit is rounded from the seconds, never from an already rounded unit.
+  const minutes = Math.round(seconds / 60);
+  if (minutes < 120) return `about ${minutes} minutes`;
+  const hours = Math.round(seconds / 3600);
+  return hours <= 24 ? `about ${hours} hours` : 'more than a day';
 }
 
 export function userMessage(error: unknown): string {

@@ -81,4 +81,13 @@ describe('userMessage for 429', () => {
       expect(limited(short), String(short)).not.toContain('asks to wait');
     }
   });
+
+  it('rounds a long wait once to the nearest unit, and stops counting past a day', () => {
+    expect(limited(5_400_000)).toContain('Ripio asks to wait about 90 minutes before trying again.');
+    expect(limited(7_199_000)).toContain('Ripio asks to wait about 2 hours before trying again.');
+    expect(limited(7_201_000)).toContain('Ripio asks to wait about 2 hours before trying again.');
+    expect(limited(86_400_000)).toContain('Ripio asks to wait about 24 hours before trying again.');
+    expect(limited(90_000_000)).toContain('Ripio asks to wait more than a day before trying again.');
+    expect(limited(1e33)).toContain('Ripio asks to wait more than a day before trying again.');
+  });
 });
