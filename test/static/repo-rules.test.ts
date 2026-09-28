@@ -90,19 +90,28 @@ describe('repository rules', () => {
   });
 
   it('builds releases in a job that cannot publish, and publishes from a job that runs no npm dependencies', () => {
-    // Windows checkouts turn line endings into CRLF.
-    const workflow = readFileSync('.github/workflows/release.yml', 'utf8').replace(/\r\n/g, '\n');
+    // Windows checkouts turn line endings into CRLF; dropping comments keeps one from ending a job's block early.
+    const workflow = readFileSync('.github/workflows/release.yml', 'utf8')
+      .replace(/\r\n/g, '\n')
+      .split('\n')
+      .filter((line) => !/^\s*#/.test(line))
+      .join('\n');
     const [head = '', jobs = ''] = workflow.split(/^jobs:\n/m);
     const job = (name: string): string => new RegExp(`^  ${name}:\\n((?: {4}.*\\n|\\n)*)`, 'm').exec(jobs)?.[1] ?? '';
     const build = job('build');
     const publish = job('publish');
     expect(head, 'workflow-level permissions').toMatch(/^permissions: \{\}$/m);
+    expect(workflow.match(/id-token:\s*write/g), 'only publish may request an OIDC token').toHaveLength(1);
+    expect(workflow.match(/contents:\s*write/g), 'only publish may write to the repository').toHaveLength(1);
     expect(build).toMatch(/run: npm ci/);
     expect(build).toMatch(/run: npm test/);
     expect(build).toMatch(/Check the tag matches package\.json/);
-    expect(build).not.toMatch(/: write/);
+    expect(build).not.toMatch(/:\s*write/);
     expect(publish).toMatch(/needs: build/);
-    expect(publish).toMatch(/id-token: write/);
-    expect(publish).not.toMatch(/npm (ci|install|test|run)\b|npx /);
+    expect(publish).toMatch(/id-token:\s*write/);
+    expect(publish).not.toMatch(
+      /\bnpm[ \t]+(ci|i|install|it|add|test|t|run|run-script|exec|x|rebuild|pack|start|restart|stop)\b|\bnpx\b|\b(yarn|pnpm|bun|corepack)\b|\bnode[ \t]/,
+    );
+    expect(publish).toMatch(/npm publish "[^"\n]+\.tgz"/);
   });
 });
