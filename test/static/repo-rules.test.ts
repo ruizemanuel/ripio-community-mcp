@@ -89,7 +89,7 @@ describe('repository rules', () => {
     }
   });
 
-  it('installs npm dependencies in CI without running their install scripts', () => {
+  it('installs npm dependencies in CI and in the bundle without running their install scripts', () => {
     const installs = listFiles('.github/workflows').flatMap((path) =>
       readFileSync(path, 'utf8')
         .replace(/\r\n/g, '\n')
@@ -100,6 +100,8 @@ describe('repository rules', () => {
     );
     expect(installs.map(({ file }) => file).sort()).toEqual(['ci.yml', 'release.yml']);
     for (const { file, line } of installs) expect(line, file).toMatch(/\bnpm ci\b.*\s--ignore-scripts(\s|$)/);
+    // build:mcpb installs the bundle's production dependencies itself, in CI and in the release build.
+    expect(readFileSync('scripts/build-mcpb.mjs', 'utf8')).toMatch(/'ci',[^\]]*'--ignore-scripts'/);
   });
 
   it('builds releases in a job that cannot publish, and publishes from a job that runs no npm dependencies', () => {
