@@ -95,9 +95,9 @@ export function walletTransactionDetail(tx: WalletTransaction): TransactionDetai
   return detail;
 }
 
-/** Without a readable amount there is no sign to read, so only the entry's type can tell its direction. */
+/** Only a readable, non-zero amount has a sign to read; otherwise only the entry's type can tell its direction. */
 function tradeDirection(type: string, amount: Decimal | undefined): ActivityItem['direction'] {
-  if (amount !== undefined) return isNegative(amount) ? 'out' : 'in';
+  if (amount !== undefined && !isZero(amount)) return isNegative(amount) ? 'out' : 'in';
   if (type === 'deposit') return 'in';
   if (type === 'withdrawal' || type === 'fee') return 'out';
   return 'internal';

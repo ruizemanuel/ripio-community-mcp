@@ -127,4 +127,17 @@ describe('normalizeTradeStatementEntry', () => {
     const both = normalizeTradeStatementEntry({ ...sell, currency: '', amount: 'N/A', operation: 'Withdrawal' });
     expect(both).toMatchObject({ asset: 'UNKNOWN', amount: '0', direction: 'out', unreadable: ['amount', 'asset'] });
   });
+
+  it('takes the direction of an entry with an amount of 0 from its type, since 0 has no sign', () => {
+    const [sell] = tradeStatement.statement;
+    if (sell === undefined) throw new Error('fixture');
+    const direction = (amount: number | string, operation: string) =>
+      normalizeTradeStatementEntry({ ...sell, amount, operation }).direction;
+    expect(direction(0, 'Withdrawal')).toBe('out');
+    expect(direction('0.00', 'Fee')).toBe('out');
+    expect(direction(0, 'Deposit')).toBe('in');
+    expect(direction('-0', 'Sell')).toBe('internal');
+    expect(direction(-0.5, 'Sell')).toBe('out');
+    expect(normalizeTradeStatementEntry({ ...sell, amount: 0 })).not.toHaveProperty('unreadable');
+  });
 });
