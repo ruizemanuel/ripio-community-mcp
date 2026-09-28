@@ -261,4 +261,16 @@ describe('verifyDepositAddress', () => {
     const addresses = [addressOn(polygon, EVM_ADDRESS, 3), addressOn(polygon, ` ${EVM_ADDRESS}\n`, 3)];
     expect(verify({ address: EVM_ADDRESS, addresses }).status).toBe('verified');
   });
+
+  it('never matches a blank paste to a blank entry Ripio sent', () => {
+    const polygon = network('polygon', 'Polygon');
+    const blankTie = [addressOn(polygon, '', 3), addressOn(polygon, EVM_ADDRESS, 3)];
+    for (const address of [' ', '\n\t']) {
+      const result = verify({ address, addresses: blankTie });
+      expect(result.status, JSON.stringify(address)).toBe('not_yours');
+      expect(result.address_networks).toEqual([]);
+      expect(verify({ address, network: 'polygon', asset: usdt, addresses: blankTie }).status).toBe('not_yours');
+      expect(verify({ address }).status).toBe('not_yours');
+    }
+  });
 });

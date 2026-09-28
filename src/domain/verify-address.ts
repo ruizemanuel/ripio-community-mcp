@@ -114,6 +114,8 @@ export function verifyDepositAddress(input: VerifyAddressInput): VerifyAddress {
   const memo = input.memo?.trim() || undefined;
   const notes: string[] = [];
   const warnings = (): string[] => [...(input.warnings ?? []), ...notes, VENUE_WARNING];
+  // A blank paste is nobody's address, and must not match a blank entry Ripio sent.
+  if (address === '') return { status: 'not_yours', verdict: NOT_YOURS, address_networks: [], warnings: warnings() };
   const current = currentAddresses(input.addresses);
   const owned = current.filter((entry) => sameAddress(entry.address.trim(), address));
   if (owned.length === 0) {
