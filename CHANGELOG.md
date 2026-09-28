@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.5 — 2026-09-28
+
+- Deposit tools: Ripio's addresses and memos are compared without the spaces around them, so two copies that differ only by spaces no longer read as conflicting.
+- `ripio_verify_deposit_address`: a blank address answers `not_yours` instead of matching a blank entry from Ripio.
+- `ripio_get_deposit_address`: the line naming the other networks that receive the asset says "but not at this address", which is also true where Ripio has not assigned an address yet.
+- `ripio_list_activity` (Ripio Trade): an entry with an amount of 0 takes its direction from its type, like one with an unreadable amount.
+- A rate limit with a long `Retry-After` rounds the wait once (7201 seconds reads as about 2 hours, not 3) and says "more than a day" past 24 hours.
+
 ## 0.2.4 — 2026-09-28
 
 - Releases are built and tested in a job that can't publish. A separate job, which installs and runs no npm dependencies, publishes exactly the package that was built.
