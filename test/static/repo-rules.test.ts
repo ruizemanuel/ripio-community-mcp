@@ -1,5 +1,5 @@
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
-import { join } from 'node:path';
+import { basename, join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { SERVER_VERSION } from '../../src/server.js';
 
@@ -87,6 +87,19 @@ describe('repository rules', () => {
         expect(line, path).toMatch(/uses:\s*[\w.-]+\/[\w.-]+@[0-9a-f]{40}\s+#\s*v\d/);
       }
     }
+  });
+
+  it('installs npm dependencies in CI without running their install scripts', () => {
+    const installs = listFiles('.github/workflows').flatMap((path) =>
+      readFileSync(path, 'utf8')
+        .replace(/\r\n/g, '\n')
+        .split('\n')
+        .filter((line) => !/^\s*#/.test(line))
+        .filter((line) => /\bnpm\s+(add|ci|cit|clean-install|i|install|install-ci-test|install-test|isntall|it)\b/.test(line))
+        .map((line) => ({ file: basename(path), line })),
+    );
+    expect(installs.map(({ file }) => file).sort()).toEqual(['ci.yml', 'release.yml']);
+    for (const { file, line } of installs) expect(line, file).toMatch(/\bnpm ci\b.*\s--ignore-scripts(\s|$)/);
   });
 
   it('builds releases in a job that cannot publish, and publishes from a job that runs no npm dependencies', () => {

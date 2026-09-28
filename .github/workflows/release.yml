@@ -20,7 +20,8 @@ jobs:
         with:
           node-version: 24
           package-manager-cache: false
-      - run: npm ci
+      # Install scripts never run: only code the test and build tools actually load runs here.
+      - run: npm ci --ignore-scripts
       - run: npm test
       - run: npm run build
       - name: Check the tag matches package.json
