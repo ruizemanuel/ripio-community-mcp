@@ -114,4 +114,19 @@ describe('repository rules', () => {
     );
     expect(publish).toMatch(/npm publish "[^"\n]+\.tgz"/);
   });
+
+  it('checks what it is about to publish, and skips a release step only when it already matches this commit', () => {
+    const workflow = readFileSync('.github/workflows/release.yml', 'utf8').replace(/\r\n/g, '\n');
+    const at = (text: string): number => workflow.indexOf(text);
+    expect(workflow, 'the artifact lands outside the checkout').toMatch(/name: release\n\s+path: \$\{\{ runner\.temp \}\}\/release\n/);
+    expect(at('npm pkg set gitHead="$GITHUB_SHA"'), 'build stamps the commit').toBeGreaterThan(-1);
+    expect(at('npm pkg set gitHead="$GITHUB_SHA"')).toBeLessThan(at('run: npm pack'));
+    const publishing = at('npm publish "${RUNNER_TEMP}/release/ripio-community-mcp-${version}.tgz"');
+    expect(publishing).toBeGreaterThan(-1);
+    expect(at('test -f "${RUNNER_TEMP}/release/ripio-community-mcp.mcpb"')).toBeGreaterThan(-1);
+    expect(at('test -f "${RUNNER_TEMP}/release/ripio-community-mcp.mcpb"')).toBeLessThan(publishing);
+    expect(workflow).toContain('if [ "$published" != "$GITHUB_SHA" ]; then');
+    expect(workflow).toContain('--jq \'(.isDraft | not) and any(.assets[]; .name == "ripio-community-mcp.mcpb")\'');
+    expect(workflow).toContain('gh release create "${GITHUB_REF_NAME}" "${RUNNER_TEMP}/release/ripio-community-mcp.mcpb"');
+  });
 });
