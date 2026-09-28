@@ -101,17 +101,24 @@ describe('repository rules', () => {
     const build = job('build');
     const publish = job('publish');
     expect(head, 'workflow-level permissions').toMatch(/^permissions: \{\}$/m);
-    expect(workflow.match(/id-token:\s*write/g), 'only publish may request an OIDC token').toHaveLength(1);
-    expect(workflow.match(/contents:\s*write/g), 'only publish may write to the repository').toHaveLength(1);
+    expect(workflow, 'no job may take every permission').not.toMatch(/write-all/);
+    expect(workflow.match(/id-token["']?\s*:\s*["']?write/g), 'only publish may request an OIDC token').toHaveLength(1);
+    expect(workflow.match(/contents["']?\s*:\s*["']?write/g), 'only publish may write to the repository').toHaveLength(1);
     expect(build).toMatch(/run: npm ci/);
     expect(build).toMatch(/run: npm test/);
     expect(build).toMatch(/Check the tag matches package\.json/);
-    expect(build).not.toMatch(/:\s*write/);
+    expect(build).not.toMatch(/:\s*["']?write/);
     expect(publish).toMatch(/needs: build/);
     expect(publish).toMatch(/id-token:\s*write/);
-    expect(publish).not.toMatch(
-      /\bnpm[ \t]+(ci|i|install|it|add|test|t|run|run-script|exec|x|rebuild|pack|start|restart|stop)\b|\bnpx\b|\b(yarn|pnpm|bun|corepack)\b|\bnode[ \t]/,
-    );
+    // An allowlist, not a blocklist: npm there may only look a version up or publish it, and only these actions run there.
+    // The extra words are what follows "npm" in today's step names and messages ("Publish to npm", "on npm from…").
+    for (const [, word] of publish.matchAll(/\bnpm\b[ \t\n\\]*(\S*)/g)) {
+      expect(['--version', 'view', 'publish', 'from', 'release', 'run:', ''], `npm ${word}`).toContain(word);
+    }
+    for (const [, action] of publish.matchAll(/uses:\s*([^@\s]+)/g)) {
+      expect(['actions/checkout', 'actions/download-artifact', 'actions/setup-node'], action).toContain(action);
+    }
+    expect(publish).not.toMatch(/\bnpx\b|\b(yarn|pnpm|bun|corepack)\b|\bnode[ \t]+(-|\.|\/|\S+\.[cm]?[jt]s)/);
     expect(publish).toMatch(/npm publish "[^"\n]+\.tgz"/);
   });
 
