@@ -10,6 +10,7 @@ import {
   EVM_ADDRESS,
   network,
   receiving,
+  TRON_ADDRESS,
   usdtNetworks,
   walletAddresses,
   XRP_ADDRESS,
@@ -36,7 +37,7 @@ const xrp = (overrides: Partial<DepositAddressInput> = {}): DepositAddressInput 
 
 const CREDITED = 'Ethereum (ERC-20), Polygon, BNB Chain (BEP-20), Tron (TRC-20), The Open Network';
 const SAME_ADDRESS = 'Ethereum (ERC-20), Polygon, BNB Chain (BEP-20)';
-const OTHERS = 'USDT can also be received on Tron (TRC-20), The Open Network, but with a different address: ask for it by network.';
+const OTHERS = 'USDT can also be received on Tron (TRC-20), The Open Network, but not at this address: ask for it by network.';
 const VENUE = 'This is a Ripio app (Wallet) address. Ripio Trade uses different deposit addresses.';
 
 describe('buildDepositAddress', () => {
@@ -249,7 +250,7 @@ describe('buildDepositAddress', () => {
   it('names only its own network for an address that exists on one network, with no other-address line', () => {
     const { warnings } = buildDepositAddress(xrp());
     expect(warnings).toContain('Send only XRP over Ripple. Ripio credits XRP to this address only via: Ripple. Sending over any other network can lose the funds.');
-    expect(warnings.some((w) => w.includes('different address'))).toBe(false);
+    expect(warnings.some((w) => w.includes('can also be received'))).toBe(false);
   });
 
   it('says Ripio lists conflicting addresses instead of "not assigned yet"', () => {
@@ -273,6 +274,13 @@ describe('buildDepositAddress', () => {
     expect(buildDepositAddress(usdt({ network: 'polygon', addresses: padded })).warnings).toContain(
       'This same address also exists on Base, Gnosis, where Ripio does not credit USDT.',
     );
+  });
+
+  it('names the other receiving networks in one line, whether Ripio assigned them another address or none yet', () => {
+    const tron = network('tron', 'Tron', { deliver_time: 10 });
+    const addresses = [...walletAddresses, addressOn(tron, TRON_ADDRESS)];
+    expect(buildDepositAddress(usdt({ network: 'polygon', addresses })).warnings).toContain(OTHERS);
+    expect(buildDepositAddress(usdt({ network: 'polygon' })).warnings).toContain(OTHERS);
   });
 });
 

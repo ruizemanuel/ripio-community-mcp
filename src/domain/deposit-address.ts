@@ -155,7 +155,7 @@ export function buildDepositAddress(input: DepositAddressInput): DepositAddress 
     `${SEND_ONLY}${asset} over ${label}. Ripio credits ${asset} to this address only via: ${viaThisAddress.join(', ')}. ` +
       'Sending over any other network can lose the funds.',
     ...(viaOtherAddresses.length > 0
-      ? [`${asset} can also be received on ${viaOtherAddresses.join(', ')}, but with a different address: ask for it by network.`]
+      ? [`${asset} can also be received on ${viaOtherAddresses.join(', ')}, but not at this address: ask for it by network.`]
       : []),
     ...(alsoOn.length > 0 ? [`This same address also exists on ${alsoOn.join(', ')}, where Ripio does not credit ${asset}.`] : []),
     ...(memoRequired && memo !== null
