@@ -267,6 +267,13 @@ describe('buildDepositAddress', () => {
     }
     expect(buildDepositAddress(usdt({ network: 'polygon', addresses: [] })).next_step).toContain('has not assigned a Polygon address');
   });
+
+  it('treats a copy of the address with spaces around it on another network as the same address', () => {
+    const padded = walletAddresses.map((entry) => (entry.network.code === 'base' ? { ...entry, address: ` ${entry.address}\n` } : entry));
+    expect(buildDepositAddress(usdt({ network: 'polygon', addresses: padded })).warnings).toContain(
+      'This same address also exists on Base, Gnosis, where Ripio does not credit USDT.',
+    );
+  });
 });
 
 describe('summarizeDepositAddress', () => {

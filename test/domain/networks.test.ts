@@ -108,6 +108,12 @@ describe('sameAddress', () => {
     expect(sameAddress(TRON_ADDRESS, TRON_ADDRESS)).toBe(true);
     expect(sameAddress(TRON_ADDRESS, TRON_ADDRESS.toLowerCase())).toBe(false);
   });
+
+  it('ignores the spaces around either address', () => {
+    expect(sameAddress(` ${TRON_ADDRESS}\n`, TRON_ADDRESS)).toBe(true);
+    expect(sameAddress(EVM_ADDRESS, ` ${EVM_ADDRESS.toLowerCase()} `)).toBe(true);
+    expect(sameAddress(`${TRON_ADDRESS} x`, TRON_ADDRESS)).toBe(false);
+  });
 });
 
 describe('currentAddresses', () => {
@@ -153,6 +159,13 @@ describe('currentAddresses with a tie at the newest version', () => {
 
   it('keeps a repeated identical entry', () => {
     expect(currentAddresses([addressOn(polygon, '0xA', 3), addressOn(polygon, '0xA', 3)]).map((e) => e.address)).toEqual(['0xA']);
+  });
+
+  it('keeps the address when tied entries differ only by the spaces around the address or memo', () => {
+    expect(currentAddresses([addressOn(polygon, '0xA', 3), addressOn(polygon, ' 0xA\n', 3)])).toHaveLength(1);
+    const padded = [addressOn(ripple, 'r1', 1, '11'), addressOn(ripple, ' r1 ', 1, ' 11 ')];
+    expect(currentAddresses(padded)).toHaveLength(1);
+    expect(conflictingAddresses(padded)).toEqual([]);
   });
 });
 

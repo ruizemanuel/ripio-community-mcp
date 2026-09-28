@@ -255,4 +255,10 @@ describe('verifyDepositAddress', () => {
     expect(result.address_networks).toEqual([{ code: 'ethereum', name: 'Ethereum' }]);
     expect(verify({ address: EVM_ADDRESS, network: 'ethereum', asset: usdt, addresses }).status).toBe('verified');
   });
+
+  it('verifies an address Ripio lists twice at the newest version, once with spaces around it', () => {
+    const polygon = network('polygon', 'Polygon');
+    const addresses = [addressOn(polygon, EVM_ADDRESS, 3), addressOn(polygon, ` ${EVM_ADDRESS}\n`, 3)];
+    expect(verify({ address: EVM_ADDRESS, addresses }).status).toBe('verified');
+  });
 });

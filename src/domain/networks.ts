@@ -78,9 +78,13 @@ const EVM_ADDRESS = /^0x[0-9a-fA-F]{40}$/;
 
 export const isEvmAddress = (value: string): boolean => EVM_ADDRESS.test(value);
 
-/** Identical text, or the same EVM address in another letter case (the case only carries the EIP-55 checksum). */
+/**
+ * Identical text once the spaces around each are dropped, or the same EVM address in another letter case (the case only
+ * carries the EIP-55 checksum).
+ */
 export function sameAddress(a: string, b: string): boolean {
-  return a === b || (isEvmAddress(a) && isEvmAddress(b) && a.toLowerCase() === b.toLowerCase());
+  const [x, y] = [a.trim(), b.trim()];
+  return x === y || (isEvmAddress(x) && isEvmAddress(y) && x.toLowerCase() === y.toLowerCase());
 }
 
 /** Each network's entries at its newest (highest `version`) version. */
@@ -103,7 +107,7 @@ function agree(tied: WalletAddress[]): boolean {
     tied.every(
       (entry) =>
         sameAddress(entry.address, first.address) &&
-        memoOf(entry) === memoOf(first) &&
+        memoOf(entry)?.trim() === memoOf(first)?.trim() &&
         memoSent(entry) === memoSent(first) &&
         (entry.network.use_memo === true) === (first.network.use_memo === true),
     )
