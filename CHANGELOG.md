@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.4 — 2026-09-28
+
+- Releases are built and tested in a job that can't publish. A separate job, which installs and runs no npm dependencies, publishes exactly the package that was built.
+- The READMEs on npm now include the updates made after 0.2.3: which networks each deposit address works on, the CVU conversion note, the no-redirects rule and the supported clients.
+
 ## 0.2.3 — 2026-09-25
 
 - `ripio_list_activity` (Ripio Trade): an entry with an unreadable amount takes its direction from its type instead of reading as incoming, and an entry with a blank currency shows `UNKNOWN` and is flagged.
