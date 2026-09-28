@@ -40,8 +40,8 @@ jobs:
           retention-days: 7
 
   # Publishes exactly what build produced. It installs nothing and runs no package scripts, so no npm dependency ever
-  # runs with the npm publishing token. A step already done is skipped only after checking it matches this commit, so a
-  # re-run finishes the rest.
+  # runs with the npm publishing token. npm is skipped only when it already has this version from this commit, and the
+  # Release only when it is already published with the bundle, so a re-run finishes the rest.
   publish:
     needs: build
     runs-on: ubuntu-latest

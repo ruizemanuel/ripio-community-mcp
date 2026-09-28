@@ -122,7 +122,7 @@ describe('repository rules', () => {
     expect(publish).toMatch(/npm publish "[^"\n]+\.tgz"/);
   });
 
-  it('checks what it is about to publish, and skips a release step only when it already matches this commit', () => {
+  it('checks what it is about to publish, and skips npm or the Release only when this release already did that step', () => {
     const workflow = readFileSync('.github/workflows/release.yml', 'utf8').replace(/\r\n/g, '\n');
     const at = (text: string): number => workflow.indexOf(text);
     expect(workflow, 'the artifact lands outside the checkout').toMatch(/name: release\n\s+path: \$\{\{ runner\.temp \}\}\/release\n/);
