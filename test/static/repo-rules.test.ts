@@ -149,4 +149,11 @@ describe('repository rules', () => {
     expect(workflow).toContain('--jq \'(.isDraft | not) and any(.assets[]; .name == "ripio-community-mcp.mcpb")\'');
     expect(workflow).toContain('gh release create "${GITHUB_REF_NAME}" "${RUNNER_TEMP}/release/ripio-community-mcp.mcpb"');
   });
+
+  it('publishes only from the release environment, which npm requires of this package', () => {
+    const workflow = readFileSync('.github/workflows/release.yml', 'utf8').replace(/\r\n/g, '\n');
+    const publish = /^ {2}publish:\n((?: {4}.*\n|\n)*)/m.exec(workflow)?.[1] ?? '';
+    expect(publish, 'at job level').toMatch(/^ {4}environment: release$/m);
+    expect(workflow.match(/^ *environment:/gm), 'nowhere else').toHaveLength(1);
+  });
 });
