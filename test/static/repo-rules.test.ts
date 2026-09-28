@@ -88,4 +88,21 @@ describe('repository rules', () => {
       }
     }
   });
+
+  it('builds releases in a job that cannot publish, and publishes from a job that runs no npm dependencies', () => {
+    // Windows checkouts turn line endings into CRLF.
+    const workflow = readFileSync('.github/workflows/release.yml', 'utf8').replace(/\r\n/g, '\n');
+    const [head = '', jobs = ''] = workflow.split(/^jobs:\n/m);
+    const job = (name: string): string => new RegExp(`^  ${name}:\\n((?: {4}.*\\n|\\n)*)`, 'm').exec(jobs)?.[1] ?? '';
+    const build = job('build');
+    const publish = job('publish');
+    expect(head, 'workflow-level permissions').toMatch(/^permissions: \{\}$/m);
+    expect(build).toMatch(/run: npm ci/);
+    expect(build).toMatch(/run: npm test/);
+    expect(build).toMatch(/Check the tag matches package\.json/);
+    expect(build).not.toMatch(/: write/);
+    expect(publish).toMatch(/needs: build/);
+    expect(publish).toMatch(/id-token: write/);
+    expect(publish).not.toMatch(/npm (ci|install|test|run)\b|npx /);
+  });
 });
